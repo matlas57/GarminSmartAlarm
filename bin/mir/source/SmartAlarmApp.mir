@@ -1,0 +1,95 @@
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 1; ]
+import Toybox.Application;
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 2; ]
+import Toybox.Lang;
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 3; ]
+import Toybox.WatchUi;
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 5; ]
+class SmartAlarmApp extends Application.AppBase{
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 5; ]
+    <init> {
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 5; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 7; ]
+    function initialize() as Void {
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_7_26_9_4_start:
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" 8 8 ]
+        %tmp.2 = getv ? :AppBase;
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_7_26_9_4_stop:
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 12; ]
+    function onStart(state as Dictionary or Null) as Void {
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_12_51_19_4_start:
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" 13 8 ]
+        [ "_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_12_51_19_4_start" "_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_12_51_19_4_stop" ]
+        %myTime.1 = local;
+        %tmp.2 = getv ? :System;
+        %tmp.3 = getv function %tmp.2 :getClockTime;
+        %tmp.4 = invoke %tmp.2 %tmp.3();
+        lputv %myTime.1 %tmp.4;
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" 14 8 ]
+        %tmp.6 = getv ? :System;
+        %tmp.7 = getv function %tmp.6 :println;
+        %tmp.8 = lgetv %myTime.1;
+        %tmp.9 = getv %tmp.8 :hour;
+        %tmp.10 = getv function %tmp.9 :format;
+        %tmp.11 = "%02d";
+        %tmp.12 = invoke %tmp.9 %tmp.10(%tmp.11);
+        %tmp.13 = ":";
+        %tmp.14 = add %tmp.12 %tmp.13;
+        %tmp.15 = lgetv %myTime.1;
+        %tmp.16 = getv %tmp.15 :min;
+        %tmp.17 = getv function %tmp.16 :format;
+        %tmp.18 = "%02d";
+        %tmp.19 = invoke %tmp.16 %tmp.17(%tmp.18);
+        %tmp.20 = add %tmp.14 %tmp.19;
+        %tmp.21 = ":";
+        %tmp.22 = add %tmp.20 %tmp.21;
+        %tmp.23 = lgetv %myTime.1;
+        %tmp.24 = getv %tmp.23 :sec;
+        %tmp.25 = getv function %tmp.24 :format;
+        %tmp.26 = "%02d";
+        %tmp.27 = invoke %tmp.24 %tmp.25(%tmp.26);
+        %tmp.28 = add %tmp.22 %tmp.27;
+        invoke %tmp.6 %tmp.7(%tmp.28);
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_12_51_19_4_stop:
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 22; ]
+    function onStop(state as Dictionary or Null) as Void {
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 26; ]
+    function getInitialView() as [Views] or [Views, InputDelegates] {
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_26_68_28_4_start:
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" 27 8 ]
+        %tmp.1 = newa 2;
+        %tmp.5 = getv ? :SmartAlarmView;
+        %tmp.2 = newc %tmp.5 ();
+        %tmp.6 = dup %tmp.1;
+        %tmp.7 = aputv %tmp.6 0 %tmp.2;
+        %tmp.11 = getv ? :SmartAlarmDelegate;
+        %tmp.8 = newc %tmp.11 ();
+        %tmp.12 = dup %tmp.7;
+        %tmp.13 = aputv %tmp.12 1 %tmp.8;
+        ret %tmp.13;
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_26_68_28_4_stop:
+    }
+}
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 32; ]
+function getApp() as SmartAlarmApp {
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_32_35_34_0_start:
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" 33 4 ]
+    %tmp.1 = getm $.Toybox.Application;
+    %tmp.2 = getv function %tmp.1 :getApp;
+    %tmp.3 = invoke %tmp.1 %tmp.2();
+    %tmp.4 = as %tmp.3 SmartAlarmApp;
+    ret %tmp.4;
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmApp_mc_32_35_34_0_stop:
+}
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc"; @line = 1; ]
+<init> {
+}

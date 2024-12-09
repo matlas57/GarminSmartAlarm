@@ -1,0 +1,103 @@
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 1; ]
+import Toybox.Graphics;
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 2; ]
+import Toybox.WatchUi;
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 5; ]
+class SmartAlarmView extends WatchUi.View{
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 5; ]
+    <init> {
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 5; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 7; @position = 15; ]
+    protected
+    var myText;
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 9; ]
+    function initialize() as Void {
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmView_mc_9_26_11_4_start:
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" 10 8 ]
+        %tmp.2 = getv ? :View;
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmView_mc_9_26_11_4_stop:
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 14; ]
+    function onLayout(dc as Dc) as Void {
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmView_mc_14_40_16_4_start:
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" 15 8 ]
+        %tmp.1 = self;
+        %tmp.2 = getv function %tmp.1 :setLayout;
+        %tmp.4 = getv ? :Rez;
+        %tmp.5 = getv %tmp.4 :Layouts;
+        %tmp.6 = getv function %tmp.5 :MainLayout;
+        %tmp.8 = lgetv %dc;
+        %tmp.9 = invoke %tmp.5 %tmp.6(%tmp.8);
+        invoke %tmp.1 %tmp.2(%tmp.9);
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmView_mc_14_40_16_4_stop:
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 21; ]
+    function onShow() as Void {
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmView_mc_21_30_29_4_start:
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" 22 8 ]
+        %tmp.3 = getm $.Toybox.WatchUi;
+        %tmp.4 = getv function ? %tmp.3 :Text;
+        %tmp.5 = newd 5;
+        %tmp.7 = const :text;
+        %tmp.8 = "Hello World!";
+        %tmp.9 = dup %tmp.5;
+        %tmp.10 = aputv %tmp.9 %tmp.7 %tmp.8;
+        %tmp.12 = const :color;
+        %tmp.13 = getm $.Toybox.Graphics;
+        %tmp.14 = getv %tmp.13 :COLOR_WHITE;
+        %tmp.15 = dup %tmp.10;
+        %tmp.16 = aputv %tmp.15 %tmp.12 %tmp.14;
+        %tmp.18 = const :font;
+        %tmp.19 = getm $.Toybox.Graphics;
+        %tmp.20 = getv %tmp.19 :FONT_LARGE;
+        %tmp.21 = dup %tmp.16;
+        %tmp.22 = aputv %tmp.21 %tmp.18 %tmp.20;
+        %tmp.24 = const :locX;
+        %tmp.25 = getm $.Toybox.WatchUi;
+        %tmp.26 = getv %tmp.25 :LAYOUT_HALIGN_CENTER;
+        %tmp.27 = dup %tmp.22;
+        %tmp.28 = aputv %tmp.27 %tmp.24 %tmp.26;
+        %tmp.30 = const :locY;
+        %tmp.31 = getm $.Toybox.WatchUi;
+        %tmp.32 = getv %tmp.31 :LAYOUT_VALIGN_CENTER;
+        %tmp.33 = dup %tmp.28;
+        %tmp.34 = aputv %tmp.33 %tmp.30 %tmp.32;
+        %tmp.1 = newc %tmp.4 (%tmp.34);
+        putv self :myText %tmp.1;
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmView_mc_21_30_29_4_stop:
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 32; ]
+    function onUpdate(dc) as Void {
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmView_mc_32_34_37_4_start:
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" 34 8 ]
+        %tmp.1 = lgetv %dc;
+        %tmp.2 = getv function %tmp.1 :setColor;
+        %tmp.3 = getm $.Toybox.Graphics;
+        %tmp.4 = getv %tmp.3 :COLOR_WHITE;
+        %tmp.5 = getm $.Toybox.Graphics;
+        %tmp.6 = getv %tmp.5 :COLOR_BLACK;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" 35 8 ]
+        %tmp.7 = lgetv %dc;
+        %tmp.8 = getv function %tmp.7 :clear;
+        invoke %tmp.7 %tmp.8();
+[ "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" 36 8 ]
+        %tmp.10 = getv ? :myText;
+        %tmp.11 = getv function %tmp.10 :draw;
+        %tmp.13 = lgetv %dc;
+        invoke %tmp.10 %tmp.11(%tmp.13);
+_Users_matanatlas_Desktop_Projects_GarminSmartAlarm_source_SmartAlarmView_mc_32_34_37_4_stop:
+    }
+    [ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 42; ]
+    function onHide() as Void {
+    }
+}
+[ @file = "/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc"; @line = 1; ]
+<init> {
+}

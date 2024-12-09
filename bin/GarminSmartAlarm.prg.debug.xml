@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<debugInfo>
+<manifest filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/manifest.xml"/>
+<pcToLineNum>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="1" lineNum="5" parent="globals/SmartAlarmApp" pc="268435460" symbol="&lt;init&gt;"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="2" lineNum="5" parent="globals/SmartAlarmView" pc="268435472" symbol="&lt;init&gt;"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmDelegate.mc" id="3" lineNum="4" parent="globals/SmartAlarmDelegate" pc="268435484" symbol="&lt;init&gt;"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="4" lineNum="32" parent="globals" pc="268435496" symbol="getApp"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="4" lineNum="33" parent="globals" pc="268435506" symbol="getApp"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="5" lineNum="7" parent="globals/Rez" pc="268435517" symbol="&lt;init&gt;"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmMenuDelegate.mc" id="6" lineNum="5" parent="globals/SmartAlarmMenuDelegate" pc="268435537" symbol="&lt;init&gt;"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="7" lineNum="12" parent="globals/SmartAlarmApp" pc="268435549" symbol="onStart"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="7" lineNum="13" parent="globals/SmartAlarmApp" pc="268435552" symbol="onStart"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="7" lineNum="14" parent="globals/SmartAlarmApp" pc="268435565" symbol="onStart"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="8" lineNum="26" parent="globals/SmartAlarmApp" pc="268435651" symbol="getInitialView"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="8" lineNum="27" parent="globals/SmartAlarmApp" pc="268435653" symbol="getInitialView"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="9" lineNum="7" parent="globals/SmartAlarmApp" pc="268435708" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="9" lineNum="8" parent="globals/SmartAlarmApp" pc="268435710" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmApp.mc" id="10" lineNum="22" parent="globals/SmartAlarmApp" pc="268435723" symbol="onStop"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="11" lineNum="21" parent="globals/SmartAlarmView" pc="268435726" symbol="onShow"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="11" lineNum="22" parent="globals/SmartAlarmView" pc="268435728" symbol="onShow"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="12" lineNum="14" parent="globals/SmartAlarmView" pc="268435815" symbol="onLayout"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="12" lineNum="15" parent="globals/SmartAlarmView" pc="268435817" symbol="onLayout"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="13" lineNum="9" parent="globals/SmartAlarmView" pc="268435851" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="13" lineNum="10" parent="globals/SmartAlarmView" pc="268435853" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="15" lineNum="32" parent="globals/SmartAlarmView" pc="268435866" symbol="onUpdate"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="15" lineNum="34" parent="globals/SmartAlarmView" pc="268435868" symbol="onUpdate"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="15" lineNum="35" parent="globals/SmartAlarmView" pc="268435884" symbol="onUpdate"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmView.mc" id="15" lineNum="36" parent="globals/SmartAlarmView" pc="268435892" symbol="onUpdate"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmDelegate.mc" id="16" lineNum="10" parent="globals/SmartAlarmDelegate" pc="268435909" symbol="onMenu"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmDelegate.mc" id="16" lineNum="11" parent="globals/SmartAlarmDelegate" pc="268435911" symbol="onMenu"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmDelegate.mc" id="16" lineNum="12" parent="globals/SmartAlarmDelegate" pc="268435980" symbol="onMenu"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmDelegate.mc" id="17" lineNum="6" parent="globals/SmartAlarmDelegate" pc="268435982" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmDelegate.mc" id="17" lineNum="7" parent="globals/SmartAlarmDelegate" pc="268435984" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmMenuDelegate.mc" id="18" lineNum="11" parent="globals/SmartAlarmMenuDelegate" pc="268435997" symbol="onMenuItem"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmMenuDelegate.mc" id="18" lineNum="12" parent="globals/SmartAlarmMenuDelegate" pc="268435999" symbol="onMenuItem"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmMenuDelegate.mc" id="18" lineNum="13" parent="globals/SmartAlarmMenuDelegate" pc="268436010" symbol="onMenuItem"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmMenuDelegate.mc" id="18" lineNum="14" parent="globals/SmartAlarmMenuDelegate" pc="268436031" symbol="onMenuItem"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmMenuDelegate.mc" id="18" lineNum="15" parent="globals/SmartAlarmMenuDelegate" pc="268436042" symbol="onMenuItem"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmMenuDelegate.mc" id="19" lineNum="7" parent="globals/SmartAlarmMenuDelegate" pc="268436064" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/source/SmartAlarmMenuDelegate.mc" id="19" lineNum="8" parent="globals/SmartAlarmMenuDelegate" pc="268436066" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="20" lineNum="14" parent="globals/Rez/Layouts" pc="268436079" symbol="MainLayout"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="20" lineNum="15" parent="globals/Rez/Layouts" pc="268436090" symbol="MainLayout"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="20" lineNum="17" parent="globals/Rez/Layouts" pc="268436191" symbol="MainLayout"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="20" lineNum="18" parent="globals/Rez/Layouts" pc="268436276" symbol="MainLayout"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="20" lineNum="20" parent="globals/Rez/Layouts" pc="268436308" symbol="MainLayout"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="21" lineNum="25" parent="globals/Rez/Menus/MainMenu" pc="268436323" symbol="&lt;init&gt;"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="22" lineNum="26" parent="globals/Rez/Menus/MainMenu" pc="268436335" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="22" lineNum="27" parent="globals/Rez/Menus/MainMenu" pc="268436337" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="22" lineNum="28" parent="globals/Rez/Menus/MainMenu" pc="268436349" symbol="initialize"/>
+<entry filename="/Users/matanatlas/Desktop/Projects/GarminSmartAlarm/bin/gen/006-B4257-00/source/Rez.mcgen" id="22" lineNum="29" parent="globals/Rez/Menus/MainMenu" pc="268436394" symbol="initialize"/>
+</pcToLineNum>
+<symbolTable>
+<entry id="8388639" module="true" symbol="Graphics"/>
+<entry id="8389346" symbol="text"/>
+<entry id="8388632" method="true" symbol="&lt;init&gt;"/>
+<entry id="5" module="true" symbol="globals/Rez/Menus"/>
+<entry id="10" object="true" symbol="SmartAlarmView"/>
+<entry id="16" method="true" symbol="MainLayout"/>
+<entry id="7" object="true" symbol="SmartAlarmApp"/>
+<entry field="true" id="8388611" module="true" symbol="Toybox"/>
+<entry field="true" id="18" symbol="AppName"/>
+<entry id="6" module="true" symbol="globals/Rez/Strings"/>
+<entry id="8389080" method="true" symbol="onMenu"/>
+<entry id="8389345" symbol="rezId"/>
+<entry id="8388648" module="true" symbol="WatchUi"/>
+<entry id="2" module="true" symbol="globals/Rez"/>
+<entry field="true" id="21" symbol="prompt"/>
+<entry field="true" id="15" symbol="id_monkey"/>
+<entry id="8389124" method="true" symbol="onUpdate"/>
+<entry field="true" id="8389065" symbol="locY"/>
+<entry field="true" id="8389064" symbol="locX"/>
+<entry id="9" object="true" symbol="SmartAlarmMenuDelegate"/>
+<entry id="8388771" module="true" object="true" symbol="Drawables"/>
+<entry id="8389348" symbol="font"/>
+<entry id="23" symbol="item_2"/>
+<entry id="22" symbol="item_1"/>
+<entry id="13" module="true" symbol="Menus"/>
+<entry id="8389275" method="true" symbol="getApp"/>
+<entry id="4" module="true" symbol="globals/Rez/Layouts"/>
+<entry id="8389122" method="true" symbol="onLayout"/>
+<entry id="8" object="true" symbol="SmartAlarmDelegate"/>
+<entry field="true" id="8389063" symbol="identifier"/>
+<entry id="8389349" symbol="justification"/>
+<entry field="true" id="11" symbol="myText"/>
+<entry id="3" module="true" symbol="globals/Rez/Drawables"/>
+<entry id="17" object="true" symbol="MainMenu"/>
+<entry id="8388644" module="true" symbol="System"/>
+<entry id="8388769" module="true" object="true" symbol="Rez"/>
+<entry id="8388640" module="true" symbol="Lang"/>
+<entry field="true" id="14" symbol="LauncherIcon"/>
+<entry id="8388610" symbol="statics"/>
+<entry id="8389123" method="true" symbol="onShow"/>
+<entry id="8389350" module="true" symbol="globals"/>
+<entry id="8388770" module="true" object="true" symbol="Strings"/>
+<entry id="8388702" method="true" symbol="initialize"/>
+<entry id="8389279" method="true" symbol="onStart"/>
+<entry id="8389280" method="true" symbol="getInitialView"/>
+<entry id="8389281" method="true" symbol="onStop"/>
+<entry id="8389109" method="true" symbol="onMenuItem"/>
+<entry id="8389347" symbol="color"/>
+<entry id="12" module="true" symbol="Layouts"/>
+<entry id="8389125" method="true" symbol="onHide"/>
+<entry id="8388635" module="true" symbol="Application"/>
+<entry field="true" id="20" symbol="menu_label_2"/>
+<entry field="true" id="19" symbol="menu_label_1"/>
+</symbolTable>
+<localVars>
+<entry arg="true" endPc="268435650" name="state" stackId="1" startPc="268435549"/>
+<entry endPc="268435649" name="myTime" stackId="2" startPc="268435552"/>
+<entry arg="true" endPc="268435850" name="dc" stackId="1" startPc="268435815"/>
+<entry arg="true" endPc="268435908" name="dc" stackId="1" startPc="268435866"/>
+<entry arg="true" endPc="268436063" name="item" stackId="1" startPc="268435997"/>
+<entry arg="true" endPc="268436322" name="dc" stackId="1" startPc="268436079"/>
+<entry endPc="268436322" name="rez_cmp_local_text_2127060075" stackId="2" startPc="268436090"/>
+<entry endPc="268436322" name="rez_cmp_local_bitmap_id_monkey" stackId="3" startPc="268436090"/>
+</localVars>
+<deviceInfo deviceVersion="4866e5192c0c99025597cd8e6e841f3d774b64f7" partNumber="006-B4257-00"/>
+<annotations>
+<annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="LauncherIcon"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="menu_label_2"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="menu_label_1"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="prompt"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="AppName"/>
+<annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="id_monkey"/>
+</annotations>
+<dataEntryOffsetMappings>
+<dataEntry label="globals" offset="67" parentId="" symbolId="globals" type="module"/>
+<dataEntry label="globals/SmartAlarmApp" offset="152" parentId="globals" symbolId="SmartAlarmApp" type="class"/>
+<dataEntry label="globals/SmartAlarmView" offset="223" parentId="globals" symbolId="SmartAlarmView" type="class"/>
+<dataEntry label="globals/SmartAlarmDelegate" offset="312" parentId="globals" symbolId="SmartAlarmDelegate" type="class"/>
+<dataEntry label="globals/Rez" offset="365" parentId="globals" symbolId="Rez" type="module"/>
+<dataEntry label="globals/SmartAlarmMenuDelegate" offset="427" parentId="globals" symbolId="SmartAlarmMenuDelegate" type="class"/>
+<dataEntry label="globals/Rez/Drawables" offset="480" parentId="Rez" symbolId="Drawables" type="module"/>
+<dataEntry label="globals/Rez/Layouts" offset="524" parentId="Rez" symbolId="Layouts" type="module"/>
+<dataEntry label="globals/Rez/Menus" offset="559" parentId="Rez" symbolId="Menus" type="module"/>
+<dataEntry label="globals/Rez/Strings" offset="594" parentId="Rez" symbolId="Strings" type="module"/>
+<dataEntry label="globals/Rez/Menus/MainMenu" offset="656" parentId="Menus" symbolId="MainMenu" type="class"/>
+</dataEntryOffsetMappings>
+<functions>
+<functionEntry accessMode="public" endPc="268435471" name="&lt;init&gt;" parent="SmartAlarmApp" startPc="268435460">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435483" name="&lt;init&gt;" parent="SmartAlarmView" startPc="268435472">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435495" name="&lt;init&gt;" parent="SmartAlarmDelegate" startPc="268435484">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435516" name="getApp" startPc="268435496">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435536" name="&lt;init&gt;" parent="Rez" startPc="268435517">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435548" name="&lt;init&gt;" parent="SmartAlarmMenuDelegate" startPc="268435537">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435650" name="onStart" parent="SmartAlarmApp" startPc="268435549">
+<param id="state"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435707" name="getInitialView" parent="SmartAlarmApp" startPc="268435651">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435722" name="initialize" parent="SmartAlarmApp" startPc="268435708">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435725" name="onStop" parent="SmartAlarmApp" startPc="268435723">
+<param id="state"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435814" name="onShow" parent="SmartAlarmView" startPc="268435726">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435850" name="onLayout" parent="SmartAlarmView" startPc="268435815">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435865" name="initialize" parent="SmartAlarmView" startPc="268435851">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onHide" parent="SmartAlarmView">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435908" name="onUpdate" parent="SmartAlarmView" startPc="268435866">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435981" name="onMenu" parent="SmartAlarmDelegate" startPc="268435909">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435996" name="initialize" parent="SmartAlarmDelegate" startPc="268435982">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Drawables">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Layouts">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Menus">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Strings">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436063" name="onMenuItem" parent="SmartAlarmMenuDelegate" startPc="268435997">
+<param id="item"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436078" name="initialize" parent="SmartAlarmMenuDelegate" startPc="268436064">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436322" name="MainLayout" parent="Layouts" startPc="268436079">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436334" name="&lt;init&gt;" parent="MainMenu" startPc="268436323">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436439" name="initialize" parent="MainMenu" startPc="268436335">
+<documentation/>
+</functionEntry>
+</functions>
+</debugInfo>
