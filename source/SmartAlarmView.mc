@@ -4,7 +4,8 @@ import Toybox.WatchUi;
 
 class SmartAlarmView extends WatchUi.View {
 
-    hidden var myText;
+    hidden var promptEarliest;
+    hidden var earliestTime;
 
     function initialize() {
         View.initialize();
@@ -19,11 +20,20 @@ class SmartAlarmView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        myText = new WatchUi.Text({
-            :text=>"Hello World!",
+
+        System.println(appState);
+        promptEarliest = new WatchUi.Text({
+            :text=>"Earliest Alarm:",
+            :color=>Graphics.COLOR_WHITE,
+            :font=>Graphics.FONT_SYSTEM_TINY,
+            :locX =>WatchUi.LAYOUT_HALIGN_CENTER,
+            :locY=>120
+        });
+        earliestTime = new WatchUi.Text({
+            :text=>"",
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_LARGE,
-            :locX =>WatchUi.LAYOUT_HALIGN_CENTER,
+            :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
             :locY=>WatchUi.LAYOUT_VALIGN_CENTER
         });
     }
@@ -33,7 +43,10 @@ class SmartAlarmView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
-        myText.draw(dc);
+        System.println("updating to " + earliestHour);
+        earliestTime.setText(earliestHour.toString());
+        promptEarliest.draw(dc);
+        earliestTime.draw(dc);
     }
 
     // Called when this View is removed from the screen. Save the
@@ -41,5 +54,7 @@ class SmartAlarmView extends WatchUi.View {
     // memory.
     function onHide() as Void {
     }
+
+    
 
 }

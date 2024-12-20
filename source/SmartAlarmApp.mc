@@ -2,6 +2,10 @@ import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
+var appState = "earliestAlarmPrompt";
+var earliestHour = 6;
+var earliestMinute = 0;
+
 class SmartAlarmApp extends Application.AppBase {
 
     function initialize() {
