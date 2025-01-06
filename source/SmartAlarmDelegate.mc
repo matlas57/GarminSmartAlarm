@@ -14,12 +14,25 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
+    /*
+    Keycodes
+    4: Start/Stop
+    5: Back
+    8: Down
+    13: Up
+    */
     function onKey(keyEvent) {
         if (keyEvent.getKey() == 13) {
             earliestHour = earliestHour + 1;
+            if (earliestHour > 12) {
+                earliestHour = 1;
+            }
         }
         else if (keyEvent.getKey() == 8) {
             earliestHour = earliestHour - 1;
+            if (earliestHour < 1) { 
+                earliestHour = 12;
+            }
         }
 
         WatchUi.requestUpdate();
