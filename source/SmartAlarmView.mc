@@ -25,9 +25,9 @@ class SmartAlarmView extends WatchUi.View {
         promptEarliest = new WatchUi.Text({
             :text=>"Earliest Alarm:",
             :color=>Graphics.COLOR_WHITE,
-            :font=>Graphics.FONT_SYSTEM_TINY,
+            :font=>Graphics.FONT_SYSTEM_XTINY,
             :locX =>WatchUi.LAYOUT_HALIGN_CENTER,
-            :locY=>120
+            :locY=>50
         });
         earliestTime = new WatchUi.Text({
             :text=>"",
@@ -43,8 +43,16 @@ class SmartAlarmView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
-        System.println("updating to " + earliestHour);
-        earliestTime.setText(earliestHour.toString());
+
+        var paddedMinuteString = "";
+        if (earliestMinute < 10) {
+            paddedMinuteString = "0" + earliestMinute.toString();
+        }
+        else {
+            paddedMinuteString = earliestMinute.toString();
+        }
+        System.println(paddedMinuteString);
+        earliestTime.setText(earliestHour.toString() + ":" + paddedMinuteString);
         promptEarliest.draw(dc);
         earliestTime.draw(dc);
     }
