@@ -5,6 +5,7 @@ import Toybox.WatchUi;
 class SmartAlarmView extends WatchUi.View {
 
     hidden var promptEarliest;
+    hidden var currentStep;
     hidden var earliestTime;
 
     function initialize() {
@@ -21,13 +22,19 @@ class SmartAlarmView extends WatchUi.View {
     // loading resources into memory.
     function onShow() as Void {
 
-        System.println(appState);
         promptEarliest = new WatchUi.Text({
-            :text=>"Earliest Alarm:",
+            :text=>"Earliest Alarm",
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_SYSTEM_XTINY,
-            :locX =>WatchUi.LAYOUT_HALIGN_CENTER,
+            :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
             :locY=>50
+        });
+        currentStep = new WatchUi.Text({
+            :text=>"",
+            :color=>Graphics.COLOR_WHITE,
+            :font=>Graphics.FONT_SYSTEM_XTINY,
+            :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+            :locY=>115
         });
         earliestTime = new WatchUi.Text({
             :text=>"",
@@ -44,6 +51,16 @@ class SmartAlarmView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
 
+        if (step == 0) {
+            currentStep.setText("Set Hour");
+        } 
+        else if (step == 1) {
+            currentStep.setText("Set Minutes");
+        }
+        else {
+            currentStep.setText("Confirm");
+        }
+
         var paddedMinuteString = "";
         if (earliestMinute < 10) {
             paddedMinuteString = "0" + earliestMinute.toString();
@@ -51,9 +68,9 @@ class SmartAlarmView extends WatchUi.View {
         else {
             paddedMinuteString = earliestMinute.toString();
         }
-        System.println(paddedMinuteString);
         earliestTime.setText(earliestHour.toString() + ":" + paddedMinuteString);
         promptEarliest.draw(dc);
+        currentStep.draw(dc);
         earliestTime.draw(dc);
     }
 
