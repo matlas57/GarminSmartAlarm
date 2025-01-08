@@ -4,9 +4,9 @@ import Toybox.WatchUi;
 
 class SmartAlarmView extends WatchUi.View {
 
-    hidden var promptEarliest;
+    hidden var prompt;
     hidden var currentStep;
-    hidden var earliestTime;
+    hidden var time;
 
     function initialize() {
         View.initialize();
@@ -22,8 +22,8 @@ class SmartAlarmView extends WatchUi.View {
     // loading resources into memory.
     function onShow() as Void {
 
-        promptEarliest = new WatchUi.Text({
-            :text=>"Earliest Alarm",
+        prompt = new WatchUi.Text({
+            :text=>"",
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_SYSTEM_XTINY,
             :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
@@ -36,7 +36,7 @@ class SmartAlarmView extends WatchUi.View {
             :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
             :locY=>115
         });
-        earliestTime = new WatchUi.Text({
+        time = new WatchUi.Text({
             :text=>"",
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_LARGE,
@@ -51,27 +51,51 @@ class SmartAlarmView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
 
-        if (step == 0) {
-            currentStep.setText("Set Hour");
-        } 
-        else if (step == 1) {
-            currentStep.setText("Set Minutes");
-        }
-        else {
-            currentStep.setText("Confirm");
-        }
+        if (appState.equals("earliestAlarmPrompt")) {
+            if (step == 0) {
+                currentStep.setText("Set Hour");
+            } 
+            else if (step == 1) {
+                currentStep.setText("Set Minutes");
+            }
+            else {
+                currentStep.setText("Confirm");
+            }
 
-        var paddedMinuteString = "";
-        if (earliestMinute < 10) {
-            paddedMinuteString = "0" + earliestMinute.toString();
+            var paddedMinuteString = "";
+            if (earliestMinute < 10) {
+                paddedMinuteString = "0" + earliestMinute.toString();
+            }
+            else {
+                paddedMinuteString = earliestMinute.toString();
+            }
+            time.setText(earliestHour.toString() + ":" + paddedMinuteString);
+            prompt.setText("Earliest Alarm");
+        } 
+        else if (appState.equals("latestAlarmPrompt")) {
+            if (step == 0) {
+                currentStep.setText("Set Hour");
+            } 
+            else if (step == 1) {
+                currentStep.setText("Set Minutes");
+            }
+            else {
+                currentStep.setText("Confirm");
+            }
+
+            var paddedMinuteString = "";
+            if (latestMinute < 10) {
+                paddedMinuteString = "0" + latestMinute.toString();
+            }
+            else {
+                paddedMinuteString = latestMinute.toString();
+            }
+            time.setText(latestHour.toString() + ":" + paddedMinuteString);
+            prompt.setText("Latest Alarm");
         }
-        else {
-            paddedMinuteString = earliestMinute.toString();
-        }
-        earliestTime.setText(earliestHour.toString() + ":" + paddedMinuteString);
-        promptEarliest.draw(dc);
+        prompt.draw(dc);
         currentStep.draw(dc);
-        earliestTime.draw(dc);
+        time.draw(dc);
     }
 
     // Called when this View is removed from the screen. Save the

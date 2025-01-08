@@ -6,6 +6,8 @@ var appState = "earliestAlarmPrompt";
 var step = 0;
 var earliestHour = 6;
 var earliestMinute = 0;
+var latestHour = 7;
+var latestMinute = 0;
 
 class SmartAlarmApp extends Application.AppBase {
 
