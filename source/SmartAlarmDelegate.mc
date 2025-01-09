@@ -63,6 +63,10 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 appState = "latestAlarmPrompt";
                 step = 0;
             }
+
+            if (keyEvent.getKey() == 5 && step > 0) {
+                step--;
+            }    
         }
         else if (appState.equals("latestAlarmPrompt")) {
             if (step == 0) {
@@ -81,6 +85,10 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 else if (keyEvent.getKey() == 4) {
                     step++;
                 }
+                else if (keyEvent.getKey() == 5) {
+                    appState = "earliestAlarmPrompt";
+                    step = 2;
+                }
             }
             else if (step == 1) {
                 if (keyEvent.getKey() == 13) {
@@ -98,12 +106,20 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 else if (keyEvent.getKey() == 4) {
                     step++;
                 }
+                else if (keyEvent.getKey() == 5) {
+                    step--;
+                }
             }
             else if (step == 2) {
-                appState = "trackSleep";
-                step = 0;
-                System.println(latestHour.toString() + ":" + latestMinute.toString());
-                System.println(appState);
+                if (keyEvent.getKey() == 4) {
+                    appState = "trackSleep";
+                    step = 0;
+                    System.println(latestHour.toString() + ":" + latestMinute.toString());
+                    System.println(appState);
+                }
+                else if (keyEvent.getKey() == 5) {
+                    step--;
+                }
             }
         }
 
