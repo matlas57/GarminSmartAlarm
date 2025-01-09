@@ -5,7 +5,7 @@ import Toybox.System;
 
 class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
-    function initialize() {
+    function initialize(view) {
         BehaviorDelegate.initialize();
     }
 

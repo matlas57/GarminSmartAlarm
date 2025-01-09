@@ -7,6 +7,7 @@ class SmartAlarmView extends WatchUi.View {
     hidden var prompt;
     hidden var currentStep;
     hidden var time;
+    hidden var warning;
 
     function initialize() {
         View.initialize();
@@ -42,6 +43,13 @@ class SmartAlarmView extends WatchUi.View {
             :font=>Graphics.FONT_LARGE,
             :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
             :locY=>WatchUi.LAYOUT_VALIGN_CENTER
+        });
+        warning = new WatchUi.Text({
+            :text=>"",
+            :color=>Graphics.COLOR_WHITE,
+            :font=>Graphics.FONT_SYSTEM_XTINY,
+            :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
+            :locY=>315
         });
     }
 
@@ -91,6 +99,7 @@ class SmartAlarmView extends WatchUi.View {
                 paddedMinuteString = latestMinute.toString();
             }
             time.setText(latestHour.toString() + ":" + paddedMinuteString);
+
             prompt.setText("Latest Alarm");
         }
         prompt.draw(dc);
@@ -103,7 +112,5 @@ class SmartAlarmView extends WatchUi.View {
     // memory.
     function onHide() as Void {
     }
-
-    
 
 }
