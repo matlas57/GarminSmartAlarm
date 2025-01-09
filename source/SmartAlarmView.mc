@@ -9,8 +9,11 @@ class SmartAlarmView extends WatchUi.View {
     hidden var time;
     hidden var warning;
 
-    function initialize() {
+    hidden var appDelegate;
+
+    function initialize(delegate) {
         View.initialize();
+        appDelegate = delegate; 
     }
 
     // Load your resources here
@@ -99,6 +102,8 @@ class SmartAlarmView extends WatchUi.View {
                 paddedMinuteString = latestMinute.toString();
             }
             time.setText(latestHour.toString() + ":" + paddedMinuteString);
+
+            System.println(appDelegate.getLatestAlarmWarning());
 
             prompt.setText("Latest Alarm");
         }

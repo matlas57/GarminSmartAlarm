@@ -5,7 +5,7 @@ import Toybox.System;
 
 class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
-    function initialize(view) {
+    function initialize() {
         BehaviorDelegate.initialize();
     }
 
@@ -136,6 +136,24 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
     function onSwipe(swipeEvent) {
         System.println(swipeEvent.getDirection()); // e.g. SWIPE_DOWN = 2
         return true;
+    }
+
+    function getLatestAlarmWarning() {
+        if (latestHour < earliestHour || (latestHour == earliestHour && latestMinute < earliestMinute)) {
+            return "Latest alarm can not be earlier than earliest alarm";
+        }
+        var thirtyMinAfterEarliest_Hour;
+        var thirtyMinAfterEarliest_Minute = (earliestMinute + 30) % 60;
+        if (earliestMinute >= 30) {
+            thirtyMinAfterEarliest_Hour = earliestHour + 1;
+        }
+        else {
+            thirtyMinAfterEarliest_Hour = earliestHour;
+        }
+        if (latestHour < thirtyMinAfterEarliest_Hour || (latestHour == thirtyMinAfterEarliest_Hour && latestMinute < thirtyMinAfterEarliest_Minute)) {
+            return "Alarm interval must be at least 30 minutes";
+        }
+        return "No warning";
     }
 
 }
