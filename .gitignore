@@ -1,0 +1,10 @@
+*.prg
+*.mir
+
+# Ignore system files
+.DS_Store
+
+# Ignore compiled files
+*.class
+*.o
+*.out
