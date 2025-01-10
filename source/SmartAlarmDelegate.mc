@@ -59,7 +59,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                     step++;
                 }
             }
-            else if (step == 2) {
+            else if (step == 2 && keyEvent.getKey() == 4) {
                 appState = "latestAlarmPrompt";
                 step = 0;
             }
@@ -140,7 +140,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
     function getLatestAlarmWarning() {
         if (latestHour < earliestHour || (latestHour == earliestHour && latestMinute < earliestMinute)) {
-            return "Latest alarm can not be earlier than earliest alarm";
+            return "Latest alarm can not be\nearlier than earliest alarm";
         }
         var thirtyMinAfterEarliest_Hour;
         var thirtyMinAfterEarliest_Minute = (earliestMinute + 30) % 60;
@@ -151,7 +151,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             thirtyMinAfterEarliest_Hour = earliestHour;
         }
         if (latestHour < thirtyMinAfterEarliest_Hour || (latestHour == thirtyMinAfterEarliest_Hour && latestMinute < thirtyMinAfterEarliest_Minute)) {
-            return "Alarm interval must be at least 30 minutes";
+            return "Alarm interval must\nbe at least 30 minutes";
         }
         return "No warning";
     }

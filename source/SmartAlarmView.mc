@@ -52,7 +52,7 @@ class SmartAlarmView extends WatchUi.View {
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_SYSTEM_XTINY,
             :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
-            :locY=>315
+            :locY=>255
         });
     }
 
@@ -82,6 +82,7 @@ class SmartAlarmView extends WatchUi.View {
             }
             time.setText(earliestHour.toString() + ":" + paddedMinuteString);
             prompt.setText("Earliest Alarm");
+            warning.setText("");
         } 
         else if (appState.equals("latestAlarmPrompt")) {
             if (step == 0) {
@@ -104,7 +105,7 @@ class SmartAlarmView extends WatchUi.View {
             time.setText(latestHour.toString() + ":" + paddedMinuteString);
 
             var warningText = appDelegate.getLatestAlarmWarning();
-            if (!warningText.equals("No warning") {
+            if (!warningText.equals("No warning")) {
                 warning.setText(warningText);
             }
 
