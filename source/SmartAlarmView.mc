@@ -103,13 +103,17 @@ class SmartAlarmView extends WatchUi.View {
             }
             time.setText(latestHour.toString() + ":" + paddedMinuteString);
 
-            System.println(appDelegate.getLatestAlarmWarning());
+            var warningText = appDelegate.getLatestAlarmWarning();
+            if (!warningText.equals("No warning") {
+                warning.setText(warningText);
+            }
 
             prompt.setText("Latest Alarm");
         }
         prompt.draw(dc);
         currentStep.draw(dc);
         time.draw(dc);
+        warning.draw(dc);
     }
 
     // Called when this View is removed from the screen. Save the
