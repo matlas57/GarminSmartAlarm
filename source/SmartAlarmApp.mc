@@ -8,6 +8,7 @@ var earliestHour = 6;
 var earliestMinute = 0;
 var latestHour = 7;
 var latestMinute = 0;
+var validLatestTime = true;
 
 class SmartAlarmApp extends Application.AppBase {
 

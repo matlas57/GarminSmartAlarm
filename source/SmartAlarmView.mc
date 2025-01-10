@@ -107,6 +107,10 @@ class SmartAlarmView extends WatchUi.View {
             var warningText = appDelegate.getLatestAlarmWarning();
             if (!warningText.equals("No warning")) {
                 warning.setText(warningText);
+                validLatestTime = false;
+            } else {
+                warning.setText("");
+                validLatestTime = true;
             }
 
             prompt.setText("Latest Alarm");

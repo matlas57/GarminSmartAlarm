@@ -103,7 +103,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                         latestMinute = 59;
                     }
                 }
-                else if (keyEvent.getKey() == 4) {
+                else if (keyEvent.getKey() == 4 && validLatestTime) {
                     step++;
                 }
                 else if (keyEvent.getKey() == 5) {
