@@ -2,7 +2,7 @@ import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-var appState = "earliestAlarmPrompt";
+var appState = "showAlarms";
 var step = 0;
 var earliestHour = 6;
 var earliestMinute = 0;

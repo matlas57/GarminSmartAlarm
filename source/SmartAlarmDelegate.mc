@@ -60,6 +60,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 }
             }
             else if (step == 2 && keyEvent.getKey() == 4) {
+                setEarliestAlarmInStorage(earliestHour, earliestMinute);
                 appState = "latestAlarmPrompt";
                 step = 0;
             }
@@ -128,6 +129,15 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
+    function onHold(clickEvent) {
+        Storage.clearValues();
+        System.println("Storage cleared");
+
+        WatchUi.requestUpdate();
+
+        return true;
+    }
+
     function onTap(clickEvent) {
         System.println(clickEvent.getType() + appState);      // e.g. CLICK_TYPE_TAP = 0
         return true;
@@ -136,6 +146,24 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
     function onSwipe(swipeEvent) {
         System.println(swipeEvent.getDirection()); // e.g. SWIPE_DOWN = 2
         return true;
+    }
+
+    function getEarliestAlarmFromStorage() {
+        var hour = Storage.getValue("earliestHour");
+        var minute = Storage.getValue("earliestMinute");
+        System.println("Earliest time is " + hour + ":" + minute);
+        if (hour == null && minute == null) {
+            return [null, null];
+        } 
+        else {
+            return [hour, minute];
+        }
+    }
+
+    function setEarliestAlarmInStorage(hour, minute) {
+        Storage.setValue("earliestHour", hour);
+        Storage.setValue("earliestMinute", minute);
+        System.println("Set earliest alarm in storage");
     }
 
     function getLatestAlarmWarning() {

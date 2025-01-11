@@ -62,7 +62,18 @@ class SmartAlarmView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
 
-        if (appState.equals("earliestAlarmPrompt")) {
+        //This shouldn't be in onUpdate so it doesn't run multiple times
+        if (appState.equals("showAlarms")) {
+            var earliestAlarm = appDelegate.getEarliestAlarmFromStorage();
+            if (earliestAlarm[0] != null && earliestAlarm[1] != null) {
+                System.println("Found existing alarm");
+            }
+            else  {
+                System.println("No existing alarm");
+            }
+            appState = "earliestAlarmPrompt";
+        }
+        else if (appState.equals("earliestAlarmPrompt")) {
             if (step == 0) {
                 currentStep.setText("Set Hour");
             } 
