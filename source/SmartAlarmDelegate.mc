@@ -153,16 +153,17 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         var minute = Storage.getValue("earliestMinute");
         System.println("Earliest time is " + hour + ":" + minute);
         if (hour == null && minute == null) {
-            return [null, null];
+            return null;
         } 
         else {
-            return [hour, minute];
+            return new Alarm(hour, minute);
         }
     }
 
     function setEarliestAlarmInStorage(hour, minute) {
         Storage.setValue("earliestHour", hour);
         Storage.setValue("earliestMinute", minute);
+
         System.println("Set earliest alarm in storage");
     }
 

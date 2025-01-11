@@ -4,16 +4,25 @@ import Toybox.WatchUi;
 
 class SmartAlarmView extends WatchUi.View {
 
+    //Ui elements
     hidden var prompt;
     hidden var currentStep;
     hidden var time;
     hidden var warning;
 
+    //instances of other classes
     hidden var appDelegate;
 
     function initialize(delegate) {
         View.initialize();
         appDelegate = delegate; 
+        earliestAlarm = appDelegate.getEarliestAlarmFromStorage();
+        if (earliestAlarm == null) {
+            appState = "earliestAlarmPrompt";
+        } 
+        else {
+            appState = "alarmMenu";
+        }
     }
 
     // Load your resources here
@@ -63,15 +72,8 @@ class SmartAlarmView extends WatchUi.View {
         dc.clear();
 
         //This shouldn't be in onUpdate so it doesn't run multiple times
-        if (appState.equals("showAlarms")) {
-            var earliestAlarm = appDelegate.getEarliestAlarmFromStorage();
-            if (earliestAlarm[0] != null && earliestAlarm[1] != null) {
-                System.println("Found existing alarm");
-            }
-            else  {
-                System.println("No existing alarm");
-            }
-            appState = "earliestAlarmPrompt";
+        if (appState.equals("alarmMenu")) {
+            prompt.setText("Current alarms");
         }
         else if (appState.equals("earliestAlarmPrompt")) {
             if (step == 0) {
