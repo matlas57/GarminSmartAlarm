@@ -60,7 +60,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 }
             }
             else if (step == 2 && keyEvent.getKey() == 4) {
-                setEarliestAlarmInStorage(earliestHour, earliestMinute);
+                // setEarliestAlarmInStorage(earliestHour, earliestMinute);
                 appState = "latestAlarmPrompt";
                 step = 0;
             }
@@ -113,6 +113,8 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             }
             else if (step == 2) {
                 if (keyEvent.getKey() == 4) {
+                    var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute);
+                    setAlarmInStorage(alarm);
                     appState = "trackSleep";
                     step = 0;
                     System.println(latestHour.toString() + ":" + latestMinute.toString());
@@ -148,6 +150,16 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
+    function getNumAlarms() {
+        var numAlarms = Storage.getValue("numAlarms");
+        if (numAlarms == null) {
+            return 0;
+        }
+        else {
+            return numAlarms;
+        }
+    }
+
     function getEarliestAlarmFromStorage() {
         var hour = Storage.getValue("earliestHour");
         var minute = Storage.getValue("earliestMinute");
@@ -156,13 +168,22 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             return null;
         } 
         else {
-            return new Alarm(hour, minute);
+            //EDIT THIS
+            return new Alarm(hour, minute, hour, minute);
         }
     }
 
-    function setEarliestAlarmInStorage(hour, minute) {
-        Storage.setValue("earliestHour", hour);
-        Storage.setValue("earliestMinute", minute);
+    function setAlarmInStorage(alarm) {
+        var numAlarms = getNumAlarms();
+        var curAlarm = numAlarms + 1;
+        var alarmDict = {
+            "earliestHour" =>  alarm.earliestHour,
+            "earliestMinute" => alarm.earliestMinute,
+            "latestHour" => alarm.latestHour,
+            "latestMinute" =>  alarm.latestMinute
+        };
+        Storage.setValue(curAlarm, alarmDict);
+        Storage.setValue("numAlarms", curAlarm);
 
         System.println("Set earliest alarm in storage");
     }

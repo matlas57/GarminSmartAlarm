@@ -16,12 +16,11 @@ class SmartAlarmView extends WatchUi.View {
     function initialize(delegate) {
         View.initialize();
         appDelegate = delegate; 
-        earliestAlarm = appDelegate.getEarliestAlarmFromStorage();
-        if (earliestAlarm == null) {
-            appState = "earliestAlarmPrompt";
-        } 
-        else {
+        if (appDelegate.getNumAlarms() > 0) {
             appState = "alarmMenu";
+        }
+        else {
+            appState = "earliestAlarmPrompt";
         }
     }
 

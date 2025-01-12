@@ -1,10 +1,14 @@
 class Alarm {
-    var hour;
-    var minute;
+    var earliestHour;
+    var earliestMinute;
+    var latestHour;
+    var latestMinute;
 
-    function initialize(h, m) {
-        hour = h;
-        minute = m;
+    function initialize(eh, em, lh, lm) {
+        earliestHour = eh;
+        earliestMinute = em;
+        latestHour = lh;
+        latestMinute = lm;
     }
 
 
