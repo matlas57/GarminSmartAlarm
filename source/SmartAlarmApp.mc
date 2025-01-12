@@ -14,17 +14,21 @@ var validLatestTime = true;
 class SmartAlarmApp extends Application.AppBase {
 
     function initialize() {
+        System.println("SmartAlarmApp initialize");
+
         AppBase.initialize();
     }
 
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void {
-        var myTime = System.getClockTime(); // ClockTime object
-        System.println(
-        myTime.hour.format("%02d") + ":" +
-        myTime.min.format("%02d") + ":" +
-        myTime.sec.format("%02d")
-        );
+        System.println("SmartAlarmView onStart");
+
+        // var myTime = System.getClockTime(); // ClockTime object
+        // System.println(
+        // myTime.hour.format("%02d") + ":" +
+        // myTime.min.format("%02d") + ":" +
+        // myTime.sec.format("%02d")
+        // );
     }
 
     // onStop() is called when your application is exiting
@@ -33,6 +37,8 @@ class SmartAlarmApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
+        System.println("SmartAlarmView getInitialView");
+
         var delegate = new SmartAlarmDelegate();
         var view = new SmartAlarmView(delegate);
         return [ view, delegate ];

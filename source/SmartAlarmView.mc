@@ -14,6 +14,7 @@ class SmartAlarmView extends WatchUi.View {
     hidden var appDelegate;
 
     function initialize(delegate) {
+        System.println("SmartAlarmView initialize");
         View.initialize();
         appDelegate = delegate; 
         if (appDelegate.getNumAlarms() > 0) {
@@ -26,13 +27,20 @@ class SmartAlarmView extends WatchUi.View {
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.MainLayout(dc));
+        System.println("SmartAlarmView onLayout");
+        if (appState.equals("alarmMenu")) {
+            appDelegate.onMenu();
+        } 
+        else if (appState.equals("earliestAlarmPrompt")) {
+            setLayout(Rez.Layouts.promptAlarm(dc));
+        }
     }
 
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
+        System.println("SmartAlarmView onShow");
 
         prompt = new WatchUi.Text({
             :text=>"",
@@ -73,6 +81,8 @@ class SmartAlarmView extends WatchUi.View {
         //This shouldn't be in onUpdate so it doesn't run multiple times
         if (appState.equals("alarmMenu")) {
             prompt.setText("Current alarms");
+            var numAlarms = appDelegate.getNumAlarms();
+            appDelegate.getAlarmFromStorage(numAlarms);
         }
         else if (appState.equals("earliestAlarmPrompt")) {
             if (step == 0) {

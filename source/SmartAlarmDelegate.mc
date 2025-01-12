@@ -6,11 +6,30 @@ import Toybox.System;
 class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
     function initialize() {
+        System.println("SmartAlarmDelegate initialize");
+
         BehaviorDelegate.initialize();
     }
 
     function onMenu() as Boolean {
-        WatchUi.pushView(new Rez.Menus.MainMenu(), new SmartAlarmMenuDelegate(), WatchUi.SLIDE_UP);
+        var alarmsMenu = new WatchUi.Menu2({:title=>"Alarms"});
+        var numAlarms = getNumAlarms();
+        for (var i = 1; i <= numAlarms; i++ ) {
+            var alarm = getAlarmFromStorage(i);
+            // var alarmString = alarmArray[0].toString() + ":" + padMinuteString(alarmArray[1]) + " - " + alarmArray[2] + ":" + padMinuteString(alarmArray[3].toString());
+            var alarmString = alarm.earliestHour.toString() + ":" + padMinuteString(alarm.earliestMinute) + " - " + alarm.latestHour.toString() + ":" + padMinuteString(alarm.latestMinute);
+            System.println(alarmString);
+            alarmsMenu.addItem(
+                new MenuItem(
+                    alarmString,
+                    "",
+                    i,
+                    {}
+                )
+            );
+        }
+
+        WatchUi.pushView(alarmsMenu, new SmartAlarmMenuDelegate(), WatchUi.SLIDE_UP);
         return true;
     }
 
@@ -22,8 +41,6 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
     13: Up
     */
     function onKey(keyEvent) {
-        //TODO: Add handling for back button
-        System.println("Registered button click " + appState);
         if (appState.equals("earliestAlarmPrompt")) {
             if (step == 0) {
                 if (keyEvent.getKey() == 13) {
@@ -117,8 +134,6 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                     setAlarmInStorage(alarm);
                     appState = "trackSleep";
                     step = 0;
-                    System.println(latestHour.toString() + ":" + latestMinute.toString());
-                    System.println(appState);
                 }
                 else if (keyEvent.getKey() == 5) {
                     step--;
@@ -133,7 +148,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
     function onHold(clickEvent) {
         Storage.clearValues();
-        System.println("Storage cleared");
+        System.println("Cleared storage");
 
         WatchUi.requestUpdate();
 
@@ -160,32 +175,48 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         }
     }
 
-    function getEarliestAlarmFromStorage() {
-        var hour = Storage.getValue("earliestHour");
-        var minute = Storage.getValue("earliestMinute");
-        System.println("Earliest time is " + hour + ":" + minute);
-        if (hour == null && minute == null) {
+    function getAlarmFromStorage(alarmNum) {
+        if (alarmNum < getNumAlarms()) {
             return null;
-        } 
-        else {
-            //EDIT THIS
-            return new Alarm(hour, minute, hour, minute);
         }
+        var alarm = Storage.getValue(alarmNum);
+        System.println(alarm);
+        // var em = alarm.get("earliestMinute");
+        // var lh = alarm.get("latestHour");
+        // var lm = alarm.get("latestMinute");
+        if (alarm != null) {
+            return new Alarm(
+                alarm[0],
+                alarm[1],
+                alarm[2],
+                alarm[3]
+            );
+        }
+        return null;
     }
 
     function setAlarmInStorage(alarm) {
         var numAlarms = getNumAlarms();
         var curAlarm = numAlarms + 1;
-        var alarmDict = {
-            "earliestHour" =>  alarm.earliestHour,
-            "earliestMinute" => alarm.earliestMinute,
-            "latestHour" => alarm.latestHour,
-            "latestMinute" =>  alarm.latestMinute
-        };
-        Storage.setValue(curAlarm, alarmDict);
+        // var alarmDict = {
+        //     "earliestHour" =>  alarm.earliestHour,
+        //     "earliestMinute" => alarm.earliestMinute,
+        //     "latestHour" => alarm.latestHour,
+        //     "latestMinute" =>  alarm.latestMinute
+        // };
+        var alarmArray = [
+            alarm.earliestHour,
+            alarm.earliestMinute,
+            alarm.latestHour,
+            alarm.latestMinute
+        ];
+        Storage.setValue(curAlarm, alarmArray);
         Storage.setValue("numAlarms", curAlarm);
 
         System.println("Set earliest alarm in storage");
+        // System.println(alarmDict.keys());
+        // System.println(alarmDict.values());
+        System.println(alarmArray);
     }
 
     function getLatestAlarmWarning() {
@@ -204,6 +235,15 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             return "Alarm interval must\nbe at least 30 minutes";
         }
         return "No warning";
+    }
+
+    function padMinuteString(minute) {
+        if (minute < 10) {
+            return "0" + minute.toString();
+        } 
+        else {
+            return minute.toString();
+        }
     }
 
 }
