@@ -2,19 +2,14 @@ import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
 
-class SmartAlarmMenuDelegate extends WatchUi.MenuInputDelegate {
+class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function initialize() {
-        MenuInputDelegate.initialize();
+        Menu2InputDelegate.initialize();
     }
 
-    function onMenuItem(item as Symbol) as Void {
-        System.println("onMenuItem");
-        if (item == :item_1) {
-            System.println("item 1");
-        } else if (item == :item_2) {
-            System.println("item 2");
-        }
+    function onSelect(item) {
+        System.println(item.getId());
     }
 
 }

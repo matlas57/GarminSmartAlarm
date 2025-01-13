@@ -21,13 +21,21 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             System.println(alarmString);
             alarmsMenu.addItem(
                 new MenuItem(
-                    alarmString,
-                    "",
-                    i,
-                    {}
+                    alarmString, //labal
+                    "",          //sublabel   
+                    i,           //id   
+                    {}           //dictionary of options: can include text alignment, icon   
                 )
             );
         }
+        alarmsMenu.addItem(
+            new MenuItem (
+                "Add Alarm",
+                "",
+                "addAlarmButton",
+                {}
+            )
+        );
 
         WatchUi.pushView(alarmsMenu, new SmartAlarmMenuDelegate(), WatchUi.SLIDE_UP);
         return true;
