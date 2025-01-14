@@ -10,6 +10,12 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item) {
         System.println(item.getId());
+        if (item.getId().equals("addAlarmButton")) {
+            System.println("Changing appState to earliestAlarmPrompt");
+            appState = "earliestAlarmPrompt";
+            var delegate = new SmartAlarmDelegate();
+            WatchUi.pushView(new SmartAlarmView(delegate), delegate, WatchUi.SLIDE_UP);
+        }
     }
 
 }

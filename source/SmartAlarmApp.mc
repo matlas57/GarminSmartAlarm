@@ -40,6 +40,12 @@ class SmartAlarmApp extends Application.AppBase {
         System.println("SmartAlarmView getInitialView");
 
         var delegate = new SmartAlarmDelegate();
+        if (delegate.getNumAlarms() > 0) {
+            appState = "alarmMenu";
+        }
+        else {
+            appState = "earliestAlarmPrompt";
+        }
         var view = new SmartAlarmView(delegate);
         return [ view, delegate ];
     }

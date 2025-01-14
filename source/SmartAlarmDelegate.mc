@@ -184,23 +184,18 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function getAlarmFromStorage(alarmNum) {
-        if (alarmNum < getNumAlarms()) {
+        if (alarmNum > getNumAlarms()) {
+            System.println("Attempting to retrieve non-existing alarm");
             return null;
         }
-        var alarm = Storage.getValue(alarmNum);
-        System.println(alarm);
-        // var em = alarm.get("earliestMinute");
-        // var lh = alarm.get("latestHour");
-        // var lm = alarm.get("latestMinute");
-        if (alarm != null) {
-            return new Alarm(
-                alarm[0],
-                alarm[1],
-                alarm[2],
-                alarm[3]
-            );
+        var alarmArray = Storage.getValue(alarmNum);
+        System.println("Retrieved alarm " + alarmArray);
+        // var earliestHour = alarm[0];
+
+        if (alarmArray != null) {
+            return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3]);
         }
-        return null;
+        return new Alarm(null, null, null, null);
     }
 
     function setAlarmInStorage(alarm) {
@@ -221,10 +216,9 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         Storage.setValue(curAlarm, alarmArray);
         Storage.setValue("numAlarms", curAlarm);
 
-        System.println("Set earliest alarm in storage");
-        // System.println(alarmDict.keys());
-        // System.println(alarmDict.values());
-        System.println(alarmArray);
+        // System.println("Set alarm in storage");
+        // System.println(alarmArray);
+        // System.println(curAlarm);
     }
 
     function getLatestAlarmWarning() {
