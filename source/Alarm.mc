@@ -6,11 +6,19 @@ class Alarm {
     var latestHour as Lang.Number;
     var latestMinute as Lang.Number;
 
+    var active as Lang.Boolean;
+
     function initialize(eh, em, lh, lm) {
         earliestHour = eh;
         earliestMinute = em;
         latestHour = lh;
         latestMinute = lm;
+        active = true;
+    }
+
+    function toggleActive() {
+        active = !active;
+        System.println("active set to " + active);
     }
 
     function isValid() as Boolean{

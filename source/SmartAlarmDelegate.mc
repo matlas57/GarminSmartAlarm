@@ -21,10 +21,10 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             System.println(alarmString);
             alarmsMenu.addItem(
                 new MenuItem(
-                    alarmString, //labal
-                    "",          //sublabel   
-                    i,           //id   
-                    {}           //dictionary of options: can include text alignment, icon   
+                    alarmString,                          //labal
+                    alarm.active ? "On" : "Off",          //sublabel   
+                    i,                                    //id   
+                    {}                                    //dictionary of options: can include text alignment, icon   
                 )
             );
         }

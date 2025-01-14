@@ -17,12 +17,6 @@ class SmartAlarmView extends WatchUi.View {
         System.println("SmartAlarmView initialize");
         View.initialize();
         appDelegate = delegate; 
-        if (appDelegate.getNumAlarms() > 0) {
-            appState = "alarmMenu";
-        }
-        else {
-            appState = "earliestAlarmPrompt";
-        }
     }
 
     // Load your resources here
@@ -79,12 +73,12 @@ class SmartAlarmView extends WatchUi.View {
         dc.clear();
 
         //This shouldn't be in onUpdate so it doesn't run multiple times
-        if (appState.equals("alarmMenu")) {
-            prompt.setText("Current alarms");
-            var numAlarms = appDelegate.getNumAlarms();
-            appDelegate.getAlarmFromStorage(numAlarms);
-        }
-        else if (appState.equals("earliestAlarmPrompt")) {
+        // if (appState.equals("alarmMenu")) {
+        //     prompt.setText("Current alarms");
+        //     var numAlarms = appDelegate.getNumAlarms();
+        //     appDelegate.getAlarmFromStorage(numAlarms);
+        // }
+        if (appState.equals("earliestAlarmPrompt")) {
             if (step == 0) {
                 currentStep.setText("Set Hour");
             } 
