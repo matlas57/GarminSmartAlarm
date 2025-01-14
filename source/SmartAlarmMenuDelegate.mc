@@ -4,8 +4,11 @@ import Toybox.WatchUi;
 
 class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
-    function initialize() {
+    var appDelegate;
+
+    function initialize(delegate) {
         Menu2InputDelegate.initialize();
+        appDelegate = delegate;
     }
 
     function onSelect(item) {
@@ -16,10 +19,41 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             appState = "earliestAlarmPrompt";
             WatchUi.pushView(new SmartAlarmView(delegate), delegate, WatchUi.SLIDE_UP);
         }
-        else{
+        else {
             var id = item.getId() as Number;
             var alarm = delegate.getAlarmFromStorage(id);
-            alarm.toggleActive();
+            var editAlarmMenuTitle = alarm.earliestHour.toString() + ":" + delegate.padMinuteString(alarm.earliestMinute) + " - " + alarm.latestHour.toString() + ":" + delegate.padMinuteString(alarm.latestMinute);
+            System.println("Creating menu with title " + editAlarmMenuTitle);
+            var editAlarmMenu = new WatchUi.Menu2({:title=>editAlarmMenuTitle});
+            editAlarmMenu.addItem(
+                new MenuItem(
+                    "Status",
+                    alarm.active ? "On" : "Off",
+                    0,
+                    {} //Place to add on off switch icon
+            ));
+            editAlarmMenu.addItem(
+                new MenuItem(
+                    "Time",
+                    editAlarmMenuTitle,
+                    1,
+                    {} //Place to add on off switch icon
+            ));
+            editAlarmMenu.addItem(
+                new MenuItem(
+                    "Delete",
+                    "",
+                    2,
+                    {} //Place to add on off switch icon
+            ));
+            WatchUi.pushView(editAlarmMenu, new EditAlarmMenuDelegate(self, id), WatchUi.SLIDE_RIGHT);
+            // Slide right to a new menu with options for the current alarm 
+                //Create new alarm class EditAlarmMenuDelegate
+                //Create menu layout in menus.xml
+                //Add functions for onSelect for the buttons 
+                //Pass parent menu to update the parent menu
+                //Pop the menu when done
+            // alarm.toggleActive();
             //Need to update the menu view somehow to reflect the change
         }
     }
