@@ -6,12 +6,15 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     var appDelegate;
 
+    var parentMenu;
+
     var statusButtonId = 0;
     var editButtonId = 1;
     var deleteButtonId = 2;
 
-    function initialize(delegate) {
+    function initialize(parentMenu, delegate) {
         Menu2InputDelegate.initialize();
+        self.parentMenu = parentMenu;
         appDelegate = delegate;
     }
 
@@ -50,7 +53,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                     deleteButtonId,
                     {} //Place to add on off switch icon
             ));
-            WatchUi.pushView(editAlarmMenu, new EditAlarmMenuDelegate(editAlarmMenu, id), WatchUi.SLIDE_RIGHT);
+            WatchUi.pushView(editAlarmMenu, new EditAlarmMenuDelegate(editAlarmMenu, parentMenu, id), WatchUi.SLIDE_RIGHT);
             // Slide right to a new menu with options for the current alarm 
                 //Create new alarm class EditAlarmMenuDelegate
                 //Create menu layout in menus.xml

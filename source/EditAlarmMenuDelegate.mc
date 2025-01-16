@@ -4,15 +4,21 @@ import Toybox.WatchUi;
 
 class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
+    //Parent menu refers to the EditAlarmMenu
     var parentMenu;
     var parentMenuItemId;
 
+    var grandParentMenu;
+    var grandParentMenuItemId;
+
     var appDelegate;
 
-    function initialize(parentMenu, parentMenuItemId) {
+    function initialize(parentMenu, grandParentMenu, parentMenuItemId) {
         Menu2InputDelegate.initialize();
         self.parentMenu = parentMenu;
         self.parentMenuItemId = parentMenuItemId;
+        self.grandParentMenu = grandParentMenu;
+        self.grandParentMenuItemId = parentMenuItemId;
         appDelegate = new SmartAlarmDelegate();
     }
 
@@ -34,9 +40,14 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         alarm.toggleActive();
         System.println("alarm active is " + alarm.active);
         appDelegate.editAlarmInStorage(parentMenuItemId, alarm);
-        var parentItem = parentMenu.getItem(parentMenuItemId - 1);
-        System.println("Parent item info: label = " + parentItem.getLabel() + " sublabel = " + parentItem.getSubLabel());
-        //Status is successfully updated, now need to update the UI in real time
+        //Get the menu item for the status button in this menu and request it be updated
+        var parentItem = parentMenu.getItem(parentMenuItemId - 1);        
+        parentItem.setSubLabel(alarm.active ? "On" : "Off");
+        parentMenu.updateItem(parentItem, parentMenuItemId - 1);
+
+        var grandParentItem = grandParentMenu.getItem(grandParentMenuItemId - 1);
+        grandParentItem.setSubLabel(alarm.active ? "On" : "Off");
+        grandParentMenu.updateItem(grandParentItem, grandParentMenuItemId - 1);
     }
 
     function editAlarm() {
@@ -44,6 +55,10 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function deleteAlarm() {
+
+    }
+
+    function updateAlarmMenu() {
 
     }
 }

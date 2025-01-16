@@ -37,7 +37,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             )
         );
 
-        WatchUi.pushView(alarmsMenu, new SmartAlarmMenuDelegate(self), WatchUi.SLIDE_UP);
+        WatchUi.pushView(alarmsMenu, new SmartAlarmMenuDelegate(alarmsMenu, self), WatchUi.SLIDE_UP);
         return true;
     }
 
