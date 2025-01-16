@@ -185,6 +185,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
     function getAlarmFromStorage(alarmNum) {
         if (alarmNum > getNumAlarms()) {
+            // Throw exception here
             System.println("Attempting to retrieve non-existing alarm");
             return null;
         }
@@ -195,6 +196,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         if (alarmArray != null) {
             return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4]);
         }
+        // Throw exception here
         return null;
     }
 
@@ -225,6 +227,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
     function editAlarmInStorage(alarmId, alarm) {
         var numAlarms = getNumAlarms();
         if (alarmId > numAlarms) {
+            // Throw exception here
             System.println("Invalid id");
             return;
         }
