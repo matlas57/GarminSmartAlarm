@@ -139,7 +139,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             else if (step == 2) {
                 if (keyEvent.getKey() == 4) {
                     var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute, true);
-                    setAlarmInStorage(alarm);
+                    addNewAlarmToStorage(alarm);
                     appState = "trackSleep";
                     step = 0;
                 }
@@ -198,7 +198,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         return null;
     }
 
-    function setAlarmInStorage(alarm) {
+    function addNewAlarmToStorage(alarm) {
         var numAlarms = getNumAlarms();
         var curAlarm = numAlarms + 1;
         // var alarmDict = {
@@ -220,6 +220,23 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         // System.println("Set alarm in storage");
         // System.println(alarmArray);
         // System.println(curAlarm);
+    }
+
+    function editAlarmInStorage(alarmId, alarm) {
+        var numAlarms = getNumAlarms();
+        if (alarmId > numAlarms) {
+            System.println("Invalid id");
+            return;
+        }
+        var alarmArray = [
+            alarm.earliestHour,
+            alarm.earliestMinute,
+            alarm.latestHour,
+            alarm.latestMinute,
+            alarm.active
+        ];
+        Storage.setValue(alarmId, alarmArray);
+        return;
     }
 
     function getLatestAlarmWarning() {

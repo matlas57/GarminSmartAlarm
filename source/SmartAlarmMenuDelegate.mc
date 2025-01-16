@@ -50,7 +50,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                     deleteButtonId,
                     {} //Place to add on off switch icon
             ));
-            WatchUi.pushView(editAlarmMenu, new EditAlarmMenuDelegate(self, id), WatchUi.SLIDE_RIGHT);
+            WatchUi.pushView(editAlarmMenu, new EditAlarmMenuDelegate(editAlarmMenu, id), WatchUi.SLIDE_RIGHT);
             // Slide right to a new menu with options for the current alarm 
                 //Create new alarm class EditAlarmMenuDelegate
                 //Create menu layout in menus.xml
