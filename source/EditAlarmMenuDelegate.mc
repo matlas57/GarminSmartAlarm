@@ -36,7 +36,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         appDelegate.editAlarmInStorage(parentMenuItemId, alarm);
         var parentItem = parentMenu.getItem(parentMenuItemId - 1);
         System.println("Parent item info: label = " + parentItem.getLabel() + " sublabel = " + parentItem.getSubLabel());
-        //Add delegate toggle status function to call which will retreive the alarm toggle status and edit the entry 
+        //Status is successfully updated, now need to update the UI in real time
     }
 
     function editAlarm() {
