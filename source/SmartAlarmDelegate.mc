@@ -138,7 +138,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             }
             else if (step == 2) {
                 if (keyEvent.getKey() == 4) {
-                    var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute);
+                    var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute, true);
                     setAlarmInStorage(alarm);
                     appState = "trackSleep";
                     step = 0;
@@ -193,9 +193,9 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         // var earliestHour = alarm[0];
 
         if (alarmArray != null) {
-            return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3]);
+            return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4]);
         }
-        return new Alarm(null, null, null, null);
+        return null;
     }
 
     function setAlarmInStorage(alarm) {
@@ -211,7 +211,8 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             alarm.earliestHour,
             alarm.earliestMinute,
             alarm.latestHour,
-            alarm.latestMinute
+            alarm.latestMinute,
+            alarm.active
         ];
         Storage.setValue(curAlarm, alarmArray);
         Storage.setValue("numAlarms", curAlarm);

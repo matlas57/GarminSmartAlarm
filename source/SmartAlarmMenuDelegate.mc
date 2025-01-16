@@ -6,6 +6,10 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     var appDelegate;
 
+    var statusButtonId = 0;
+    var editButtonId = 1;
+    var deleteButtonId = 2;
+
     function initialize(delegate) {
         Menu2InputDelegate.initialize();
         appDelegate = delegate;
@@ -29,21 +33,21 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                 new MenuItem(
                     "Status",
                     alarm.active ? "On" : "Off",
-                    0,
+                    statusButtonId,
                     {} //Place to add on off switch icon
             ));
             editAlarmMenu.addItem(
                 new MenuItem(
                     "Time",
                     editAlarmMenuTitle,
-                    1,
+                    editButtonId,
                     {} //Place to add on off switch icon
             ));
             editAlarmMenu.addItem(
                 new MenuItem(
                     "Delete",
                     "",
-                    2,
+                    deleteButtonId,
                     {} //Place to add on off switch icon
             ));
             WatchUi.pushView(editAlarmMenu, new EditAlarmMenuDelegate(self, id), WatchUi.SLIDE_RIGHT);
