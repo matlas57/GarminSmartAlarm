@@ -1,5 +1,6 @@
 import Toybox.Lang;
 import Toybox.System;
+import Toybox.Application;
 import Toybox.WatchUi;
 
 class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
@@ -72,6 +73,14 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         //delete max alarm
         //decrement number of alarms 
         System.println("Reached delete alarm function");
+        var numAlarms = appDelegate.getNumAlarms();
+        //If one alarm delete the entry and return to the alarmMenu
+        if (numAlarms == 1) {
+            Storage.deleteValue(parentMenuItemId);
+            Storage.setValue("numAlarms", 0);
+            grandParentMenu.deleteItem(grandParentMenuItemId - 1);
+            WatchUi.popView(WatchUi.SLIDE_LEFT);
+        }
     }
 
     function updateAlarmMenu() {

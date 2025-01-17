@@ -15,7 +15,6 @@ class SmartAlarmApp extends Application.AppBase {
 
     function initialize() {
         System.println("SmartAlarmApp initialize");
-
         AppBase.initialize();
     }
 
