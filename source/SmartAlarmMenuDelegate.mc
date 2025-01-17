@@ -33,10 +33,11 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             System.println("Creating menu with title " + editAlarmMenuTitle);
             var editAlarmMenu = new WatchUi.Menu2({:title=>editAlarmMenuTitle});
             editAlarmMenu.addItem(
-                new MenuItem(
+                new ToggleMenuItem(
                     "Status",
                     alarm.active ? "On" : "Off",
                     statusButtonId,
+                    alarm.active,
                     {} //Place to add on off switch icon
             ));
             editAlarmMenu.addItem(
