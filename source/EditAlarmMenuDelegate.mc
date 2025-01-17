@@ -32,6 +32,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         } 
         else if (item.getId() == 2) {
             System.println("Delete button");
+            deleteAlarmConfirmation();
         } 
     }
 
@@ -54,8 +55,23 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     }
 
-    function deleteAlarm() {
+    function deleteAlarmConfirmation() {
+        var confirmationMessage = "Delete Alarm?";
+        var confirmationView = new WatchUi.Confirmation(confirmationMessage);
+        WatchUi.pushView(
+            confirmationView,
+            new DeleteAlarmConfirmationDelegate(self),
+            WatchUi.SLIDE_IMMEDIATE
+        );
+    }
 
+    function deleteAlarm() {
+        //Take the deleted alarm id 
+        //Go through the alarm storage from the current index to numAlarms - 1
+        //Swap i and i + 1
+        //delete max alarm
+        //decrement number of alarms 
+        System.println("Reached delete alarm function");
     }
 
     function updateAlarmMenu() {
