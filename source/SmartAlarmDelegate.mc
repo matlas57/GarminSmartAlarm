@@ -216,8 +216,13 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             alarm.latestMinute,
             alarm.active
         ];
-        Storage.setValue(curAlarm, alarmArray);
-        Storage.setValue("numAlarms", curAlarm);
+        try {
+            Storage.setValue(curAlarm, alarmArray);
+            Storage.setValue("numAlarms", curAlarm);
+        } catch (e instanceof Lang.Exception) {
+            System.println(e.getErrorMessage());
+            // Add window here to indicate that alarms need to be deleted before more can be added
+        }
 
         // System.println("Set alarm in storage");
         // System.println(alarmArray);
