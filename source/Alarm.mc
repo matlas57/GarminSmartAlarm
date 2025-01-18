@@ -8,12 +8,15 @@ class Alarm {
 
     var active as Lang.Boolean;
 
+    var delete as Lang.Boolean;
+
     function initialize(eh, em, lh, lm, a) {
         earliestHour = eh;
         earliestMinute = em;
         latestHour = lh;
         latestMinute = lm;
         active = a;
+        delete = false;
     }
 
     function toggleActive() {

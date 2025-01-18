@@ -81,6 +81,12 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             grandParentMenu.deleteItem(grandParentMenuItemId - 1);
             WatchUi.popView(WatchUi.SLIDE_LEFT);
         }
+        else {
+            //Get the alarm from storage
+            //Change the delete flag to true
+            //Delete the record in the menu
+            //When the menu is closed update the keys in storage to be sequential
+        }
     }
 
     function updateAlarmMenu() {

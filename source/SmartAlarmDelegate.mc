@@ -194,7 +194,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         // var earliestHour = alarm[0];
 
         if (alarmArray != null) {
-            return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4]);
+            return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4], alarmArray[5]);
         }
         // Throw exception here
         return null;
@@ -214,7 +214,8 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             alarm.earliestMinute,
             alarm.latestHour,
             alarm.latestMinute,
-            alarm.active
+            alarm.active,
+            alarm.delete
         ];
         try {
             Storage.setValue(curAlarm, alarmArray);
@@ -241,7 +242,8 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             alarm.earliestMinute,
             alarm.latestHour,
             alarm.latestMinute,
-            alarm.active
+            alarm.active,
+            alarm.delete
         ];
         Storage.setValue(alarmId, alarmArray);
         return;
