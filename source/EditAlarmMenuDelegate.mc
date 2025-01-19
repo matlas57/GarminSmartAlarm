@@ -76,17 +76,22 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         var numAlarms = appDelegate.getNumAlarms();
         //If one alarm delete the entry and return to the alarmMenu
         if (numAlarms == 1) {
+            System.println("1 alarm deleting it from storage");
             Storage.deleteValue(parentMenuItemId);
             Storage.setValue("numAlarms", 0);
-            grandParentMenu.deleteItem(grandParentMenuItemId - 1);
-            WatchUi.popView(WatchUi.SLIDE_LEFT);
         }
         else {
+            System.println("More than 1 alarm, marking alarm for deletion");
             //Get the alarm from storage
             //Change the delete flag to true
             //Delete the record in the menu
             //When the menu is closed update the keys in storage to be sequential
+            var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
+            alarm.setDelete(true);
+            appDelegate.editAlarmInStorage(parentMenuItemId, alarm);
         }
+        grandParentMenu.deleteItem(grandParentMenuItemId - 1);
+        WatchUi.popView(WatchUi.SLIDE_LEFT);
     }
 
     function updateAlarmMenu() {

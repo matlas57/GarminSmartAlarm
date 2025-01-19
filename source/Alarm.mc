@@ -10,18 +10,22 @@ class Alarm {
 
     var delete as Lang.Boolean;
 
-    function initialize(eh, em, lh, lm, a) {
+    function initialize(eh, em, lh, lm, a, d) {
         earliestHour = eh;
         earliestMinute = em;
         latestHour = lh;
         latestMinute = lm;
         active = a;
-        delete = false;
+        delete = d;
     }
 
     function toggleActive() {
         active = !active;
         System.println("active set to " + active);
+    }
+
+    function setDelete(d) {
+        delete = d;
     }
 
     function isValid() as Boolean{

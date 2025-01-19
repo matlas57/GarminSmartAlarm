@@ -138,7 +138,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             }
             else if (step == 2) {
                 if (keyEvent.getKey() == 4) {
-                    var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute, true);
+                    var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute, true, false);
                     addNewAlarmToStorage(alarm);
                     appState = "trackSleep";
                     step = 0;
@@ -246,6 +246,39 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             alarm.delete
         ];
         Storage.setValue(alarmId, alarmArray);
+        return;
+    }
+
+    function reorganizeStorage() {
+        var numAlarms = getNumAlarms();
+        if (numAlarms  == 0) {
+            return;
+        }
+        else {
+            System.println("resetting storage keys for " + numAlarms.toString() + " alarms");
+            var newKey = 1;
+            var alarmsDeleted = 0;
+            for (var i = 1; i <= numAlarms; i++) {
+                var alarm = getAlarmFromStorage(i);
+                if (alarm.delete) {
+                    System.println("Deleting alarm " + i.toString());
+                    Storage.deleteValue(i);
+                    alarmsDeleted++;
+                } 
+                else {
+                    if (i != newKey) {
+                        System.println("Moving alarm " + i.toString() + " to key " + newKey.toString());
+                        editAlarmInStorage(newKey, alarm);
+                        Storage.deleteValue(i);
+                    }
+                    newKey++;
+                }
+                System.println("numAlarms is now " + getNumAlarms().toString());
+                // System.println(alarm.delete);
+                // System.println("Alarm " + i.toString() + " is" + (alarm.delete ? " " : " not ") + "marked for deletion");
+            }
+            Storage.setValue("numAlarms", numAlarms - alarmsDeleted);
+        }
         return;
     }
 

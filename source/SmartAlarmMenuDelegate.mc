@@ -66,4 +66,10 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         }
     }
 
+    function onBack() {
+        System.println("Pressed back to exit menu");
+        appDelegate.reorganizeStorage();
+        WatchUi.popView(WatchUi.SLIDE_RIGHT);
+    }
+
 }
