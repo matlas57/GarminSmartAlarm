@@ -142,6 +142,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                     addNewAlarmToStorage(alarm);
                     appState = "trackSleep";
                     step = 0;
+                    onMenu();
                 }
                 else if (keyEvent.getKey() == 5) {
                     step--;
