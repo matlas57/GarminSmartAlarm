@@ -53,7 +53,12 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function editAlarm() {
-
+        // Set a global variable in SmartAlarmApp.mc to hold the id of the alarm being edited
+        // Change state to "earliestAlarmPrompt"
+        // Push layout for creating an alarm prompt
+        // in SmartAlarmAppDelegate when confirming the second alarm check if the global var is present and call add or edit
+        // Pop view to return to edit alarm menu
+        // update menu
     }
 
     function deleteAlarmConfirmation() {
