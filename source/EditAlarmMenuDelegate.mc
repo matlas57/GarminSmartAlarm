@@ -43,9 +43,9 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         System.println("alarm active is " + alarm.active);
         appDelegate.editAlarmInStorage(parentMenuItemId, alarm);
         //Get the menu item for the status button in this menu and request it be updated
-        var parentItem = parentMenu.getItem(parentMenuItemId - 1);        
+        var parentItem = parentMenu.getItem(0);        
         parentItem.setSubLabel(alarm.active ? "On" : "Off");
-        parentMenu.updateItem(parentItem, parentMenuItemId - 1);
+        parentMenu.updateItem(parentItem, 0);
 
         var grandParentItem = grandParentMenu.getItem(grandParentMenuItemId - 1);
         grandParentItem.setSubLabel(alarm.active ? "On" : "Off");
