@@ -139,10 +139,22 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             else if (step == 2) {
                 if (keyEvent.getKey() == 4) {
                     var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute, true, false);
-                    addNewAlarmToStorage(alarm);
+
+                    if (editAlarmId == 0) {
+                        addNewAlarmToStorage(alarm);
+                        onMenu();
+                    } 
+                    else if (editAlarmId > 0) {
+                        editAlarmInStorage(editAlarmId, alarm);
+                        editAlarmId = 0;
+                    }
+
                     appState = "trackSleep";
                     step = 0;
-                    onMenu();
+                    earliestHour = 6;
+                    earliestMinute = 0;
+                    latestHour = 6;
+                    latestMinute = 0;
                 }
                 else if (keyEvent.getKey() == 5) {
                     step--;
@@ -299,6 +311,10 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             return "Alarm interval must\nbe at least 30 minutes";
         }
         return "No warning";
+    }
+
+    function makeAlarmString(alarm) {
+        return alarm.earliestHour.toString() + ":" + padMinuteString(alarm.earliestMinute) + " - " + alarm.latestHour.toString() + ":" + padMinuteString(alarm.latestMinute);
     }
 
     function padMinuteString(minute) {

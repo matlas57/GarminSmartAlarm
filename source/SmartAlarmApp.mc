@@ -4,12 +4,12 @@ import Toybox.WatchUi;
 
 var appState = "alarmMenu";
 var step = 0;
-var earliestAlarm;
 var earliestHour = 6;
 var earliestMinute = 0;
 var latestHour = 7;
 var latestMinute = 0;
 var validLatestTime = true;
+var editAlarmId = 0;
 
 class SmartAlarmApp extends Application.AppBase {
 
@@ -20,7 +20,7 @@ class SmartAlarmApp extends Application.AppBase {
 
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void {
-        System.println("SmartAlarmView onStart");
+        System.println("SmartAlarmApp onStart");
 
         // var myTime = System.getClockTime(); // ClockTime object
         // System.println(
@@ -36,7 +36,7 @@ class SmartAlarmApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        System.println("SmartAlarmView getInitialView");
+        System.println("SmartAlarmApp getInitialView");
 
         var delegate = new SmartAlarmDelegate();
         if (delegate.getNumAlarms() > 0) {
