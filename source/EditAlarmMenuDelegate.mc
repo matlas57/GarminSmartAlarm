@@ -30,6 +30,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         } 
         else if (item.getId() == 1) {
             System.println("Edit button");
+            editAlarm();
         } 
         else if (item.getId() == 2) {
             System.println("Delete button");
@@ -59,6 +60,31 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         // in SmartAlarmAppDelegate when confirming the second alarm check if the global var is present and call add or edit
         // Pop view to return to edit alarm menu
         // update menu
+        editAlarmId = grandParentMenuItemId;
+        appState = "earliestAlarmPrompt";
+
+        var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
+        earliestHour = alarm.earliestHour;
+        earliestMinute = alarm.earliestMinute;
+        latestHour = alarm.latestHour;
+        latestMinute = alarm.latestMinute;
+
+        WatchUi.pushView(new SmartAlarmView(appDelegate), appDelegate, WatchUi.SLIDE_BLINK);
+
+        // Need to wait until the view is popped to update the view or call the update logic from appDelegate
+        // alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
+        // var alarmString = appDelegate.makeAlarmString(alarm);
+
+        // var parentItem = parentMenu.getItem(1);        
+        // parentItem.setSubLabel(alarmString);
+        // parentMenu.updateItem(parentItem, 1);
+
+        // var grandParentItem = grandParentMenu.getItem(grandParentMenuItemId - 1);
+        // grandParentItem.setLabel(alarmString);
+        // grandParentMenu.updateItem(grandParentItem, grandParentMenuItemId - 1);
+
+        parentMenu.setFocus(1);
+        System.println("Editing alarm " + editAlarmId.toString());
     }
 
     function deleteAlarmConfirmation() {
@@ -100,6 +126,6 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function updateAlarmMenu() {
-
+        System.println("Updating menu");
     }
 }

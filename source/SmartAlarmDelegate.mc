@@ -147,13 +147,16 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                     else if (editAlarmId > 0) {
                         editAlarmInStorage(editAlarmId, alarm);
                         editAlarmId = 0;
+                        WatchUi.popView(WatchUi.SLIDE_LEFT);
+                        // var editAlarmMenuDelegate = new EditAlarmMenuDelegate();
+                        // editAlarmMenuDelegate.updateAlarmMenu();
                     }
 
                     appState = "trackSleep";
                     step = 0;
                     earliestHour = 6;
                     earliestMinute = 0;
-                    latestHour = 6;
+                    latestHour = 7;
                     latestMinute = 0;
                 }
                 else if (keyEvent.getKey() == 5) {
