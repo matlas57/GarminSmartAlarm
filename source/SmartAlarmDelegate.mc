@@ -254,6 +254,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             return;
         }
         else {
+            var newKey = 1;
             var alarmsDeleted = 0;
             for (var i = 1; i <= numAlarms; i++) {
                 var alarm = getAlarmFromStorage(i);
@@ -305,5 +306,6 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             return minute.toString();
         }
     }
+
 }
 
