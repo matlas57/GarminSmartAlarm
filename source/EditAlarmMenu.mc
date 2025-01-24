@@ -3,6 +3,27 @@ import Toybox.System;
 import Toybox.Application;
 import Toybox.WatchUi;
 
+class EditAlarmMenu extends WatchUi.Menu2 {
+    
+    var appDelegate;
+
+    function initialize(options, delegate) {
+        Menu2.initialize(options);
+        appDelegate = delegate;
+    }
+
+    function onShow() {
+        System.println("EditAlarmMenu onShow " + editAlarmId);
+        var timeMenuItem = self.getItem(1);
+        if (editAlarmId > 0)
+        {
+            var alarm = appDelegate.getAlarmFromStorage(editAlarmId);
+            timeMenuItem.setSubLabel(appDelegate.makeAlarmString(alarm));
+        }
+        System.println(timeMenuItem.getSubLabel());
+    }
+}
+
 class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     //Parent menu refers to the EditAlarmMenu
@@ -61,6 +82,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         // Pop view to return to edit alarm menu
         // update menu
         editAlarmId = grandParentMenuItemId;
+        
         appState = "earliestAlarmPrompt";
 
         var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);

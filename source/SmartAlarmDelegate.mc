@@ -146,7 +146,6 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                     } 
                     else if (editAlarmId > 0) {
                         editAlarmInStorage(editAlarmId, alarm);
-                        editAlarmId = 0;
                         WatchUi.popView(WatchUi.SLIDE_LEFT);
                         // var editAlarmMenuDelegate = new EditAlarmMenuDelegate();
                         // editAlarmMenuDelegate.updateAlarmMenu();
