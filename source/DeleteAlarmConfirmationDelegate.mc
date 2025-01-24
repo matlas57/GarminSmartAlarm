@@ -12,11 +12,9 @@ class DeleteAlarmConfirmationDelegate extends WatchUi.ConfirmationDelegate {
 
     function onResponse(response) {
         if (response == WatchUi.CONFIRM_YES) {
-            System.println("Deleting Alarm");
             parentMenuDelegate.deleteAlarm();
             return true;
         } else {
-            System.println("Going back");
             return false;
         }
     }

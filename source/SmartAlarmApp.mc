@@ -14,13 +14,11 @@ var editAlarmId = 0;
 class SmartAlarmApp extends Application.AppBase {
 
     function initialize() {
-        System.println("SmartAlarmApp initialize");
         AppBase.initialize();
     }
 
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void {
-        System.println("SmartAlarmApp onStart");
 
         // var myTime = System.getClockTime(); // ClockTime object
         // System.println(
@@ -36,8 +34,6 @@ class SmartAlarmApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        System.println("SmartAlarmApp getInitialView");
-
         var delegate = new SmartAlarmDelegate();
         if (delegate.getNumAlarms() > 0) {
             appState = "alarmMenu";

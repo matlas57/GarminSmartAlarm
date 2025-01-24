@@ -14,14 +14,12 @@ class SmartAlarmView extends WatchUi.View {
     hidden var appDelegate;
 
     function initialize(delegate) {
-        System.println("SmartAlarmView initialize");
         View.initialize();
         appDelegate = delegate; 
     }
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-        System.println("SmartAlarmView onLayout");
         if (appState.equals("alarmMenu")) {
             appDelegate.onMenu();
         } 
@@ -34,8 +32,6 @@ class SmartAlarmView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        System.println("SmartAlarmView onShow");
-
         prompt = new WatchUi.Text({
             :text=>"",
             :color=>Graphics.COLOR_WHITE,

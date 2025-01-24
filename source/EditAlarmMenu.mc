@@ -13,7 +13,6 @@ class EditAlarmMenu extends WatchUi.Menu2 {
     }
 
     function onShow() {
-        System.println("EditAlarmMenu onShow " + editAlarmId);
         var timeMenuItem = self.getItem(1);
         if (editAlarmId > 0)
         {
@@ -46,15 +45,12 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item) {
         if (item.getId() == 0) {
-            System.println("Status button");
             toggleStatus();
         } 
         else if (item.getId() == 1) {
-            System.println("Edit button");
             editAlarm();
         } 
         else if (item.getId() == 2) {
-            System.println("Delete button");
             deleteAlarmConfirmation();
         } 
     }
@@ -75,14 +71,8 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function editAlarm() {
-        // Set a global variable in SmartAlarmApp.mc to hold the id of the alarm being edited
-        // Change state to "earliestAlarmPrompt"
-        // Push layout for creating an alarm prompt
-        // in SmartAlarmAppDelegate when confirming the second alarm check if the global var is present and call add or edit
-        // Pop view to return to edit alarm menu
-        // update menu
         editAlarmId = grandParentMenuItemId;
-        
+
         appState = "earliestAlarmPrompt";
 
         var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
@@ -92,18 +82,6 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         latestMinute = alarm.latestMinute;
 
         WatchUi.pushView(new SmartAlarmView(appDelegate), appDelegate, WatchUi.SLIDE_BLINK);
-
-        // Need to wait until the view is popped to update the view or call the update logic from appDelegate
-        // alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
-        // var alarmString = appDelegate.makeAlarmString(alarm);
-
-        // var parentItem = parentMenu.getItem(1);        
-        // parentItem.setSubLabel(alarmString);
-        // parentMenu.updateItem(parentItem, 1);
-
-        // var grandParentItem = grandParentMenu.getItem(grandParentMenuItemId - 1);
-        // grandParentItem.setLabel(alarmString);
-        // grandParentMenu.updateItem(grandParentItem, grandParentMenuItemId - 1);
 
         parentMenu.setFocus(1);
         System.println("Editing alarm " + editAlarmId.toString());
@@ -120,34 +98,19 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function deleteAlarm() {
-        //Take the deleted alarm id 
-        //Go through the alarm storage from the current index to numAlarms - 1
-        //Swap i and i + 1
-        //delete max alarm
-        //decrement number of alarms 
-        System.println("Reached delete alarm function");
+        
         var numAlarms = appDelegate.getNumAlarms();
         //If one alarm delete the entry and return to the alarmMenu
         if (numAlarms == 1) {
-            System.println("1 alarm deleting it from storage");
             Storage.deleteValue(parentMenuItemId);
             Storage.setValue("numAlarms", 0);
         }
         else {
-            System.println("More than 1 alarm, marking alarm for deletion");
-            //Get the alarm from storage
-            //Change the delete flag to true
-            //Delete the record in the menu
-            //When the menu is closed update the keys in storage to be sequential
             var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
             alarm.setDelete(true);
             appDelegate.editAlarmInStorage(parentMenuItemId, alarm);
         }
         grandParentMenu.deleteItem(grandParentMenuItemId - 1);
         WatchUi.popView(WatchUi.SLIDE_LEFT);
-    }
-
-    function updateAlarmMenu() {
-        System.println("Updating menu");
     }
 }

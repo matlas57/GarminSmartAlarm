@@ -6,8 +6,6 @@ import Toybox.System;
 class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
     function initialize() {
-        System.println("SmartAlarmDelegate initialize");
-
         BehaviorDelegate.initialize();
     }
 
@@ -16,8 +14,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         var numAlarms = getNumAlarms();
         for (var i = 1; i <= numAlarms; i++ ) {
             var alarm = getAlarmFromStorage(i);
-            // var alarmString = alarmArray[0].toString() + ":" + padMinuteString(alarmArray[1]) + " - " + alarmArray[2] + ":" + padMinuteString(alarmArray[3].toString());
-            var alarmString = alarm.earliestHour.toString() + ":" + padMinuteString(alarm.earliestMinute) + " - " + alarm.latestHour.toString() + ":" + padMinuteString(alarm.latestMinute);
+            var alarmString = makeAlarmString(alarm);
             System.println(alarmString);
             alarmsMenu.addItem(
                 new MenuItem(
@@ -85,7 +82,6 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 }
             }
             else if (step == 2 && keyEvent.getKey() == 4) {
-                // setEarliestAlarmInStorage(earliestHour, earliestMinute);
                 appState = "latestAlarmPrompt";
                 step = 0;
             }
@@ -147,8 +143,6 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                     else if (editAlarmId > 0) {
                         editAlarmInStorage(editAlarmId, alarm);
                         WatchUi.popView(WatchUi.SLIDE_LEFT);
-                        // var editAlarmMenuDelegate = new EditAlarmMenuDelegate();
-                        // editAlarmMenuDelegate.updateAlarmMenu();
                     }
 
                     appState = "trackSleep";
@@ -200,30 +194,24 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
     function getAlarmFromStorage(alarmNum) {
         if (alarmNum > getNumAlarms()) {
-            // Throw exception here
+            // TODO: Throw exception here
             System.println("Attempting to retrieve non-existing alarm");
             return null;
         }
         var alarmArray = Storage.getValue(alarmNum);
         System.println("Retrieved alarm " + alarmArray);
-        // var earliestHour = alarm[0];
 
         if (alarmArray != null) {
             return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4], alarmArray[5]);
         }
-        // Throw exception here
+        // TODO: Throw exception here
         return null;
     }
 
     function addNewAlarmToStorage(alarm) {
         var numAlarms = getNumAlarms();
         var curAlarm = numAlarms + 1;
-        // var alarmDict = {
-        //     "earliestHour" =>  alarm.earliestHour,
-        //     "earliestMinute" => alarm.earliestMinute,
-        //     "latestHour" => alarm.latestHour,
-        //     "latestMinute" =>  alarm.latestMinute
-        // };
+        
         var alarmArray = [
             alarm.earliestHour,
             alarm.earliestMinute,
@@ -237,18 +225,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             Storage.setValue("numAlarms", curAlarm);
         } catch (e instanceof Lang.Exception) {
             System.println(e.getErrorMessage());
-            // Add window here to indicate that alarms need to be deleted before more can be added
+            // TODO: Add window here to indicate that alarms need to be deleted before more can be added
         }
-
-        // System.println("Set alarm in storage");
-        // System.println(alarmArray);
-        // System.println(curAlarm);
     }
 
     function editAlarmInStorage(alarmId, alarm) {
         var numAlarms = getNumAlarms();
         if (alarmId > numAlarms) {
-            // Throw exception here
+            // TODO: Throw exception here
             System.println("Invalid id");
             return;
         }
@@ -270,8 +254,6 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             return;
         }
         else {
-            System.println("resetting storage keys for " + numAlarms.toString() + " alarms");
-            var newKey = 1;
             var alarmsDeleted = 0;
             for (var i = 1; i <= numAlarms; i++) {
                 var alarm = getAlarmFromStorage(i);
@@ -282,15 +264,11 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 } 
                 else {
                     if (i != newKey) {
-                        System.println("Moving alarm " + i.toString() + " to key " + newKey.toString());
                         editAlarmInStorage(newKey, alarm);
                         Storage.deleteValue(i);
                     }
                     newKey++;
                 }
-                System.println("numAlarms is now " + getNumAlarms().toString());
-                // System.println(alarm.delete);
-                // System.println("Alarm " + i.toString() + " is" + (alarm.delete ? " " : " not ") + "marked for deletion");
             }
             Storage.setValue("numAlarms", numAlarms - alarmsDeleted);
         }
@@ -327,6 +305,5 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             return minute.toString();
         }
     }
-
 }
 
