@@ -1,6 +1,7 @@
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
+import Toybox.Attention;
 
 class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
@@ -24,6 +25,12 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         if (item.getId().equals("addAlarmButton")) {
             appState = "earliestAlarmPrompt";
             WatchUi.pushView(new SmartAlarmView(delegate), delegate, WatchUi.SLIDE_UP);
+        }
+        else if (item.getId().equals("testVibration")) {
+            var vibeData = [
+                new Attention.VibeProfile(100, 2000),  // Off for two seconds
+            ];
+            Attention.vibrate(vibeData);
         }
         else {
             var id = item.getId() as Number;

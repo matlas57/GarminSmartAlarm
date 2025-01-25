@@ -33,6 +33,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 {}
             )
         );
+        alarmsMenu.addItem(
+            new MenuItem (
+                "Test Vibration",
+                "",
+                "testVibration",
+                {}
+            )
+        );
 
         WatchUi.pushView(alarmsMenu, new SmartAlarmMenuDelegate(alarmsMenu, self), WatchUi.SLIDE_UP);
         return true;
