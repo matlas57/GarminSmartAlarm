@@ -41,6 +41,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 {}
             )
         );
+        alarmsMenu.addItem(
+            new MenuItem (
+                "Get Heart Rate",
+                "",
+                "getHR",
+                {}
+            )
+        );
 
         WatchUi.pushView(alarmsMenu, new SmartAlarmMenuDelegate(alarmsMenu, self), WatchUi.SLIDE_UP);
         return true;

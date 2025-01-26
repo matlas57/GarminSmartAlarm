@@ -32,6 +32,9 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             ];
             Attention.vibrate(vibeData);
         }
+        else if (item.getId().equals("getHR")) {
+            var hr = new HeartRateSensor();
+        }
         else {
             var id = item.getId() as Number;
             var alarm = delegate.getAlarmFromStorage(id);
