@@ -1,8 +1,10 @@
 import Toybox.Sensor;
+import Toybox.Math;
 
 class HeartRateSensor {
 
     var heartBeatIntervals = [];
+    var sdnnArray = [];
 
     function initialize() {
         Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
@@ -25,7 +27,42 @@ class HeartRateSensor {
     function heartBeatIntervalsCallback(sensorData as SensorData) as Void {
         if (sensorData has :heartRateData && sensorData.heartRateData != null) {
             heartBeatIntervals = sensorData.heartRateData.heartBeatIntervals;
-            System.println(heartBeatIntervals);
+            computeSDNN(heartBeatIntervals);
         }
+    }
+
+    function computeSDNN(rrIntervals) {
+        var n = rrIntervals.size();
+        if (n < 2) {
+            return null; // Not enough data
+        }
+
+        // Compute mean RR interval
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            sum += rrIntervals[i];
+        }
+        var meanRR = sum / n;
+
+        // Compute squared differences from mean
+        var sumSquaredDiff = 0;
+        for (var i = 0; i < n; i++) {
+            sumSquaredDiff += Math.pow(rrIntervals[i] - meanRR, 2);
+        }
+
+        // Compute SDNN (standard deviation)
+        var sdnn = Math.sqrt(sumSquaredDiff / n);
+        sdnnArray.add(sdnn);
+        return sdnn;
+    }
+
+    function stop() {
+        Sensor.unregisterSensorDataListener();
+        var sdnnSum = 0.0;
+        var n = sdnnArray.size();
+        for (var i = 0; i < n; i++) {
+            sdnnSum += sdnnArray[i];
+        }
+        System.println("Average HRV is " + (sdnnSum / n).toString() + "ms");
     }
 }

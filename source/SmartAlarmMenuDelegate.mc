@@ -2,10 +2,12 @@ import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
 import Toybox.Attention;
+import Toybox.Sensor;
 
 class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     var appDelegate;
+    var hrSensor;
 
     var parentMenu;
 
@@ -33,7 +35,10 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             Attention.vibrate(vibeData);
         }
         else if (item.getId().equals("getHR")) {
-            var hr = new HeartRateSensor();
+            hrSensor = new HeartRateSensor();
+        }
+        else if (item.getId().equals("stopHR")) {
+            hrSensor.stop();
         }
         else {
             var id = item.getId() as Number;

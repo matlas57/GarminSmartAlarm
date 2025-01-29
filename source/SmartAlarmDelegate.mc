@@ -49,6 +49,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 {}
             )
         );
+        alarmsMenu.addItem(
+            new MenuItem (
+                "Stop Recording",
+                "",
+                "stopHR",
+                {}
+            )
+        );
 
         WatchUi.pushView(alarmsMenu, new SmartAlarmMenuDelegate(alarmsMenu, self), WatchUi.SLIDE_UP);
         return true;
