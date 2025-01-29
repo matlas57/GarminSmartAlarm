@@ -16,6 +16,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             var alarm = getAlarmFromStorage(i);
             var alarmString = makeAlarmString(alarm);
             System.println(alarmString);
+            // alarm.getNextEarliestTimeMoment();
             alarmsMenu.addItem(
                 new MenuItem(
                     alarmString,                          //labal
