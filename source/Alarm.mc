@@ -9,6 +9,8 @@ class Alarm {
 
     var active as Lang.Boolean;
 
+    var repeatArray = [];
+
     var delete as Lang.Boolean;
 
     function initialize(eh, em, lh, lm, a, d) {

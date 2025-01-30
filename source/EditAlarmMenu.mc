@@ -51,6 +51,9 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             editAlarm();
         } 
         else if (item.getId() == 2) {
+            openRepeatAlarmMenu();
+        }
+        else if (item.getId() == 3) {
             deleteAlarmConfirmation();
         } 
     }
@@ -85,6 +88,10 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
         parentMenu.setFocus(1);
         System.println("Editing alarm " + editAlarmId.toString());
+    }
+
+    function openRepeatAlarmMenu() {
+        //TODO: create and open menu
     }
 
     function deleteAlarmConfirmation() {
