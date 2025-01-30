@@ -44,6 +44,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         );
         alarmsMenu.addItem(
             new MenuItem (
+                "Print next event",
+                "",
+                "getNextTemporalEvent",
+                {}
+            )
+        );
+        alarmsMenu.addItem(
+            new MenuItem (
                 "Get Heart Rate",
                 "",
                 "getHR",

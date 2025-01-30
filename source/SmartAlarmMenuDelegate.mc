@@ -3,6 +3,8 @@ import Toybox.System;
 import Toybox.WatchUi;
 import Toybox.Attention;
 import Toybox.Sensor;
+import Toybox.Background;
+import Toybox.Time;
 
 class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
@@ -34,6 +36,16 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                 new Attention.VibeProfile(100, 2000),  // Off for two seconds
             ];
             Attention.vibrate(vibeData);
+        }
+        else if (item.getId().equals("getNextTemporalEvent")) {
+            System.println("Getting next event time");
+            var eventTime = Background.getTemporalEventRegisteredTime();
+            if (eventTime == null) {
+                System.println("No registered event");
+            }
+            else {
+                System.println("Temporal event in " + eventTime.value() " seconds");
+            }
         }
         else if (item.getId().equals("getHR")) {
             hrSensor = new HeartRateSensor();

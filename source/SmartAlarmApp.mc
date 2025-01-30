@@ -1,6 +1,8 @@
 import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
+import Toybox.System;
+import Toybox.Background;
 
 var appState = "alarmMenu";
 var step = 0;
@@ -11,6 +13,7 @@ var latestMinute = 0;
 var validLatestTime = true;
 var editAlarmId = 0;
 
+(:background)
 class SmartAlarmApp extends Application.AppBase {
 
     function initialize() {
@@ -26,6 +29,15 @@ class SmartAlarmApp extends Application.AppBase {
         // myTime.min.format("%02d") + ":" +
         // myTime.sec.format("%02d")
         // );
+
+        if(Background.getTemporalEventRegisteredTime() == null) {
+            System.println("Registering for temporal event");
+            Background.registerForTemporalEvent(/*Time.now()*/new Time.Duration(5 * 60));
+        }
+    }
+
+    function getServiceDelegate() as [ ServiceDelegate ]{
+        return [new TemporalServiceDelegate()];
     }
 
     // onStop() is called when your application is exiting
