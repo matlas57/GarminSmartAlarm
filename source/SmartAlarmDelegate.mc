@@ -18,10 +18,11 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             System.println(alarmString);
             // alarm.getNextEarliestTimeMoment();
             alarmsMenu.addItem(
-                new MenuItem(
+                new ToggleMenuItem(
                     alarmString,                          //labal
-                    alarm.active ? "On" : "Off",          //sublabel   
+                    alarm.getRepeatLabel(),           //sublabel   
                     i,                                    //id   
+                    alarm.active,          //is toggle enabled  
                     {}                                    //dictionary of options: can include text alignment, icon   
                 )
             );

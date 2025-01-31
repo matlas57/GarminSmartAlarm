@@ -70,7 +70,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         parentMenu.updateItem(parentItem, 0);
 
         var grandParentItem = grandParentMenu.getItem(grandParentMenuItemId - 1);
-        grandParentItem.setSubLabel(alarm.active ? "On" : "Off");
+        grandParentItem.setEnabled(alarm.active);
         grandParentMenu.updateItem(grandParentItem, grandParentMenuItemId - 1);
     }
 

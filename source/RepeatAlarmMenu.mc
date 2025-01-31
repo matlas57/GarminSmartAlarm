@@ -93,9 +93,10 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         editAlarmMenuItem.setSubLabel(repeatLabel);
         editAlarmMenu.updateItem(editAlarmMenuItem, 2);
 
-        // var alarmMenuItem = alarmMenu.getItem(editAlarmMenuItemId - 1);
-        // alarmMenuItem.setSubLabel(repeatLabel);
-        // alarmMenu.updateItem(editAlarmMenuItemId - 1);
+        var alarmMenuItem = alarmMenu.getItem(editAlarmMenuItemId - 1);
+        alarmMenuItem.setEnabled(alarm.active);
+        alarmMenuItem.setSubLabel(repeatLabel);
+        alarmMenu.updateItem(alarmMenuItem, editAlarmMenuItemId - 1);
 
         WatchUi.popView(WatchUi.SLIDE_LEFT);
     }
