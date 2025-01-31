@@ -25,10 +25,11 @@ class EditAlarmMenu extends WatchUi.Menu2 {
 
 class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
-    //Parent menu refers to the EditAlarmMenu
+    //Parent menu refers to the alarmMenu
     var parentMenu;
     var parentMenuItemId;
 
+    //Grandparent menu is then alarms menu
     var grandParentMenu;
     var grandParentMenuItemId;
 
@@ -92,6 +93,17 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function openRepeatAlarmMenu() {
         //TODO: create and open menu
+        var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
+        var repeatAlarmMenu = new RepeatAlarmMenu({:title=>"Repeat"}, appDelegate);
+        WatchUi.pushView(
+            repeatAlarmMenu,
+            new RepeatAlarmMenuDelegate(
+                alarm.getRepeatLabel(),
+                parentMenu,
+                parentMenuItemId,
+                grandParentMenu
+            ),
+            WatchUi.SLIDE_RIGHT);
     }
 
     function deleteAlarmConfirmation() {

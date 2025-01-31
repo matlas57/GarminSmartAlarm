@@ -118,4 +118,14 @@ class Alarm {
         );
     }
 
+    function getRepeatLabel() {
+        if (repeatArray.size() == 0) {
+            return "Once";
+        }
+        else {
+            System.println(repeatArray.toString);
+        }
+        return "TBD";
+    }
+
 }

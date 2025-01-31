@@ -44,7 +44,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                 System.println("No registered event");
             }
             else {
-                System.println("Temporal event in " + eventTime.value() " seconds");
+                System.println("Temporal event in " + eventTime.value() + " seconds");
             }
         }
         else if (item.getId().equals("getHR")) {
@@ -76,7 +76,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             editAlarmMenu.addItem(
                 new MenuItem(
                     "Repeat",
-                    "_____", //TODO: Create sublabel
+                    alarm.getRepeatLabel(), //TODO: Create sublabel
                     repeatButtonId,
                     {}
             ));

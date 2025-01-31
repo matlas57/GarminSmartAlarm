@@ -30,10 +30,10 @@ class SmartAlarmApp extends Application.AppBase {
         // myTime.sec.format("%02d")
         // );
 
-        if(Background.getTemporalEventRegisteredTime() == null) {
-            System.println("Registering for temporal event");
-            Background.registerForTemporalEvent(/*Time.now()*/new Time.Duration(5 * 60));
-        }
+        // if(Background.getTemporalEventRegisteredTime() == null) {
+        //     System.println("Registering for temporal event");
+        //     Background.registerForTemporalEvent(/*Time.now()*/new Time.Duration(5 * 60));
+        // }
     }
 
     function getServiceDelegate() as [ ServiceDelegate ]{
