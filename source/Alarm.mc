@@ -9,17 +9,18 @@ class Alarm {
 
     var active as Lang.Boolean;
 
-    var repeatArray = [];
+    var repeatArray;
 
     var delete as Lang.Boolean;
 
-    function initialize(eh, em, lh, lm, a, d) {
+    function initialize(eh, em, lh, lm, a, d, ra) {
         earliestHour = eh;
         earliestMinute = em;
         latestHour = lh;
         latestMinute = lm;
         active = a;
         delete = d;
+        repeatArray = ra;
     }
 
     function toggleActive() {
@@ -118,14 +119,38 @@ class Alarm {
         );
     }
 
+    //TODO: Find a better way for array comparison
     function getRepeatLabel() {
+        System.println(repeatArray.toString());
         if (repeatArray.size() == 0) {
             return "Once";
         }
-        else {
-            System.println(repeatArray.toString);
+        else if (repeatArray.toString().equals("[true, true, true, true, true, true, true]")) {
+            return "Daily";
         }
-        return "TBD";
+        else if (repeatArray.toString().equals("[false, true, true, true, true, true, false]")) {
+            return "Weekday";
+        } 
+        else if (repeatArray.toString().equals("[true, false, false, false, false, false, true]")) {
+            return "Weekend";
+        } 
+        return "Custom";
+    }
+
+    function setRepeatByLabel(label) {
+        System.println("Setting repeat label");
+        if (label.equals("once")) {
+            repeatArray = [];
+        }
+        else if (label.equals("daily")) {
+            repeatArray = [true, true, true, true, true, true, true];
+        }
+        else if (label.equals("weekday")) {
+            repeatArray = [false, true, true, true, true, true, false];
+        }
+        else if (label.equals("weekend")) {
+            repeatArray = [true, false, false, false, false, false, true];
+        }
     }
 
 }

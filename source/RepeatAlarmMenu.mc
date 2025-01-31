@@ -63,11 +63,40 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     var editAlarmMenuItemId;
     var alarmMenu;
 
+    var appDelegate;
+
     function initialize(curRepeatSetting, editAlarmMenu, editAlarmMenuItemId, alarmMenu) {
         Menu2InputDelegate.initialize();
         self.curRepeatSetting = curRepeatSetting;
         self.editAlarmMenu = editAlarmMenu;
         self.editAlarmMenuItemId = editAlarmMenuItemId;
         self.alarmMenu = alarmMenu;
+
+        System.println("RepeatAlarmMenuDelegate()");
+        System.println(curRepeatSetting);
+        System.println(editAlarmMenuItemId);
+
+        appDelegate = new SmartAlarmDelegate();
+    }
+
+    function onSelect(item) {
+        var alarm = appDelegate.getAlarmFromStorage(editAlarmMenuItemId);
+        if (!item.getId().equals("custom")) {
+            alarm.setRepeatByLabel(item.getId());
+            appDelegate.editAlarmInStorage(editAlarmMenuItemId, alarm);
+            System.println(alarm.getRepeatLabel());
+        }
+
+        var repeatLabel = alarm.getRepeatLabel();
+
+        var editAlarmMenuItem = editAlarmMenu.getItem(2);        
+        editAlarmMenuItem.setSubLabel(repeatLabel);
+        editAlarmMenu.updateItem(editAlarmMenuItem, 2);
+
+        // var alarmMenuItem = alarmMenu.getItem(editAlarmMenuItemId - 1);
+        // alarmMenuItem.setSubLabel(repeatLabel);
+        // alarmMenu.updateItem(editAlarmMenuItemId - 1);
+
+        WatchUi.popView(WatchUi.SLIDE_LEFT);
     }
 }

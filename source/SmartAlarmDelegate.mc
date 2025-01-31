@@ -167,7 +167,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             }
             else if (step == 2) {
                 if (keyEvent.getKey() == 4) {
-                    var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute, true, false);
+                    var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute, true, false, []);
 
                     if (editAlarmId == 0) {
                         addNewAlarmToStorage(alarm);
@@ -235,7 +235,8 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         System.println("Retrieved alarm " + alarmArray);
 
         if (alarmArray != null) {
-            return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4], alarmArray[5]);
+            //TODO: replace blank array at the end here, use array.slice
+            return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4], alarmArray[5], alarmArray[6]);
         }
         // TODO: Throw exception here
         return null;
@@ -253,6 +254,8 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             alarm.active,
             alarm.delete
         ];
+        alarmArray.add(alarm.repeatArray);
+        System.println("Adding new alarmArray to storage :" + alarmArray.toString());
         try {
             Storage.setValue(curAlarm, alarmArray);
             Storage.setValue("numAlarms", curAlarm);
@@ -277,6 +280,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             alarm.active,
             alarm.delete
         ];
+        alarmArray.add(alarm.repeatArray);
         Storage.setValue(alarmId, alarmArray);
         return;
     }
