@@ -95,6 +95,22 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         //TODO: create and open menu
         var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
         var repeatAlarmMenu = new RepeatAlarmMenu({:title=>"Repeat"}, appDelegate);
+        var label = alarm.getRepeatLabel();
+        if (label.equals("Once")) {
+            repeatAlarmMenu.setFocus(0);
+        } 
+        else if (label.equals("Daily")) {
+            repeatAlarmMenu.setFocus(1);
+        }
+        else if (label.equals("Weekday")) {
+            repeatAlarmMenu.setFocus(2);
+        }
+        else if (label.equals("Weekend")) {
+            repeatAlarmMenu.setFocus(3);
+        }
+        else {
+            repeatAlarmMenu.setFocus(4);
+        }
         WatchUi.pushView(
             repeatAlarmMenu,
             new RepeatAlarmMenuDelegate(

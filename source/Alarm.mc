@@ -134,7 +134,28 @@ class Alarm {
         else if (repeatArray.toString().equals("[true, false, false, false, false, false, true]")) {
             return "Weekend";
         } 
-        return "Custom";
+        else {
+            System.println("Making custom repeat string");
+            var indexToDayPrefixDict = {
+                0 => "Sun",
+                1 => "Mon",
+                2 => "Tue",
+                3 => "Wed",
+                4 => "Thu",
+                5 => "Fri",
+                6 => "Sat"
+            };
+            var label = "";
+            for (var i = 0; i < repeatArray.size(); i++) {
+                if (repeatArray[i] == true){
+                    label += indexToDayPrefixDict.get(i);
+                    label += ", ";
+                }
+            }
+            label = label.substring(0, label.length() - 2);
+            return label;
+        } 
+        
     }
 
     function setRepeatByLabel(label) {
@@ -151,6 +172,10 @@ class Alarm {
         else if (label.equals("weekend")) {
             repeatArray = [true, false, false, false, false, false, true];
         }
+    }
+
+    function setRepeatByArray(repeatArray) {
+        self.repeatArray = repeatArray;
     }
 
 }

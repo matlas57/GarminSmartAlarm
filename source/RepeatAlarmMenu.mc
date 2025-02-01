@@ -103,7 +103,7 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             var customRepeatAlarmMenu = new CustomRepeatAlarmMenu({:title=>"Custom"}, alarm.repeatArray, appDelegate);
             WatchUi.pushView(
                 customRepeatAlarmMenu,
-                new CustomRepeatAlarmMenuDelegate(),
+                new CustomRepeatAlarmMenuDelegate(alarm, customRepeatAlarmMenu, editAlarmMenu, editAlarmMenuItemId, alarmMenu),
                 WatchUi.SLIDE_RIGHT);
         }
     }
@@ -191,7 +191,53 @@ class CustomRepeatAlarmMenu extends WatchUi.CheckboxMenu {
 
 class CustomRepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
-    function initialize(){
+    var alarm;
+    var customRepeatAlarmMenu;
+    var editAlarmMenu;
+    var editAlarmMenuItemId;
+    var alarmMenu;
+
+    var appDelegate;
+
+    function initialize(alarm, customRepeatAlarmMenu, editAlarmMenu, editAlarmMenuItemId, alarmMenu) {
         Menu2InputDelegate.initialize();
+        
+        self.alarm = alarm;
+        self.customRepeatAlarmMenu = customRepeatAlarmMenu;
+        self.editAlarmMenu = editAlarmMenu;
+        self.editAlarmMenuItemId = editAlarmMenuItemId;
+        self.alarmMenu = alarmMenu;
+
+        System.println("CustomRepeatAlarmMenuDelegate()");
+        System.println(editAlarmMenuItemId);
+
+        appDelegate = new SmartAlarmDelegate();
+    }
+
+    //When done selecting create the repeatArray
+    function onBack() {
+        var repeatArray = [];
+        for (var i = 0; i < 7; i++){
+            repeatArray.add(
+                customRepeatAlarmMenu.getItem(i).isChecked()
+            );
+        }
+        System.println("Custom repeat selection");
+        System.println(repeatArray.toString());
+
+        alarm.setRepeatByArray(repeatArray);
+        appDelegate.editAlarmInStorage(editAlarmMenuItemId, alarm);
+        var repeatLabel = alarm.getRepeatLabel();
+
+        var editAlarmMenuItem = editAlarmMenu.getItem(2);        
+        editAlarmMenuItem.setSubLabel(repeatLabel);
+        editAlarmMenu.updateItem(editAlarmMenuItem, 2);
+
+        var alarmMenuItem = alarmMenu.getItem(editAlarmMenuItemId - 1);
+        alarmMenuItem.setEnabled(alarm.active);
+        alarmMenuItem.setSubLabel(repeatLabel);
+        alarmMenu.updateItem(alarmMenuItem, editAlarmMenuItemId - 1);
+
+        WatchUi.popView(WatchUi.SLIDE_LEFT);
     }
 }
