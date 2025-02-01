@@ -85,19 +85,113 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             alarm.setRepeatByLabel(item.getId());
             appDelegate.editAlarmInStorage(editAlarmMenuItemId, alarm);
             System.println(alarm.getRepeatLabel());
+
+            var repeatLabel = alarm.getRepeatLabel();
+
+            var editAlarmMenuItem = editAlarmMenu.getItem(2);        
+            editAlarmMenuItem.setSubLabel(repeatLabel);
+            editAlarmMenu.updateItem(editAlarmMenuItem, 2);
+
+            var alarmMenuItem = alarmMenu.getItem(editAlarmMenuItemId - 1);
+            alarmMenuItem.setEnabled(alarm.active);
+            alarmMenuItem.setSubLabel(repeatLabel);
+            alarmMenu.updateItem(alarmMenuItem, editAlarmMenuItemId - 1);
+
+            WatchUi.popView(WatchUi.SLIDE_LEFT);
         }
+        else {
+            var customRepeatAlarmMenu = new CustomRepeatAlarmMenu({:title=>"Custom"}, alarm.repeatArray, appDelegate);
+            WatchUi.pushView(
+                customRepeatAlarmMenu,
+                new CustomRepeatAlarmMenuDelegate(),
+                WatchUi.SLIDE_RIGHT);
+        }
+    }
+}
 
-        var repeatLabel = alarm.getRepeatLabel();
+class CustomRepeatAlarmMenu extends WatchUi.CheckboxMenu {
 
-        var editAlarmMenuItem = editAlarmMenu.getItem(2);        
-        editAlarmMenuItem.setSubLabel(repeatLabel);
-        editAlarmMenu.updateItem(editAlarmMenuItem, 2);
+    var repeatArray;
+    var appDelegate;
 
-        var alarmMenuItem = alarmMenu.getItem(editAlarmMenuItemId - 1);
-        alarmMenuItem.setEnabled(alarm.active);
-        alarmMenuItem.setSubLabel(repeatLabel);
-        alarmMenu.updateItem(alarmMenuItem, editAlarmMenuItemId - 1);
+    function initialize(options, repeatArray, delegate) {
+        CheckboxMenu.initialize(options);
+        self.repeatArray = repeatArray;
+        appDelegate = delegate;
+        buildMenu();
+    }
 
-        WatchUi.popView(WatchUi.SLIDE_LEFT);
+    function buildMenu() {
+        System.println("Building menu");
+        self.addItem(
+            new CheckboxMenuItem(
+                "Sunday",
+                null,
+                "Sun",
+                repeatArray.size() == 0 ? false : repeatArray[0],
+                {}
+            )
+        );
+        self.addItem(
+            new CheckboxMenuItem(
+                "Monday",
+                null,
+                "Mon",
+                repeatArray.size() == 0 ? false : repeatArray[1],
+                {}
+            )
+        );
+        self.addItem(
+            new CheckboxMenuItem(
+                "Tuesday",
+                null,
+                "Tue",
+                repeatArray.size() == 0 ? false : repeatArray[2],
+                {}
+            )
+        );
+        self.addItem(
+            new CheckboxMenuItem(
+                "Wednesday",
+                null,
+                "Wed",
+                repeatArray.size() == 0 ? false : repeatArray[3],
+                {}
+            )
+        );
+        self.addItem(
+            new CheckboxMenuItem(
+                "Thursday",
+                null,
+                "Thu",
+                repeatArray.size() == 0 ? false : repeatArray[4],
+                {}
+            )
+        );
+        self.addItem(
+            new CheckboxMenuItem(
+                "Friday",
+                null,
+                "Fri",
+                repeatArray.size() == 0 ? false : repeatArray[5],
+                {}
+            )
+        );
+        self.addItem(
+            new CheckboxMenuItem(
+                "Saturday",
+                null,
+                "Sat",
+                repeatArray.size() == 0 ? false : repeatArray[6],
+                {}
+            )
+        );
+    }
+}
+
+class CustomRepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
+
+    function initialize(){
+        Menu2InputDelegate.initialize();
     }
 }
