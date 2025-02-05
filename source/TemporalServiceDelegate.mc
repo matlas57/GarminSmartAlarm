@@ -1,15 +1,29 @@
 import Toybox.System;
 import Toybox.Background;
+import Toybox.Time;
 
 (:background)
 class TemporalServiceDelegate extends System.ServiceDelegate {
 
+    var hrSensor;
+
     function initialize () {
-        System.println("Event handler created");
         System.ServiceDelegate.initialize();
+        self.hrSensor = new HeartRateSensor();
     }
 
     function onTemporalEvent() {
-        System.println("Temporal event triggered");
+        hrSensor.start();
+        var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+        var dateString = Lang.format(
+            "$1$:$2$:$3$",
+            [
+                today.hour,
+                today.min,
+                today.sec,
+            ]
+        );
+        System.println("Temporal event triggered at " + dateString);
     }
+
 }

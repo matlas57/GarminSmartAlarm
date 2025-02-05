@@ -1,6 +1,7 @@
 import Toybox.Sensor;
 import Toybox.Math;
 
+(:background)
 class HeartRateSensor {
 
     var heartBeatIntervals = [];
@@ -8,8 +9,9 @@ class HeartRateSensor {
 
     function initialize() {
         Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
-         
-         // initialize accelerometer to request the maximum amount of data possible
+    }
+
+    function start() {
         var options = {
             :period => 1,
              :heartBeatIntervals => {
@@ -63,6 +65,11 @@ class HeartRateSensor {
         for (var i = 0; i < n; i++) {
             sdnnSum += sdnnArray[i];
         }
-        System.println("Average HRV is " + (sdnnSum / n).toString() + "ms");
+        if (n > 0) {
+            System.println("Average HRV is " + (sdnnSum / n).toString() + "ms");
+        }
+        else {
+            System.println("array is null");
+        }
     }
 }
