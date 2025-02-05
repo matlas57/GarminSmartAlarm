@@ -236,7 +236,6 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         System.println("Retrieved alarm " + alarmArray);
 
         if (alarmArray != null) {
-            //TODO: replace blank array at the end here, use array.slice
             return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4], alarmArray[5], alarmArray[6]);
         }
         // TODO: Throw exception here

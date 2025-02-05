@@ -92,7 +92,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function openRepeatAlarmMenu() {
-        //TODO: create and open menu
+        //create and open menu
         var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
         var repeatAlarmMenu = new RepeatAlarmMenu({:title=>"Repeat"}, appDelegate);
         var label = alarm.getRepeatLabel();
