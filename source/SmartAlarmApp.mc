@@ -13,7 +13,7 @@ var latestMinute = 0;
 var validLatestTime = true;
 var editAlarmId = 0;
 
-(:background)
+// (:background)
 class SmartAlarmApp extends Application.AppBase {
 
     function initialize() {
@@ -37,7 +37,7 @@ class SmartAlarmApp extends Application.AppBase {
     }
 
     function getServiceDelegate() as [ ServiceDelegate ]{
-        return [new TemporalServiceDelegate()];
+        return [ new TemporalServiceDelegate()];
     }
 
     // onStop() is called when your application is exiting

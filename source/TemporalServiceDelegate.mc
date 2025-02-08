@@ -10,10 +10,11 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
 
     function initialize () {
         System.println("Temporal Service delegate");
+        System.ServiceDelegate.initialize();
         var profile = UserProfile.getProfile();
         var midnight = Time.today();
         var now = Time.Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        profile.sleepTime = timeToDurationHelper(now.hour, now.min + 2, false);
+        profile.sleepTime = timeToDurationHelper(now.hour, now.min + 5, false);
         var sleepTimeDuration = profile.sleepTime;
         var sleepTimeMoment = midnight.add(sleepTimeDuration);
         var sleepTimeInfo = Gregorian.info(sleepTimeMoment, Time.FORMAT_MEDIUM);
@@ -29,16 +30,8 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
                 sleepTimeInfo.year
             ])
         );
-        Background.registerForSleepEvent();
+        Background.registerForTemporalEvent(sleepTimeMoment);
 
-        if (Background.getSleepEventRegistered()) {
-            System.println("Sleep event registered at " + profile.sleepTime.value());
-        }
-        else {
-            System.println("Sleep event not registered");
-        }
-
-        System.ServiceDelegate.initialize();
         self.hrSensor = new HeartRateSensor();
     }
 
@@ -61,12 +54,6 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
             hour += 12;
         }
         var seconds = ((hour * 60 + min) * 60);
-        System.println("Seconds: " + seconds);
         return new Time.Duration(seconds);
     }
-
-    function onSleepTime() {
-        System.println("Sleep time");
-    }
-
 }
