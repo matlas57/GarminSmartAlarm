@@ -47,6 +47,17 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                 System.println("Temporal event in " + eventTime.value() + " seconds");
             }
         }
+        else if (item.getId().equals("deleteNextTemporalEvent")) {
+            System.println("Deleting temporal events");
+            Background.deleteTemporalEvent();
+            var eventTime = Background.getTemporalEventRegisteredTime();
+            if (eventTime == null) {
+                System.println("Event deleted");
+            }
+            else {
+                System.println("Event deletion failed");
+            }
+        }
         else if (item.getId().equals("getHR")) {
             hrSensor = new HeartRateSensor();
         }
