@@ -11,26 +11,6 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
     function initialize () {
         System.println("Temporal Service delegate");
         System.ServiceDelegate.initialize();
-        var profile = UserProfile.getProfile();
-        var midnight = Time.today();
-        var now = Time.Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        profile.sleepTime = timeToDurationHelper(now.hour, now.min + 5, false);
-        var sleepTimeDuration = profile.sleepTime;
-        var sleepTimeMoment = midnight.add(sleepTimeDuration);
-        var sleepTimeInfo = Gregorian.info(sleepTimeMoment, Time.FORMAT_MEDIUM);
-        System.println(Lang.format(
-            "$1$:$2$:$3$ $4$ $5$ $6$ $7$",
-            [
-                sleepTimeInfo.hour,
-                sleepTimeInfo.min,
-                sleepTimeInfo.sec,
-                sleepTimeInfo.day_of_week,
-                sleepTimeInfo.day,
-                sleepTimeInfo.month,
-                sleepTimeInfo.year
-            ])
-        );
-        Background.registerForTemporalEvent(sleepTimeMoment);
 
         self.hrSensor = new HeartRateSensor();
     }
