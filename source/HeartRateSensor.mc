@@ -55,6 +55,7 @@ class HeartRateSensor {
         // Compute SDNN (standard deviation)
         var sdnn = Math.sqrt(sumSquaredDiff / n);
         sdnnArray.add(sdnn);
+        System.println("HRV Reading: " + sdnn);
         return sdnn;
     }
 

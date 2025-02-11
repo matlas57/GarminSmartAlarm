@@ -9,7 +9,7 @@ import Toybox.Time;
 class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     var appDelegate;
-    var hrSensor;
+    // var hrSensor;
 
     var parentMenu;
 
@@ -60,6 +60,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         }
         else if (item.getId().equals("getHR")) {
             hrSensor = new HeartRateSensor();
+            hrSensor.start();
         }
         else if (item.getId().equals("stopHR")) {
             hrSensor.stop();

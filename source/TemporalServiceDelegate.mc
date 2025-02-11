@@ -2,21 +2,18 @@ import Toybox.System;
 import Toybox.Background;
 import Toybox.Time;
 import Toybox.UserProfile;
+import Toybox.Timer;
 
 (:background)
 class TemporalServiceDelegate extends System.ServiceDelegate {
 
-    var hrSensor;
 
     function initialize () {
         System.println("Temporal Service delegate");
         System.ServiceDelegate.initialize();
-
-        self.hrSensor = new HeartRateSensor();
     }
 
     function onTemporalEvent() {
-        hrSensor.start();
         var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
         var dateString = Lang.format(
             "$1$:$2$:$3$",
@@ -27,6 +24,11 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
             ]
         );
         System.println("Temporal event triggered at " + dateString);
+        $.hrSensor.start();
+    }
+
+    function onSleepTime() {
+        System.println("Sleep event triggered");
     }
 
     function timeToDurationHelper(hour, min, pm) as Time.Duration {
