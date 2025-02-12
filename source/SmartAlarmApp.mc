@@ -73,14 +73,6 @@ class SmartAlarmApp extends Application.AppBase {
         // Background.registerForTemporalEvent(sleepTimeMoment);
     }
 
-    function timeToDurationHelper(hour, min, pm) as Time.Duration {
-        if (pm) {
-            hour += 12;
-        }
-        var seconds = ((hour * 60 + min) * 60);
-        return new Time.Duration(seconds);
-    }
-
     function getServiceDelegate() as [ ServiceDelegate ]{
         return [ new TemporalServiceDelegate()];
     }
@@ -100,6 +92,39 @@ class SmartAlarmApp extends Application.AppBase {
         }
         var view = new SmartAlarmView(delegate);
         return [ view, delegate ];
+    }
+
+    function onBackgroundData(data) {
+        System.println("Received background data: " + data);
+
+        //register for a new event in 5 minutes
+        var nextEventMoment = Time.now().add(new Time.Duration(300));
+        System.println("Registering for next HRV reading event");
+        Background.registerForTemporalEvent(nextEventMoment);
+    }
+
+    function timeToDurationHelper(hour, min, pm) as Time.Duration {
+        if (pm) {
+            hour += 12;
+        }
+        var seconds = ((hour * 60 + min) * 60);
+        return new Time.Duration(seconds);
+    }
+
+    function printMoment(moment) {
+        var info = Gregorian.info(moment, Time.FORMAT_SHORT);
+        System.println(Lang.format(
+            "Moment: $1$:$2$:$3$ $4$ $5$ $6$ $7$",
+            [
+                info.hour,
+                info.min,
+                info.sec,
+                info.day_of_week,
+                info.day,
+                info.month,
+                info.year
+            ])
+        );
     }
 
 }

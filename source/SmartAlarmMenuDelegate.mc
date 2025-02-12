@@ -44,7 +44,20 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                 System.println("No registered event");
             }
             else {
-                System.println("Temporal event in " + eventTime.value() + " seconds");
+                if (eventTime instanceof Time.Moment) {
+                    var nextEventInfo = Gregorian.info(eventTime, Time.FORMAT_SHORT);
+                    System.println(
+                        "Temporal event at: $1:$2:$3", 
+                        [
+                            nextEventMoment.hour,
+                            nextEventMoment.min,
+                            nextEventMoment.sec,
+                        ]
+                    );
+                }
+                else {
+                    System.println("Temporal event in " + eventTime.value() + " seconds");
+                }
             }
         }
         else if (item.getId().equals("deleteNextTemporalEvent")) {

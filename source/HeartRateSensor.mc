@@ -6,12 +6,14 @@ class HeartRateSensor {
 
     var heartBeatIntervals = [];
     var sdnnArray = [];
+    var callBackCounter;
 
     function initialize() {
         Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
     }
 
     function start() {
+        callBackCounter = 0;
         var options = {
             :period => 1,
              :heartBeatIntervals => {
@@ -30,6 +32,11 @@ class HeartRateSensor {
         if (sensorData has :heartRateData && sensorData.heartRateData != null) {
             heartBeatIntervals = sensorData.heartRateData.heartBeatIntervals;
             computeSDNN(heartBeatIntervals);
+        }
+        callBackCounter++;
+        if (callBackCounter == 10) {
+            var avg = stop();
+            Background.exit(avg);
         }
     }
 
@@ -66,11 +73,13 @@ class HeartRateSensor {
         for (var i = 0; i < n; i++) {
             sdnnSum += sdnnArray[i];
         }
+        var sdnnAvg = sdnnSum / n;
         if (n > 0) {
-            System.println("Average HRV is " + (sdnnSum / n).toString() + "ms");
+            System.println("Average HRV is " + (sdnnAvg).toString() + "ms");
         }
         else {
             System.println("array is null");
         }
+        return sdnnAvg;
     }
 }
