@@ -19,6 +19,7 @@ class Sdann {
         // Compute squared differences from mean
         var sumSquaredDiff = 0;
         var meanNNIntervals = computeMean(meanNNIntervalArray);
+        var n = meanNNIntervalArray.size();
         for (var i = 0; i < n; i++) {
             sumSquaredDiff += Math.pow(meanNNIntervalArray[i] - meanNNIntervals, 2);
         }
