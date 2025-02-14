@@ -5,7 +5,9 @@ import Toybox.Math;
 class HeartRateSensor {
 
     var heartBeatIntervals = [];
-    var sdnnArray = [];
+    //Array to hold NN sum to be used to compute the NN average for a single recording
+    var intraRecordingNNSum = 0;
+    var totalIntervalsRecorded = 0;
     var callBackCounter;
 
     function initialize() {
@@ -14,6 +16,8 @@ class HeartRateSensor {
 
     function start() {
         callBackCounter = 0;
+        intraRecordingNNSum = 0;
+        totalIntervalsRecorded = 0;
         var options = {
             :period => 1,
              :heartBeatIntervals => {
@@ -27,11 +31,10 @@ class HeartRateSensor {
         }
     }
 
-
     function heartBeatIntervalsCallback(sensorData as SensorData) as Void {
         if (sensorData has :heartRateData && sensorData.heartRateData != null) {
             heartBeatIntervals = sensorData.heartRateData.heartBeatIntervals;
-            computeSDNN(heartBeatIntervals);
+            sumNNIntervals(heartBeatIntervals);
         }
         callBackCounter++;
         if (callBackCounter == 10) {
@@ -40,46 +43,51 @@ class HeartRateSensor {
         }
     }
 
-    function computeSDNN(rrIntervals) {
+    function sumNNIntervals(rrIntervals) {
+        System.println(rrIntervals.toString());
         var n = rrIntervals.size();
-        if (n < 2) {
-            return null; // Not enough data
+        if (n <= 0) {
+            return;
         }
-
-        // Compute mean RR interval
-        var sum = 0;
-        for (var i = 0; i < n; i++) {
-            sum += rrIntervals[i];
+        for (var i = 0; i < n; i++){
+            intraRecordingNNSum += rrIntervals[i];
         }
-        var meanRR = sum / n;
-
-        // Compute squared differences from mean
-        var sumSquaredDiff = 0;
-        for (var i = 0; i < n; i++) {
-            sumSquaredDiff += Math.pow(rrIntervals[i] - meanRR, 2);
-        }
-
-        // Compute SDNN (standard deviation)
-        var sdnn = Math.sqrt(sumSquaredDiff / n);
-        sdnnArray.add(sdnn);
-        System.println("HRV Reading: " + sdnn);
-        return sdnn;
+        totalIntervalsRecorded += n;
     }
+
+    // function computeSDNN(rrIntervals) {
+    //     var n = rrIntervals.size();
+    //     if (n < 2) {
+    //         return; // Not enough data
+    //     }
+
+    //     // Compute mean RR interval
+    //     var sum = 0;
+    //     for (var i = 0; i < n; i++) {
+    //         sum += rrIntervals[i];
+    //     }
+    //     var meanRR = sum / n;
+
+    //     // Compute squared differences from mean
+    //     var sumSquaredDiff = 0;
+    //     for (var i = 0; i < n; i++) {
+    //         sumSquaredDiff += Math.pow(rrIntervals[i] - meanRR, 2);
+    //     }
+
+    //     // Compute SDNN (standard deviation)
+    //     var sdnn = Math.sqrt(sumSquaredDiff / n);
+    //     sdnnArray.add(sdnn);
+    //     System.println("HRV Reading: " + sdnn);
+    // }
 
     function stop() {
         Sensor.unregisterSensorDataListener();
-        var sdnnSum = 0.0;
-        var n = sdnnArray.size();
-        for (var i = 0; i < n; i++) {
-            sdnnSum += sdnnArray[i];
+        if (totalIntervalsRecorded == 0) {
+            System.println("No intervals recorded");
+            return null;
         }
-        var sdnnAvg = sdnnSum / n;
-        if (n > 0) {
-            System.println("Average HRV is " + (sdnnAvg).toString() + "ms");
-        }
-        else {
-            System.println("array is null");
-        }
-        return sdnnAvg;
+        var meanNNInterval = intraRecordingNNSum / totalIntervalsRecorded;
+        System.println("Recorded " + totalIntervalsRecorded + " intervals with average " + meanNNInterval);
+        return meanNNInterval;
     }
 }
