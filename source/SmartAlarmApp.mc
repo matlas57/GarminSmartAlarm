@@ -23,6 +23,8 @@ var hrSensor = null;
 (:background)
 class SmartAlarmApp extends Application.AppBase {
 
+    var sdannManager;
+
     function initialize() {
         System.println("SmartAlarmApp Init");
         AppBase.initialize();
@@ -33,6 +35,7 @@ class SmartAlarmApp extends Application.AppBase {
     function initializeHrSensor() {
         System.println("initializeHrSensor");
         $.hrSensor = new HeartRateSensor();
+        sdannManager = new Sdann();
     }
 
     // onStart() is called on application start up
@@ -96,7 +99,7 @@ class SmartAlarmApp extends Application.AppBase {
 
     function onBackgroundData(data) {
         System.println("Received background data: " + data);
-
+        sdannManager.addNewMeanNNInterval(data);
         //register for a new event in 5 minutes
         var nextEventMoment = Time.now().add(new Time.Duration(300));
         System.println("Registering for next HRV reading event");
