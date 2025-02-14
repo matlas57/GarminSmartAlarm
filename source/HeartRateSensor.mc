@@ -55,31 +55,6 @@ class HeartRateSensor {
         totalIntervalsRecorded += n;
     }
 
-    // function computeSDNN(rrIntervals) {
-    //     var n = rrIntervals.size();
-    //     if (n < 2) {
-    //         return; // Not enough data
-    //     }
-
-    //     // Compute mean RR interval
-    //     var sum = 0;
-    //     for (var i = 0; i < n; i++) {
-    //         sum += rrIntervals[i];
-    //     }
-    //     var meanRR = sum / n;
-
-    //     // Compute squared differences from mean
-    //     var sumSquaredDiff = 0;
-    //     for (var i = 0; i < n; i++) {
-    //         sumSquaredDiff += Math.pow(rrIntervals[i] - meanRR, 2);
-    //     }
-
-    //     // Compute SDNN (standard deviation)
-    //     var sdnn = Math.sqrt(sumSquaredDiff / n);
-    //     sdnnArray.add(sdnn);
-    //     System.println("HRV Reading: " + sdnn);
-    // }
-
     function stop() {
         Sensor.unregisterSensorDataListener();
         if (totalIntervalsRecorded == 0) {

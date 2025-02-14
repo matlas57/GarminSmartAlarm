@@ -15,4 +15,30 @@ class Sdann {
         meanNNIntervalArray.add(meanNNInterval);
     }
 
+    function computeSDANN() {
+        // Compute squared differences from mean
+        var sumSquaredDiff = 0;
+        var meanNNIntervals = computeMean(meanNNIntervalArray);
+        for (var i = 0; i < n; i++) {
+            sumSquaredDiff += Math.pow(meanNNIntervalArray[i] - meanNNIntervals, 2);
+        }
+
+        // Compute SDNN (standard deviation)
+        var sdann = Math.sqrt(sumSquaredDiff / n);
+        System.println("HRV Reading: " + sdann);
+        return sdann;
+    }
+
+    function computeMean(array) as Lang.Number {
+        var n = array.size();
+        if (n == 0){
+            return 0;
+        }
+        var sum = 0;
+        for (var i = 0; i < n; i++) {
+            sum += array[i];
+        }
+        return sum / n;
+    }
+
 }
