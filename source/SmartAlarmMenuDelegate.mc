@@ -35,6 +35,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             var vibeData = [
                 new Attention.VibeProfile(100, 2000),  // Off for two seconds
             ];
+            WatchUi.pushView(new WakeUpView(), new WakeUpViewDelegate(), WatchUi.SLIDE_IMMEDIATE);
             Attention.vibrate(vibeData);
         }
         else if (item.getId().equals("getNextTemporalEvent")) {
