@@ -1,7 +1,13 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.Attention;
+import Toybox.Attention;
 
 class WakeUpView extends WatchUi.View {
+
+    var vibeData = [
+        new Attention.VibeProfile(100, 2000),  // On for two seconds
+    ];
 
     function initialize() {
         View.initialize();
@@ -15,6 +21,11 @@ class WakeUpView extends WatchUi.View {
             :locY=>30
         });
         buttonHint.draw(dc);
+    }
+
+    function onShow() {
+        
+        Attention.vibrate(vibeData);
     }
 }
 
