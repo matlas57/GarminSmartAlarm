@@ -105,6 +105,9 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 else if (keyEvent.getKey() == 4) {
                     step++;
                 }
+                else if (keyEvent.getKey() == 5) {
+                    WatchUi.popView(WatchUi.SLIDE_LEFT);
+                }
             }
             else if (step == 1) {
                 if (keyEvent.getKey() == 13) {
