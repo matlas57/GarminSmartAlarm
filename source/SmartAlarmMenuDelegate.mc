@@ -34,6 +34,9 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         else if (item.getId().equals("testVibration")) {
             WatchUi.pushView(new WakeUpView(), new WakeUpViewDelegate(), WatchUi.SLIDE_IMMEDIATE);
         }
+        else if (item.getId().equals("getActiveAlarms")) {
+            appDelegate.getActiveAlarms();
+        }
         else if (item.getId().equals("getNextTemporalEvent")) {
             System.println("Getting next event time");
             var eventTime = Background.getTemporalEventRegisteredTime();

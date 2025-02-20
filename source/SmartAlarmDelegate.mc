@@ -37,6 +37,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         );
         alarmsMenu.addItem(
             new MenuItem (
+                "Get Active Alarms",
+                "",
+                "getActiveAlarms",
+                {}
+            )
+        );
+        alarmsMenu.addItem(
+            new MenuItem (
                 "Test Vibration",
                 "",
                 "testVibration",
@@ -238,7 +246,11 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function getAlarmFromStorage(alarmNum) {
-        if (alarmNum > getNumAlarms()) {
+        if (!(alarmNum instanceof Number)){
+            System.println("Invalid parameter alarmNum");
+            return null;
+        }
+        else if (alarmNum > getNumAlarms()) {
             // TODO: Throw exception here
             System.println("Attempting to retrieve non-existing alarm");
             return null;
@@ -251,6 +263,22 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         }
         // TODO: Throw exception here
         return null;
+    }
+
+    function getActiveAlarms() {
+        var numAlarms = getNumAlarms();
+        if (numAlarms == 0) {
+            return [];
+        }
+        var activeAlarms = [];
+        for (var i = 0; i < numAlarms; i++) {
+            var curAlarm = getAlarmFromStorage(1);
+            if (curAlarm.getActive()) {
+                activeAlarms.add(curAlarm);
+            }
+        }
+        System.println("There are " + activeAlarms.size() + " active alarms");
+        return activeAlarms;
     }
 
     function addNewAlarmToStorage(alarm) {

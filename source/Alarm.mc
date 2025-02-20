@@ -23,6 +23,10 @@ class Alarm {
         repeatArray = ra;
     }
 
+    function getActive() {
+        return active;
+    }
+
     function toggleActive() {
         active = !active;
         System.println("active set to " + active);
