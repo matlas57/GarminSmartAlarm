@@ -10,12 +10,17 @@ import Toybox.Time;
 //TODO: Create a separate class to store global data
 var appState = "alarmMenu";
 var step = 0;
+//earliest/latest hour/min here are holders for current selections when adding/editing an alarm
 var earliestHour = 6;
 var earliestMinute = 0;
 var latestHour = 7;
 var latestMinute = 0;
 var validLatestTime = true;
 var editAlarmId = 0;
+
+//Below store the earliestActive alarm time across all stored alarms in the application
+var earliestActiveHour;
+var earliestActiveMinute;
 
 (:background)
 var hrSensor = null;

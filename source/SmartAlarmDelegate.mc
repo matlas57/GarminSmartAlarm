@@ -331,6 +331,11 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         try {
             Storage.setValue(curAlarm, alarmArray);
             Storage.setValue("numAlarms", curAlarm);
+            var earliestActiveAlarmMinHour = getEarliestActiveAlarmTime();
+            if (earliestActiveAlarmMinHour.size() == 2){
+                $.earliestActiveHour = earliestActiveAlarmMinHour[0];
+                $.earliestActiveMinute = earliestActiveAlarmMinHour[1];
+            }
         } catch (e instanceof Lang.Exception) {
             System.println(e.getErrorMessage());
             // TODO: Add window here to indicate that alarms need to be deleted before more can be added
@@ -354,6 +359,11 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         ];
         alarmArray.add(alarm.repeatArray);
         Storage.setValue(alarmId, alarmArray);
+        var earliestActiveAlarmMinHour = getEarliestActiveAlarmTime();
+            if (earliestActiveAlarmMinHour.size() == 2){
+                $.earliestActiveHour = earliestActiveAlarmMinHour[0];
+                $.earliestActiveMinute = earliestActiveAlarmMinHour[1];
+            }
         return;
     }
 
