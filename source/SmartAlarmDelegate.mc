@@ -45,6 +45,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         );
         alarmsMenu.addItem(
             new MenuItem (
+                "Print Earliest Active",
+                "",
+                "printEarliestActiveAlarm",
+                {}
+            )
+        );
+        alarmsMenu.addItem(
+            new MenuItem (
                 "Test Vibration",
                 "",
                 "testVibration",
@@ -272,13 +280,38 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         }
         var activeAlarms = [];
         for (var i = 0; i < numAlarms; i++) {
-            var curAlarm = getAlarmFromStorage(1);
+            var curAlarm = getAlarmFromStorage(i + 1);
             if (curAlarm.getActive()) {
                 activeAlarms.add(curAlarm);
             }
         }
         System.println("There are " + activeAlarms.size() + " active alarms");
         return activeAlarms;
+    }
+
+    function getEarliestActiveAlarmTime() {
+        var activeAlarms = getActiveAlarms();
+        var n = activeAlarms.size();
+        if (n == 0) {
+            return [];
+        }
+        else if (n == 1) {
+            System.println("Earliest alarm: " + activeAlarms[0].earliestHour + ":" + activeAlarms[0].earliestMinute);
+            return [activeAlarms[0].earliestHour, activeAlarms[0].earliestMinute];
+        }
+        else {
+            var joinedArray = [] as Lang.Array;
+            for (var i = 0; i < n; i++) {
+                var joined = activeAlarms[i].earliestHour * 100 + activeAlarms[i].earliestMinute;
+                joinedArray.add(joined);
+            }
+            joinedArray.sort(null);
+            if (joinedArray.size() > 0) {
+                //Convert back to an array for hour and minute to return
+                return [joinedArray[0] / 100, joinedArray[0] % 100];
+            }
+            return [];
+        }
     }
 
     function addNewAlarmToStorage(alarm) {
