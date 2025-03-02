@@ -1,4 +1,4 @@
-class AlarmComparator {
+class EarliestAlarmComparator {
     function compare(a as Alarm, b as Alarm) {
         var aNextMoment = a.getNextEarliestTimeMoment();
         var bNextMoment = b.getNextEarliestTimeMoment();
