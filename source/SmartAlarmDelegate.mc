@@ -45,9 +45,9 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         );
         alarmsMenu.addItem(
             new MenuItem (
-                "Print Earliest Active",
+                "Print Active Interval",
                 "",
-                "printEarliestActiveAlarm",
+                "printActiveInterval",
                 {}
             )
         );
@@ -289,7 +289,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         return activeAlarms;
     }
 
-    function getEarliestActiveAlarmTime() {
+    function getEarliestActiveAlarm() {
         var activeAlarms = getActiveAlarms();
         var n = activeAlarms.size();
         if (n == 0) {
@@ -311,8 +311,23 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             //     //Convert back to an array for hour and minute to return
             //     // return [joinedArray[0] / 100, joinedArray[0] % 100];
             // }
-            activeAlarms.sort(new AlarmComparator() as Lang.Comparator);
+            activeAlarms.sort(new EarliestAlarmComparator() as Lang.Comparator);
             return activeAlarms[0];
+        }
+    }
+
+    function getLatestActiveAlarm() {
+        var activeAlarms = getActiveAlarms();
+        var n = activeAlarms.size();
+        if (n == 0) {
+            return [];
+        }
+        else if (n == 1) {
+            return activeAlarms[0];
+        }
+        else {
+            activeAlarms.sort(new LatestAlarmComparator() as Lang.Comparator);
+            return activeAlarms[activeAlarms.size() - 1];
         }
     }
 
@@ -333,10 +348,15 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         try {
             Storage.setValue(curAlarm, alarmArray);
             Storage.setValue("numAlarms", curAlarm);
-            var earliestActiveAlarm = getEarliestActiveAlarmTime();
+            var earliestActiveAlarm = getEarliestActiveAlarm();
             if (earliestActiveAlarm != null){
                 $.earliestActiveHour = earliestActiveAlarm.earliestHour;
                 $.earliestActiveMinute = earliestActiveAlarm.earliestMinute;
+            }
+            var latestActiveAlarm = getLatestActiveAlarm();
+            if (latestActiveAlarm != null){
+                $.latestActiveHour = latestActiveAlarm.latestHour;
+                $.latestActiveMinute = latestActiveAlarm.latestMinute;
             }
         } catch (e instanceof Lang.Exception) {
             System.println(e.getErrorMessage());
@@ -361,10 +381,15 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         ];
         alarmArray.add(alarm.repeatArray);
         Storage.setValue(alarmId, alarmArray);
-        var earliestActiveAlarm = getEarliestActiveAlarmTime();
+        var earliestActiveAlarm = getEarliestActiveAlarm();
         if (earliestActiveAlarm != null){
             $.earliestActiveHour = earliestActiveAlarm.earliestHour;
             $.earliestActiveMinute = earliestActiveAlarm.earliestMinute;
+        }
+        var latestActiveAlarm = getLatestActiveAlarm();
+        if (latestActiveAlarm != null){
+            $.latestActiveHour = latestActiveAlarm.latestHour;
+            $.latestActiveMinute = latestActiveAlarm.latestMinute;
         }
         return;
     }

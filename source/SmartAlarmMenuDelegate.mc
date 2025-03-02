@@ -37,9 +37,11 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         else if (item.getId().equals("getActiveAlarms")) {
             appDelegate.getActiveAlarms();
         }
-        else if (item.getId().equals("printEarliestActiveAlarm")) {
-            appDelegate.getEarliestActiveAlarmTime();
-            System.println("Global var earliest time: " + earliestActiveHour + ":" + delegate.padMinuteString(earliestActiveMinute));
+        else if (item.getId().equals("printActiveInterval")) {
+            appDelegate.getEarliestActiveAlarm();
+            appDelegate.getLatestActiveAlarm();
+            System.println("Global var earliest time: " + earliestActiveHour + ":" + earliestActiveMinute);
+            System.println("Global var latest time: " + latestActiveHour + ":" + latestActiveMinute);
         }
         else if (item.getId().equals("getNextTemporalEvent")) {
             System.println("Getting next event time");

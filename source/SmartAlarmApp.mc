@@ -19,8 +19,10 @@ var validLatestTime = true;
 var editAlarmId = 0;
 
 //Below store the earliestActive alarm time across all stored alarms in the application
-var earliestActiveHour;
-var earliestActiveMinute;
+var earliestActiveHour as Lang.Number?;
+var earliestActiveMinute as Lang.Number?;
+var latestActiveHour as Lang.Number?;
+var latestActiveMinute as Lang.Number?;
 
 (:background)
 var hrSensor = null;
