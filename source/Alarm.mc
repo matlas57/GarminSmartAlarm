@@ -64,7 +64,7 @@ class Alarm {
         else {
             var today = Time.Gregorian.info(new Time.Moment(Time.today().value()), Time.FORMAT_SHORT);
             today.hour = earliestHour;
-            today.hour = earliestMinute;
+            today.min = earliestMinute;
             info = today;
         }
         printGregorianInfo(info);
