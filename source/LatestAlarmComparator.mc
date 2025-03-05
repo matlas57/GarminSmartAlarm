@@ -1,3 +1,4 @@
+(:background)
 class LatestAlarmComparator {
     function compare(a as Alarm, b as Alarm) {
         var aNextMoment = a.getNextLatestTimeMoment();

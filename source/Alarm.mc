@@ -1,6 +1,7 @@
 import Toybox.Lang;
 import Toybox.Time;
 
+(:background)
 class Alarm {
     var earliestHour as Lang.Number;
     var earliestMinute as Lang.Number;

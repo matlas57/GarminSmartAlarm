@@ -31,6 +31,7 @@ var hrSensor = null;
 class SmartAlarmApp extends Application.AppBase {
 
     var sdannManager;
+    var appDelegate;
 
     function initialize() {
         System.println("SmartAlarmApp Init");
@@ -93,17 +94,18 @@ class SmartAlarmApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        var delegate = new SmartAlarmDelegate();
+        appDelegate = new SmartAlarmDelegate();
         appState = "alarmMenu";
-        var view = new SmartAlarmView(delegate);
-        return [ view, delegate ];
+        var view = new SmartAlarmView(appDelegate);
+        return [ view, appDelegate ];
     }
 
     function onBackgroundData(data) {
         System.println("Received background data: " + data);
         sdannManager.addNewMeanNNInterval(data);
         //register for a new event in 5 minutes
-        var nextEventMoment = Time.now().add(new Time.Duration(300));
+        var nowMoment = Time.now();
+        var nextEventMoment = nowMoment.add(new Time.Duration(300));
         System.println("Registering for next HRV reading event");
         Background.registerForTemporalEvent(nextEventMoment);
     }
@@ -119,14 +121,13 @@ class SmartAlarmApp extends Application.AppBase {
     function printMoment(moment) {
         var info = Gregorian.info(moment, Time.FORMAT_SHORT);
         System.println(Lang.format(
-            "Moment: $1$:$2$:$3$ $4$ $5$ $6$ $7$",
+            "Moment: $1$:$2$:$3$ $4$/$5$/$6$",
             [
                 info.hour,
                 info.min,
                 info.sec,
-                info.day_of_week,
-                info.day,
                 info.month,
+                info.day,
                 info.year
             ])
         );

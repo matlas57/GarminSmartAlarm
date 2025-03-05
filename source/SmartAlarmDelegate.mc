@@ -285,7 +285,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 activeAlarms.add(curAlarm);
             }
         }
-        System.println("There are " + activeAlarms.size() + " active alarms");
+        // System.println("There are " + activeAlarms.size() + " active alarms");
         return activeAlarms;
     }
 
@@ -312,6 +312,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             //     // return [joinedArray[0] / 100, joinedArray[0] % 100];
             // }
             activeAlarms.sort(new EarliestAlarmComparator() as Lang.Comparator);
+            System.println("Earliest active time is " + activeAlarms[0].earliestHour + ":" + activeAlarms[0].earliestMinute);
             return activeAlarms[0];
         }
     }
@@ -327,6 +328,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         }
         else {
             activeAlarms.sort(new LatestAlarmComparator() as Lang.Comparator);
+            System.println("Latest active time is " + activeAlarms[activeAlarms.size() - 1].latestHour + ":" + activeAlarms[activeAlarms.size() - 1].latestMinute);
             return activeAlarms[activeAlarms.size() - 1];
         }
     }
