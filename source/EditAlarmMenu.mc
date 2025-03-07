@@ -17,7 +17,7 @@ class EditAlarmMenu extends WatchUi.Menu2 {
         if (editAlarmId > 0)
         {
             var alarm = StorageManager.getAlarmFromStorage(editAlarmId);
-            timeMenuItem.setSubLabel(appDelegate.makeAlarmString(alarm));
+            timeMenuItem.setSubLabel(alarm.makeAlarmString());
         }
         System.println(timeMenuItem.getSubLabel());
     }

@@ -183,4 +183,16 @@ class Alarm {
         self.repeatArray = repeatArray;
     }
 
+    function makeAlarmString() {
+        return earliestHour.toString() + ":" + padMinuteString(earliestMinute) + " - " + latestHour.toString() + ":" + padMinuteString(latestMinute);
+    }
+
+    static function padMinuteString(minute) {
+        if (minute < 10) {
+            return "0" + minute.toString();
+        } 
+        else {
+            return minute.toString();
+        }
+    }
 }
