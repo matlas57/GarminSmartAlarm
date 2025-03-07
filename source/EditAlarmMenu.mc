@@ -16,7 +16,7 @@ class EditAlarmMenu extends WatchUi.Menu2 {
         var timeMenuItem = self.getItem(1);
         if (editAlarmId > 0)
         {
-            var alarm = appDelegate.getAlarmFromStorage(editAlarmId);
+            var alarm = StorageManager.getAlarmFromStorage(editAlarmId);
             timeMenuItem.setSubLabel(appDelegate.makeAlarmString(alarm));
         }
         System.println(timeMenuItem.getSubLabel());
@@ -60,10 +60,10 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function toggleStatus() {
-        var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
+        var alarm = StorageManager.getAlarmFromStorage(parentMenuItemId);
         alarm.toggleActive();
         System.println("alarm active is " + alarm.active);
-        appDelegate.editAlarmInStorage(parentMenuItemId, alarm);
+        StorageManager.editAlarmInStorage(parentMenuItemId, alarm);
         //Get the menu item for the status button in this menu and request it be updated
         var parentItem = parentMenu.getItem(0);        
         parentItem.setSubLabel(alarm.active ? "On" : "Off");
@@ -79,7 +79,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
         appState = "earliestAlarmPrompt";
 
-        var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
+        var alarm = StorageManager.getAlarmFromStorage(parentMenuItemId);
         earliestHour = alarm.earliestHour;
         earliestMinute = alarm.earliestMinute;
         latestHour = alarm.latestHour;
@@ -93,8 +93,8 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function openRepeatAlarmMenu() {
         //create and open menu
-        var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
-        var repeatAlarmMenu = new RepeatAlarmMenu({:title=>"Repeat"}, appDelegate);
+        var alarm = StorageManager.getAlarmFromStorage(parentMenuItemId);
+        var repeatAlarmMenu = new RepeatAlarmMenu({:title=>"Repeat"});
         var label = alarm.getRepeatLabel();
         if (label.equals("Once")) {
             repeatAlarmMenu.setFocus(0);
@@ -134,16 +134,16 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function deleteAlarm() {
         
-        var numAlarms = appDelegate.getNumAlarms();
+        var numAlarms = StorageManager.getNumAlarms();
         //If one alarm delete the entry and return to the alarmMenu
         if (numAlarms == 1) {
             Storage.deleteValue(parentMenuItemId);
             Storage.setValue("numAlarms", 0);
         }
         else {
-            var alarm = appDelegate.getAlarmFromStorage(parentMenuItemId);
+            var alarm = StorageManager.getAlarmFromStorage(parentMenuItemId);
             alarm.setDelete(true);
-            appDelegate.editAlarmInStorage(parentMenuItemId, alarm);
+            StorageManager.editAlarmInStorage(parentMenuItemId, alarm);
         }
         grandParentMenu.deleteItem(grandParentMenuItemId - 1);
         WatchUi.popView(WatchUi.SLIDE_LEFT);

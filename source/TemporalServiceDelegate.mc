@@ -30,10 +30,9 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
     function onSleepTime() {
         System.println("Sleep event triggered: setting active interval");
 
-        BackgroundStorageManager.TestStatic();
         //if current time is after the earliest alarm time then check if an alarm should be triggered
-        var earliestActiveAlarm = BackgroundStorageManager.getEarliestActiveAlarm();
-        var latestActiveAlarm = BackgroundStorageManager.getLatestActiveAlarm();
+        var earliestActiveAlarm = StorageManager.getEarliestActiveAlarm();
+        var latestActiveAlarm = StorageManager.getLatestActiveAlarm();
 
         // // Create a moment of the current day at the earliest alarm time
         var earliestActiveAlarmMomentValue = Time.today().value() + (earliestActiveAlarm.earliestHour * 60 * 60) + (earliestActiveAlarm.earliestMinute * 60);

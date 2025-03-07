@@ -8,7 +8,6 @@ import Toybox.Time;
 
 class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
-    var appDelegate;
     // var hrSensor;
 
     var parentMenu;
@@ -18,10 +17,9 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     var repeatButtonId = 2;
     var deleteButtonId = 3;
 
-    function initialize(parentMenu, delegate) {
+    function initialize(parentMenu) {
         Menu2InputDelegate.initialize();
         self.parentMenu = parentMenu;
-        appDelegate = delegate;
     }
 
     function onSelect(item) {
@@ -35,11 +33,11 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             WatchUi.pushView(new WakeUpView(), new WakeUpViewDelegate(), WatchUi.SLIDE_IMMEDIATE);
         }
         else if (item.getId().equals("getActiveAlarms")) {
-            appDelegate.getActiveAlarms();
+            StorageManager.getActiveAlarms();
         }
         else if (item.getId().equals("printActiveInterval")) {
-            appDelegate.getEarliestActiveAlarm();
-            appDelegate.getLatestActiveAlarm();
+            StorageManager.getEarliestActiveAlarm();
+            StorageManager.getLatestActiveAlarm();
             System.println("Global var earliest time: " + earliestActiveHour + ":" + earliestActiveMinute);
             System.println("Global var latest time: " + latestActiveHour + ":" + latestActiveMinute);
         }
@@ -124,7 +122,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function onBack() {
-        appDelegate.reorganizeStorage();
+        StorageManager.reorganizeStorage();
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
     }
 

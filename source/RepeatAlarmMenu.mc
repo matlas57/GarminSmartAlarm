@@ -3,11 +3,8 @@ import Toybox.System;
 
 class RepeatAlarmMenu extends WatchUi.Menu2 {
 
-    var appDelegate;
-
-    function initialize(options, delegate) {
+    function initialize(options) {
         Menu2.initialize(options);
-        appDelegate = delegate;
         buildMenu();
     }
 
@@ -63,8 +60,6 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     var editAlarmMenuItemId;
     var alarmMenu;
 
-    var appDelegate;
-
     function initialize(curRepeatSetting, editAlarmMenu, editAlarmMenuItemId, alarmMenu) {
         Menu2InputDelegate.initialize();
         self.curRepeatSetting = curRepeatSetting;
@@ -75,15 +70,13 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         System.println("RepeatAlarmMenuDelegate()");
         System.println(curRepeatSetting);
         System.println(editAlarmMenuItemId);
-
-        appDelegate = new SmartAlarmDelegate();
     }
 
     function onSelect(item) {
-        var alarm = appDelegate.getAlarmFromStorage(editAlarmMenuItemId);
+        var alarm = StorageManager.getAlarmFromStorage(editAlarmMenuItemId);
         if (!item.getId().equals("custom")) {
             alarm.setRepeatByLabel(item.getId());
-            appDelegate.editAlarmInStorage(editAlarmMenuItemId, alarm);
+            StorageManager.editAlarmInStorage(editAlarmMenuItemId, alarm);
             System.println(alarm.getRepeatLabel());
 
             var repeatLabel = alarm.getRepeatLabel();
@@ -100,7 +93,7 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             WatchUi.popView(WatchUi.SLIDE_LEFT);
         }
         else {
-            var customRepeatAlarmMenu = new CustomRepeatAlarmMenu({:title=>"Custom"}, alarm.repeatArray, appDelegate);
+            var customRepeatAlarmMenu = new CustomRepeatAlarmMenu({:title=>"Custom"}, alarm.repeatArray);
             WatchUi.pushView(
                 customRepeatAlarmMenu,
                 new CustomRepeatAlarmMenuDelegate(alarm, customRepeatAlarmMenu, editAlarmMenu, editAlarmMenuItemId, alarmMenu),
@@ -112,12 +105,10 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 class CustomRepeatAlarmMenu extends WatchUi.CheckboxMenu {
 
     var repeatArray;
-    var appDelegate;
 
-    function initialize(options, repeatArray, delegate) {
+    function initialize(options, repeatArray) {
         CheckboxMenu.initialize(options);
         self.repeatArray = repeatArray;
-        appDelegate = delegate;
         buildMenu();
     }
 
@@ -197,8 +188,6 @@ class CustomRepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     var editAlarmMenuItemId;
     var alarmMenu;
 
-    var appDelegate;
-
     function initialize(alarm, customRepeatAlarmMenu, editAlarmMenu, editAlarmMenuItemId, alarmMenu) {
         Menu2InputDelegate.initialize();
         
@@ -211,7 +200,6 @@ class CustomRepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         System.println("CustomRepeatAlarmMenuDelegate()");
         System.println(editAlarmMenuItemId);
 
-        appDelegate = new SmartAlarmDelegate();
     }
 
     //When done selecting create the repeatArray
@@ -226,7 +214,7 @@ class CustomRepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         System.println(repeatArray.toString());
 
         alarm.setRepeatByArray(repeatArray);
-        appDelegate.editAlarmInStorage(editAlarmMenuItemId, alarm);
+        StorageManager.editAlarmInStorage(editAlarmMenuItemId, alarm);
         var repeatLabel = alarm.getRepeatLabel();
 
         var editAlarmMenuItem = editAlarmMenu.getItem(2);        
