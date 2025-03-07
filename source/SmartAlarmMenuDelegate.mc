@@ -29,6 +29,9 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             appState = "earliestAlarmPrompt";
             WatchUi.pushView(new SmartAlarmView(delegate), delegate, WatchUi.SLIDE_UP);
         }
+        else if (item.getId().equals("printAppState")) {
+            System.println("App state is " + appState);
+        }
         else if (item.getId().equals("testVibration")) {
             WatchUi.pushView(new WakeUpView(), new WakeUpViewDelegate(), WatchUi.SLIDE_IMMEDIATE);
         }

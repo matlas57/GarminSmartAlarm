@@ -21,8 +21,10 @@ var editAlarmId = 0;
 //Below store the earliestActive alarm time across all stored alarms in the application
 var earliestActiveHour as Lang.Number?;
 var earliestActiveMinute as Lang.Number?;
+var earliestActiveMoment as Time.Moment?;
 var latestActiveHour as Lang.Number?;
 var latestActiveMinute as Lang.Number?;
+var latestActiveMoment as Time.Moment?;
 
 (:background)
 var hrSensor = null;
@@ -50,6 +52,17 @@ class SmartAlarmApp extends Application.AppBase {
     function onStart(state as Dictionary?) as Void {
 
         Background.registerForSleepEvent();
+
+        //if current time is after the earliest alarm time then check if an alarm should be triggered
+        var earliestActiveAlarm = StorageManager.getEarliestActiveAlarm();
+        var latestActiveAlarm = StorageManager.getLatestActiveAlarm();
+
+        // // Create a moment of the current day at the earliest alarm time
+        var earliestActiveAlarmMomentValue = Time.today().value() + (earliestActiveAlarm.earliestHour * 60 * 60) + (earliestActiveAlarm.earliestMinute * 60);
+        $.earliestActiveMoment = new Time.Moment(earliestActiveAlarmMomentValue);
+
+        var latestActiveAlarmMomentValue = Time.today().value() + (latestActiveAlarm.latestHour * 60 * 60) + (latestActiveAlarm.latestMinute * 60);
+        $.latestActiveMoment = new Time.Moment(latestActiveAlarmMomentValue);
 
         // var profile = UserProfile.getProfile();
 
@@ -103,8 +116,27 @@ class SmartAlarmApp extends Application.AppBase {
     function onBackgroundData(data) {
         System.println("Received background data: " + data);
         sdannManager.addNewMeanNNInterval(data);
+
+        var nowMoment = earliestActiveMoment;
+        // var nowMoment = new Time.Moment(Time.now().value());
+        
+        if (!appState.equals("alarmAllowed")) {
+            if ($.earliestActiveMoment == null || $.latestActiveMoment == null){
+                System.println("Moments have not been set");
+            }
+            else {
+                if (nowMoment.compare($.earliestActiveMoment) >= 0 && nowMoment.compare($.latestActiveMoment) <= 0) {
+                    System.println("Checking for alarm");
+                    $.appState = "alarmAllowed";
+                }
+            }
+        }
+        if (appState.equals("alarmAllowed")) {
+            sdannManager.computeSDANN();
+        }
+
         //register for a new event in 5 minutes
-        var nowMoment = Time.now();
+        nowMoment = Time.now();
         var nextEventMoment = nowMoment.add(new Time.Duration(300));
         System.println("Registering for next HRV reading event");
         Background.registerForTemporalEvent(nextEventMoment);

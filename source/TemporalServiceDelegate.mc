@@ -36,20 +36,17 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
 
         // // Create a moment of the current day at the earliest alarm time
         var earliestActiveAlarmMomentValue = Time.today().value() + (earliestActiveAlarm.earliestHour * 60 * 60) + (earliestActiveAlarm.earliestMinute * 60);
-        var earliestActiveAlarmMoment = new Time.Moment(earliestActiveAlarmMomentValue);
-
-        var nowMomentValue = Time.today().value() + ((earliestActiveAlarm.earliestHour + 1) * 60 * 60) + (earliestActiveAlarm.earliestMinute * 60);
-        var nowMoment = new Time.Moment(nowMomentValue);
+        $.earliestActiveMoment = new Time.Moment(earliestActiveAlarmMomentValue);
 
         var latestActiveAlarmMomentValue = Time.today().value() + (latestActiveAlarm.latestHour * 60 * 60) + (latestActiveAlarm.latestMinute * 60);
-        var latestActiveAlarmMoment = new Time.Moment(latestActiveAlarmMomentValue);
+        $.latestActiveMoment = new Time.Moment(latestActiveAlarmMomentValue);
 
-        System.println("Current date time is:");
-        printMoment(Time.now());
-        System.println("Active alarm interval is:");
-        printMoment(earliestActiveAlarmMoment);
-        System.println("-");
-        printMoment(latestActiveAlarmMoment);
+        // System.println("Current date time is:");
+        // printMoment(Time.now());
+        // System.println("Active alarm interval is:");
+        // printMoment(earliestActiveMoment);
+        // System.println("-");
+        // printMoment(latestActiveMoment);
     }
 
     function printMoment(moment) {

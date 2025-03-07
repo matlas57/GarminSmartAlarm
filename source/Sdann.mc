@@ -5,6 +5,7 @@ class Sdann {
 
     //Stores the meanNNInterval returned from each background HR recording
     var meanNNIntervalArray as Lang.Array;
+    var overnightHRV as Lang.Float;
 
     function initialize(){
         meanNNIntervalArray = [];
@@ -24,9 +25,10 @@ class Sdann {
             sumSquaredDiff += Math.pow(meanNNIntervalArray[i] - meanNNIntervals, 2);
         }
 
-        // Compute SDNN (standard deviation)
+        // Compute SDANN (standard deviation)
         var sdann = Math.sqrt(sumSquaredDiff / n);
         System.println("HRV Reading: " + sdann);
+        overnightHRV = sdann;
         return sdann;
     }
 
