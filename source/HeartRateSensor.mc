@@ -1,22 +1,24 @@
 import Toybox.Sensor;
 import Toybox.Math;
+import Toybox.Lang;
 
 (:background)
 class HeartRateSensor {
 
     var heartBeatIntervals = [];
     //Array to hold NN sum to be used to compute the NN average for a single recording
-    var intraRecordingNNSum = 0;
+    var intraRecordingNNSum as Lang.Number;
     var totalIntervalsRecorded = 0;
     var callBackCounter;
 
     function initialize() {
         Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
+        intraRecordingNNSum = 0;
     }
 
     function start() {
         callBackCounter = 0;
-        intraRecordingNNSum = 0;
+        // intraRecordingNNSum = 0;
         totalIntervalsRecorded = 0;
         var options = {
             :period => 1,
@@ -43,7 +45,7 @@ class HeartRateSensor {
         }
     }
 
-    function sumNNIntervals(rrIntervals) {
+    function sumNNIntervals(rrIntervals as Lang.Array<Lang.Number>) {
         System.println(rrIntervals.toString());
         var n = rrIntervals.size();
         if (n <= 0) {

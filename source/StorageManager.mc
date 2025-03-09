@@ -40,7 +40,7 @@ class StorageManager
         return null;
     }
 
-    static function getActiveAlarms() {
+    static function getActiveAlarms() as Lang.Array<Alarm>{
         var numAlarms = getNumAlarms();
         if (numAlarms == 0) {
             return [];

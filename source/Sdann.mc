@@ -9,6 +9,7 @@ class Sdann {
 
     function initialize(){
         meanNNIntervalArray = [];
+        overnightHRV = 0.0;
     }
 
     function addNewMeanNNInterval(meanNNInterval) {
@@ -32,7 +33,7 @@ class Sdann {
         return sdann;
     }
 
-    function computeMean(array) as Lang.Number {
+    function computeMean(array as Lang.Array) as Lang.Number {
         var n = array.size();
         if (n == 0){
             return 0;

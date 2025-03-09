@@ -10,7 +10,7 @@ class Alarm {
 
     var active as Lang.Boolean;
 
-    var repeatArray;
+    var repeatArray as Lang.Array<Lang.Boolean>;
 
     var delete as Lang.Boolean;
 
