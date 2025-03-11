@@ -53,48 +53,7 @@ class SmartAlarmApp extends Application.AppBase {
 
         Background.registerForSleepEvent();
 
-        //if current time is after the earliest alarm time then check if an alarm should be triggered
-        var earliestActiveAlarm = StorageManager.getEarliestActiveAlarm();
-        var latestActiveAlarm = StorageManager.getLatestActiveAlarm();
-
-        // // Create a moment of the current day at the earliest alarm time
-        var earliestActiveAlarmMomentValue = Time.today().value() + (earliestActiveAlarm.earliestHour * 60 * 60) + (earliestActiveAlarm.earliestMinute * 60);
-        $.earliestActiveMoment = new Time.Moment(earliestActiveAlarmMomentValue);
-
-        var latestActiveAlarmMomentValue = Time.today().value() + (latestActiveAlarm.latestHour * 60 * 60) + (latestActiveAlarm.latestMinute * 60);
-        $.latestActiveMoment = new Time.Moment(latestActiveAlarmMomentValue);
-
-        // var profile = UserProfile.getProfile();
-
-        // //TODO: FOR TESTING PURPOSES ONLY
-        // var midnight = Time.today(); // A moment object representing midnight of the current day
-        // var now = Time.Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        // //Get a duration for the configured sleep time
-        // profile.sleepTime = timeToDurationHelper(now.hour, now.min, false);
-        // //END OF TESTING BLOCK
-
-        // var sleepTimeDuration = profile.sleepTime;
-        // sleepTimeDuration = sleepTimeDuration.add(new Time.Duration(300)); //Add 5 minutes to avoid background process errors
-        // //Create a moment of the sleep time by adding the sleep time duration to the midnight moment
-        // var sleepTimeMoment = midnight.add(sleepTimeDuration);
-
-        // //ALSO FOR TESTING
-        // //Create a Gregorian info for easy printing
-        // var sleepTimeInfo = Gregorian.info(sleepTimeMoment, Time.FORMAT_MEDIUM);
-        // System.println(Lang.format(
-        //     "SleepTime is: $1$:$2$:$3$ $4$ $5$ $6$ $7$",
-        //     [
-        //         sleepTimeInfo.hour,
-        //         sleepTimeInfo.min,
-        //         sleepTimeInfo.sec,
-        //         sleepTimeInfo.day_of_week,
-        //         sleepTimeInfo.day,
-        //         sleepTimeInfo.month,
-        //         sleepTimeInfo.year
-        //     ])
-        // );
-
-        // Background.registerForTemporalEvent(sleepTimeMoment);
+        StorageManager.setActiveAlarmInterval();
     }
 
     function getServiceDelegate() as [ ServiceDelegate ]{

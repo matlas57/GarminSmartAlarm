@@ -1,6 +1,7 @@
 import Toybox.System;
 import Toybox.Application;
 import Toybox.Lang;
+import Toybox.Time;
 
 (:background)
 class StorageManager 
@@ -89,6 +90,23 @@ class StorageManager
         }
     }
 
+    static function setActiveAlarmInterval() {
+        var earliestActiveAlarm = getEarliestActiveAlarm();
+        if (earliestActiveAlarm != null){
+            $.earliestActiveHour = earliestActiveAlarm.earliestHour;
+            $.earliestActiveMinute = earliestActiveAlarm.earliestMinute;
+            var earliestActiveAlarmMomentValue = Time.today().value() + (earliestActiveAlarm.earliestHour * 60 * 60) + (earliestActiveAlarm.earliestMinute * 60);
+            $.earliestActiveMoment = new Time.Moment(earliestActiveAlarmMomentValue);
+        }
+        var latestActiveAlarm = getLatestActiveAlarm();
+        if (latestActiveAlarm != null){
+            $.latestActiveHour = latestActiveAlarm.latestHour;
+            $.latestActiveMinute = latestActiveAlarm.latestMinute;
+            var latestActiveAlarmMomentValue = Time.today().value() + (latestActiveAlarm.latestHour * 60 * 60) + (latestActiveAlarm.latestMinute * 60);
+            $.latestActiveMoment = new Time.Moment(latestActiveAlarmMomentValue);
+        }
+    }
+
     static function addNewAlarmToStorage(alarm) {
         var numAlarms = getNumAlarms();
         var curAlarm = numAlarms + 1;
@@ -106,16 +124,7 @@ class StorageManager
         try {
             Storage.setValue(curAlarm, alarmArray);
             Storage.setValue("numAlarms", curAlarm);
-            var earliestActiveAlarm = getEarliestActiveAlarm();
-            if (earliestActiveAlarm != null){
-                $.earliestActiveHour = earliestActiveAlarm.earliestHour;
-                $.earliestActiveMinute = earliestActiveAlarm.earliestMinute;
-            }
-            var latestActiveAlarm = getLatestActiveAlarm();
-            if (latestActiveAlarm != null){
-                $.latestActiveHour = latestActiveAlarm.latestHour;
-                $.latestActiveMinute = latestActiveAlarm.latestMinute;
-            }
+            setActiveAlarmInterval();
         } catch (e instanceof Lang.Exception) {
             System.println(e.getErrorMessage());
             // TODO: Add window here to indicate that alarms need to be deleted before more can be added
@@ -139,16 +148,7 @@ class StorageManager
         ];
         alarmArray.add(alarm.repeatArray);
         Storage.setValue(alarmId, alarmArray);
-        var earliestActiveAlarm = getEarliestActiveAlarm();
-        if (earliestActiveAlarm != null){
-            $.earliestActiveHour = earliestActiveAlarm.earliestHour;
-            $.earliestActiveMinute = earliestActiveAlarm.earliestMinute;
-        }
-        var latestActiveAlarm = getLatestActiveAlarm();
-        if (latestActiveAlarm != null){
-            $.latestActiveHour = latestActiveAlarm.latestHour;
-            $.latestActiveMinute = latestActiveAlarm.latestMinute;
-        }
+        setActiveAlarmInterval();
         return;
     }
 
