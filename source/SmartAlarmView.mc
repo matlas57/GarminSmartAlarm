@@ -13,8 +13,8 @@ class SmartAlarmView extends WatchUi.View {
     hidden var hour;
     hidden var semicolon;
     hidden var minute;
-    // hidden var prevHour;
-    // hidden var nextHour;
+    hidden var nextHour;
+    hidden var prevHour;
 
     hidden var buttonHint;
     var screenHeight as Lang.Number?;
@@ -47,19 +47,23 @@ class SmartAlarmView extends WatchUi.View {
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_SYSTEM_XTINY,
             :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
-            :locY=>50
+            :locY=>40
         });
         currentStep = new WatchUi.Text({
             :text=>"",
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_SYSTEM_XTINY,
             :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
-            :locY=>115
+            :locY=>80
         });
-        // prevHour = new WatchUi.Text({
-        //     :color=>Graphics.COLOR_WHITE,
-        //     :font=>Graphics.FONT_SYSTEM_XTINY,
-        // });
+        nextHour = new WatchUi.Text({
+            :color=>Graphics.COLOR_WHITE,
+            :font=>Graphics.FONT_SYSTEM_XTINY,
+        });
+        prevHour = new WatchUi.Text({
+            :color=>Graphics.COLOR_WHITE,
+            :font=>Graphics.FONT_SYSTEM_XTINY,
+        });
         hour = new WatchUi.Text({
             :text=>"",
             :color=>Graphics.COLOR_WHITE,
@@ -85,11 +89,11 @@ class SmartAlarmView extends WatchUi.View {
             :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
             :locY=>255
         });
-        buttonHint = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.xButtonHint,
-            :locX=>10,
-            :locY=>30
-        });
+        // buttonHint = new WatchUi.Bitmap({
+        //     :rezId=>Rez.Drawables.xButtonHint,
+        //     :locX=>10,
+        //     :locY=>30
+        // });
     }
 
     // Update the view
@@ -102,19 +106,57 @@ class SmartAlarmView extends WatchUi.View {
         screenHeight = dc.getHeight();
         minute.setLocation(screenWidth/2 + 20, WatchUi.LAYOUT_VALIGN_CENTER);
         if (appState.equals("earliestAlarmPrompt")) {
+            //Compute the value of the next and prev hour 
+            var nextHourInt;
+            var prevHourInt;
+            if (earliestHour == 12) {
+                nextHourInt = 1;
+            }
+            else {
+                nextHourInt = earliestHour + 1;
+            }
+
+            if (earliestHour == 1) {
+                prevHourInt = 12;
+            }
+            else {
+                prevHourInt = earliestHour - 1;
+            }
+
+            //Set nextHour UI element position
+            if (nextHourInt.toString().length() == 1){
+                nextHour.setLocation(screenWidth/2 - 55, screenHeight/2 - 70);
+            }
+            else {
+                nextHour.setLocation(screenWidth/2 - 65, screenHeight/2 - 70);
+            }
+
+            //Set hour UI element position 
             if (earliestHour.toString().length() == 1){
-                var xLoc = screenWidth/2 - 50; 
+                var xLoc = screenWidth/2 - 63; 
                 hour.setLocation(xLoc, WatchUi.LAYOUT_VALIGN_CENTER);
             }
             else {
                 hour.setLocation(screenWidth/2 - 80, WatchUi.LAYOUT_VALIGN_CENTER);
             }
 
+            //Set prevHour UI element position
+            if (prevHourInt.toString().length() == 1){
+                prevHour.setLocation(screenWidth/2 - 55, screenHeight/2 + 40);
+            }
+            else {
+                prevHour.setLocation(screenWidth/2 - 65, screenHeight/2 + 40);
+            }
+
             if (step == 0) {
                 currentStep.setText("Set Hour");
+                nextHour.setVisible(true);
+                prevHour.setVisible(true);
             } 
             else if (step == 1) {
                 currentStep.setText("Set Minutes");
+                nextHour.setVisible(false);
+                prevHour.setVisible(false);
             }
             else {
                 currentStep.setText("Confirm");
@@ -127,7 +169,9 @@ class SmartAlarmView extends WatchUi.View {
             else {
                 paddedMinuteString = earliestMinute.toString();
             }
+            nextHour.setText(nextHourInt.toString());
             hour.setText(earliestHour.toString());
+            prevHour.setText(prevHourInt.toString());
             minute.setText(paddedMinuteString);
             prompt.setText("Earliest Alarm");
             warning.setText("");
@@ -173,7 +217,9 @@ class SmartAlarmView extends WatchUi.View {
         prompt.draw(dc);
         currentStep.draw(dc);
         warning.draw(dc);
+        nextHour.draw(dc);
         hour.draw(dc);
+        prevHour.draw(dc);
         semicolon.draw(dc);
         minute.draw(dc);
     }
