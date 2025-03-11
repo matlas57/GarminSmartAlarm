@@ -30,19 +30,20 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/matlas57/GarminSmartAlarm">
+<!--   <a href="https://github.com/matlas57/GarminSmartAlarm">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  </a> -->
 
-<h3 align="center">Garmin Smart Alarm</h3>
+<h1 align="center">Garmin Smart Alarm</h1>
 
   <p align="center">
-    project_description
+    This project  is a smartwatch application designed to optimize your wake-up experience by adjusting your alarm based on sleep tracking data. By monitoring your heart rate variability (HRV) and movement patterns, the app detects your sleep stages in real-time and gently wakes you during a lighter sleep phase within a customizable time window. This helps reduce grogginess and makes waking up feel more natural and refreshing.
     <br />
-    <a href="https://github.com/matlas57/GarminSmartAlarm"><strong>Explore the docs »</strong></a>
+<!--     <a href="https://github.com/matlas57/GarminSmartAlarm"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/matlas57/GarminSmartAlarm">View Demo</a>
+    <a href="https://github.com/matlas57/GarminSmartAlarm">View Demo</a> -->
+    <br />
     &middot;
     <a href="https://github.com/matlas57/GarminSmartAlarm/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     &middot;
@@ -80,17 +81,17 @@
 
 
 
-<!-- ABOUT THE PROJECT -->
+<!-- ABOUT THE PROJECT 
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+-->
 
 
-
-### Built With
+## Built With
 
 * [Garmin Connect IQ SDK](https://developer.garmin.com/connect-iq/overview)
 
@@ -140,9 +141,10 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+This project is still early in development. Check back here at a later time to see if there is a working version.
+<!--
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+-->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
