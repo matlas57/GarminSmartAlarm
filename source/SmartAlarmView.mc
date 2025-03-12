@@ -153,29 +153,12 @@ class SmartAlarmView extends WatchUi.View {
                 prevMinuteInt = earliestMinute - 1;
             }
 
-            //Set nextHour UI element position
-            if (nextHourInt.toString().length() == 1){
-                nextHour.setLocation(screenWidth/2 - 55, screenHeight/2 - 70);
-            }
-            else {
-                nextHour.setLocation(screenWidth/2 - 65, screenHeight/2 - 70);
-            }
-
             //Set hour UI element position 
             if (earliestHour.toString().length() == 1){
-                var xLoc = screenWidth/2 - 63; 
-                hour.setLocation(xLoc, WatchUi.LAYOUT_VALIGN_CENTER);
+                hour.setLocation(screenWidth/2 - 63, WatchUi.LAYOUT_VALIGN_CENTER);
             }
             else {
                 hour.setLocation(screenWidth/2 - 80, WatchUi.LAYOUT_VALIGN_CENTER);
-            }
-
-            //Set prevHour UI element position
-            if (prevHourInt.toString().length() == 1){
-                prevHour.setLocation(screenWidth/2 - 55, screenHeight/2 + 40);
-            }
-            else {
-                prevHour.setLocation(screenWidth/2 - 65, screenHeight/2 + 40);
             }
             
             hour.setText(earliestHour.toString());
@@ -215,40 +198,13 @@ class SmartAlarmView extends WatchUi.View {
                 prevMinuteInt = latestMinute - 1;
             }
 
-            //Set nextHour UI element position
-            if (nextHourInt.toString().length() == 1){
-                nextHour.setLocation(screenWidth/2 - 55, screenHeight/2 - 70);
-            }
-            else {
-                nextHour.setLocation(screenWidth/2 - 65, screenHeight/2 - 70);
-            }
-
             //Set hour UI element position 
             if (latestHour.toString().length() == 1){
-                var xLoc = screenWidth/2 - 63; 
-                hour.setLocation(xLoc, WatchUi.LAYOUT_VALIGN_CENTER);
+                hour.setLocation(screenWidth/2 - 63, WatchUi.LAYOUT_VALIGN_CENTER);
             }
             else {
                 hour.setLocation(screenWidth/2 - 80, WatchUi.LAYOUT_VALIGN_CENTER);
             }
-
-            //Set prevHour UI element position
-            if (prevHourInt.toString().length() == 1){
-                prevHour.setLocation(screenWidth/2 - 55, screenHeight/2 + 40);
-            }
-            else {
-                prevHour.setLocation(screenWidth/2 - 65, screenHeight/2 + 40);
-            }
-
-            // if (step == 0) {
-            //     currentStep.setText("Set Hour");
-            // } 
-            // else if (step == 1) {
-            //     currentStep.setText("Set Minutes");
-            // }
-            // else {
-            //     currentStep.setText("Confirm");
-            // }
 
             hour.setText(latestHour.toString());
             minute.setText(padMinuteString(latestMinute));
@@ -264,6 +220,23 @@ class SmartAlarmView extends WatchUi.View {
 
             prompt.setText("Latest Alarm");
         }
+
+        //Set nextHour UI element position
+        if (nextHourInt.toString().length() == 1){
+            nextHour.setLocation(screenWidth/2 - 55, screenHeight/2 - 70);
+        }
+        else {
+            nextHour.setLocation(screenWidth/2 - 65, screenHeight/2 - 70);
+        }
+
+        //Set prevHour UI element position
+        if (prevHourInt.toString().length() == 1){
+            prevHour.setLocation(screenWidth/2 - 55, screenHeight/2 + 40);
+        }
+        else {
+            prevHour.setLocation(screenWidth/2 - 65, screenHeight/2 + 40);
+        }
+
         if (step == 0) {
             currentStep.setText("Set Hour");
             nextHour.setVisible(true);
