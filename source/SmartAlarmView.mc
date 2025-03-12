@@ -101,13 +101,8 @@ class SmartAlarmView extends WatchUi.View {
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_SYSTEM_XTINY,
             :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
-            :locY=>255
+            :locY=>290
         });
-        // buttonHint = new WatchUi.Bitmap({
-        //     :rezId=>Rez.Drawables.xButtonHint,
-        //     :locX=>10,
-        //     :locY=>30
-        // });
     }
 
     // Update the view
@@ -119,12 +114,17 @@ class SmartAlarmView extends WatchUi.View {
         screenWidth = dc.getWidth();
         screenHeight = dc.getHeight();
         minute.setLocation(screenWidth/2 + 20, WatchUi.LAYOUT_VALIGN_CENTER);
+        var nextHourInt = 0;
+        var prevHourInt = 0;
+        var nextMinuteInt = 0;
+        var prevMinuteInt = 0;
+
+        //next and prev minute location doesn't depend on its value
+        nextMinute.setLocation(screenWidth/2 + 35, screenHeight/2 - 70);
+        prevMinute.setLocation(screenWidth/2 + 35, screenHeight/2 + 40);
+
         if (appState.equals("earliestAlarmPrompt")) {
             //Compute the value of the next and prev hour 
-            var nextHourInt;
-            var prevHourInt;
-            var nextMinuteInt;
-            var prevMinuteInt;
             if (earliestHour == 12) {
                 nextHourInt = 1;
             }
@@ -177,65 +177,81 @@ class SmartAlarmView extends WatchUi.View {
             else {
                 prevHour.setLocation(screenWidth/2 - 65, screenHeight/2 + 40);
             }
-
-            nextMinute.setLocation(screenWidth/2 + 35, screenHeight/2 - 70);
-            prevMinute.setLocation(screenWidth/2 + 35, screenHeight/2 + 40);
-
-            if (step == 0) {
-                currentStep.setText("Set Hour");
-                nextHour.setVisible(true);
-                prevHour.setVisible(true);
-                nextMinute.setVisible(false);
-                prevMinute.setVisible(false);
-            } 
-            else if (step == 1) {
-                currentStep.setText("Set Minutes");
-                nextHour.setVisible(false);
-                prevHour.setVisible(false);
-                nextMinute.setVisible(true);
-                prevMinute.setVisible(true);
-            }
-            else {
-                currentStep.setText("Confirm");
-            }
-
-            nextHour.setText(nextHourInt.toString());
+            
             hour.setText(earliestHour.toString());
-            prevHour.setText(prevHourInt.toString());
-
-            nextMinute.setText(padMinuteString(nextMinuteInt));
+            
             minute.setText(padMinuteString(earliestMinute));
-            prevMinute.setText(padMinuteString(prevMinuteInt));
 
             prompt.setText("Earliest Alarm");
             warning.setText("");
         } 
         else if (appState.equals("latestAlarmPrompt")) {
+            //Compute the value of the next and prev hour 
+            if (latestHour == 12) {
+                nextHourInt = 1;
+            }
+            else {
+                nextHourInt = latestHour + 1;
+            }
+
+            if (latestHour == 1) {
+                prevHourInt = 12;
+            }
+            else {
+                prevHourInt = latestHour - 1;
+            }
+
+            if (latestMinute == 59){
+                nextMinuteInt = 0;
+            }
+            else {
+                nextMinuteInt = latestMinute + 1;
+            }
+
+            if (latestMinute == 0){
+                prevMinuteInt = 59;
+            }
+            else {
+                prevMinuteInt = latestMinute - 1;
+            }
+
+            //Set nextHour UI element position
+            if (nextHourInt.toString().length() == 1){
+                nextHour.setLocation(screenWidth/2 - 55, screenHeight/2 - 70);
+            }
+            else {
+                nextHour.setLocation(screenWidth/2 - 65, screenHeight/2 - 70);
+            }
+
+            //Set hour UI element position 
             if (latestHour.toString().length() == 1){
-                hour.setLocation(screenWidth/2 - 50, WatchUi.LAYOUT_VALIGN_CENTER);
+                var xLoc = screenWidth/2 - 63; 
+                hour.setLocation(xLoc, WatchUi.LAYOUT_VALIGN_CENTER);
             }
             else {
                 hour.setLocation(screenWidth/2 - 80, WatchUi.LAYOUT_VALIGN_CENTER);
             }
-            if (step == 0) {
-                currentStep.setText("Set Hour");
-            } 
-            else if (step == 1) {
-                currentStep.setText("Set Minutes");
+
+            //Set prevHour UI element position
+            if (prevHourInt.toString().length() == 1){
+                prevHour.setLocation(screenWidth/2 - 55, screenHeight/2 + 40);
             }
             else {
-                currentStep.setText("Confirm");
+                prevHour.setLocation(screenWidth/2 - 65, screenHeight/2 + 40);
             }
 
-            var paddedMinuteString = "";
-            if (latestMinute < 10) {
-                paddedMinuteString = "0" + latestMinute.toString();
-            }
-            else {
-                paddedMinuteString = latestMinute.toString();
-            }
+            // if (step == 0) {
+            //     currentStep.setText("Set Hour");
+            // } 
+            // else if (step == 1) {
+            //     currentStep.setText("Set Minutes");
+            // }
+            // else {
+            //     currentStep.setText("Confirm");
+            // }
+
             hour.setText(latestHour.toString());
-            minute.setText(paddedMinuteString);
+            minute.setText(padMinuteString(latestMinute));
 
             var warningText = appDelegate.getLatestAlarmWarning();
             if (!warningText.equals("No warning")) {
@@ -248,6 +264,32 @@ class SmartAlarmView extends WatchUi.View {
 
             prompt.setText("Latest Alarm");
         }
+        if (step == 0) {
+            currentStep.setText("Set Hour");
+            nextHour.setVisible(true);
+            prevHour.setVisible(true);
+            nextMinute.setVisible(false);
+            prevMinute.setVisible(false);
+        } 
+        else if (step == 1) {
+            currentStep.setText("Set Minutes");
+            nextHour.setVisible(false);
+            prevHour.setVisible(false);
+            nextMinute.setVisible(true);
+            prevMinute.setVisible(true);
+        }
+        else {
+            currentStep.setText("Confirm");
+            nextMinute.setVisible(false);
+            prevMinute.setVisible(false);
+        }
+
+        nextHour.setText(nextHourInt.toString());
+        prevHour.setText(prevHourInt.toString());
+
+        nextMinute.setText(padMinuteString(nextMinuteInt));
+        prevMinute.setText(padMinuteString(prevMinuteInt));
+
         prompt.draw(dc);
         currentStep.draw(dc);
 
