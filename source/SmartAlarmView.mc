@@ -39,9 +39,9 @@ class SmartAlarmView extends WatchUi.View {
         if (appState.equals("alarmMenu")) {
             appDelegate.onMenu();
         } 
-        else if (appState.equals("earliestAlarmPrompt")) {
-            setLayout(Rez.Layouts.promptAlarm(dc));
-        }
+        // else if (appState.equals("earliestAlarmPrompt")) {
+        //     setLayout(Rez.Layouts.promptAlarm(dc));
+        // }
     }
 
     // Called when this View is brought to the foreground. Restore

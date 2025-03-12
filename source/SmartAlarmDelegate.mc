@@ -232,6 +232,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
+    (:debug)
     function onHold(clickEvent) {
         Storage.clearValues();
         System.println("Cleared storage");
