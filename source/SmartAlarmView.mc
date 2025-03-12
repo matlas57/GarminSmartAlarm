@@ -9,12 +9,18 @@ class SmartAlarmView extends WatchUi.View {
     //Ui elements
     hidden var prompt;
     hidden var currentStep;
-    hidden var warning;
-    hidden var hour;
-    hidden var semicolon;
-    hidden var minute;
+
     hidden var nextHour;
+    hidden var hour;
     hidden var prevHour;
+
+    hidden var semicolon;
+
+    hidden var nextMinute;
+    hidden var minute;
+    hidden var prevMinute;
+
+    hidden var warning;
 
     hidden var buttonHint;
     var screenHeight as Lang.Number?;
@@ -76,6 +82,14 @@ class SmartAlarmView extends WatchUi.View {
             :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
             :locY=>WatchUi.LAYOUT_VALIGN_CENTER
         });
+        nextMinute = new WatchUi.Text({
+            :color=>Graphics.COLOR_WHITE,
+            :font=>Graphics.FONT_SYSTEM_XTINY,
+        });
+        prevMinute = new WatchUi.Text({
+            :color=>Graphics.COLOR_WHITE,
+            :font=>Graphics.FONT_SYSTEM_XTINY,
+        });
         minute = new WatchUi.Text({
             :text=>"",
             :color=>Graphics.COLOR_WHITE,
@@ -109,6 +123,8 @@ class SmartAlarmView extends WatchUi.View {
             //Compute the value of the next and prev hour 
             var nextHourInt;
             var prevHourInt;
+            var nextMinuteInt;
+            var prevMinuteInt;
             if (earliestHour == 12) {
                 nextHourInt = 1;
             }
@@ -121,6 +137,20 @@ class SmartAlarmView extends WatchUi.View {
             }
             else {
                 prevHourInt = earliestHour - 1;
+            }
+
+            if (earliestMinute == 59){
+                nextMinuteInt = 0;
+            }
+            else {
+                nextMinuteInt = earliestMinute + 1;
+            }
+
+            if (earliestMinute == 0){
+                prevMinuteInt = 59;
+            }
+            else {
+                prevMinuteInt = earliestMinute - 1;
             }
 
             //Set nextHour UI element position
@@ -148,31 +178,35 @@ class SmartAlarmView extends WatchUi.View {
                 prevHour.setLocation(screenWidth/2 - 65, screenHeight/2 + 40);
             }
 
+            nextMinute.setLocation(screenWidth/2 + 35, screenHeight/2 - 70);
+            prevMinute.setLocation(screenWidth/2 + 35, screenHeight/2 + 40);
+
             if (step == 0) {
                 currentStep.setText("Set Hour");
                 nextHour.setVisible(true);
                 prevHour.setVisible(true);
+                nextMinute.setVisible(false);
+                prevMinute.setVisible(false);
             } 
             else if (step == 1) {
                 currentStep.setText("Set Minutes");
                 nextHour.setVisible(false);
                 prevHour.setVisible(false);
+                nextMinute.setVisible(true);
+                prevMinute.setVisible(true);
             }
             else {
                 currentStep.setText("Confirm");
             }
 
-            var paddedMinuteString = "";
-            if (earliestMinute < 10) {
-                paddedMinuteString = "0" + earliestMinute.toString();
-            }
-            else {
-                paddedMinuteString = earliestMinute.toString();
-            }
             nextHour.setText(nextHourInt.toString());
             hour.setText(earliestHour.toString());
             prevHour.setText(prevHourInt.toString());
-            minute.setText(paddedMinuteString);
+
+            nextMinute.setText(padMinuteString(nextMinuteInt));
+            minute.setText(padMinuteString(earliestMinute));
+            prevMinute.setText(padMinuteString(prevMinuteInt));
+
             prompt.setText("Earliest Alarm");
             warning.setText("");
         } 
@@ -216,18 +250,31 @@ class SmartAlarmView extends WatchUi.View {
         }
         prompt.draw(dc);
         currentStep.draw(dc);
-        warning.draw(dc);
+
         nextHour.draw(dc);
         hour.draw(dc);
         prevHour.draw(dc);
+
         semicolon.draw(dc);
+
+        nextMinute.draw(dc);
         minute.draw(dc);
+        prevMinute.draw(dc);
+
+        warning.draw(dc);
     }
 
     // Called when this View is removed from the screen. Save the
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() as Void {
+    }
+
+    static function padMinuteString(minute) as Lang.string{
+        if (minute < 10){
+            return "0" + minute.toString();
+        }
+        return minute.toString();
     }
 
 }

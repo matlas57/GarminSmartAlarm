@@ -15,7 +15,7 @@ class WakeUpView extends WatchUi.View {
 
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.alarm(dc));
-         var buttonHint = new WatchUi.Bitmap({
+        var buttonHint = new WatchUi.Bitmap({
             :rezId=>Rez.Drawables.LauncherIcon,
             :locX=>50,
             :locY=>30
