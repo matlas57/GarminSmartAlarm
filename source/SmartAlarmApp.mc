@@ -74,8 +74,9 @@ class SmartAlarmApp extends Application.AppBase {
     }
 
     function onBackgroundData(data) {
-        System.println("Received background data: " + data);
-        sdannManager.addNewMeanNNInterval(data);
+        backgroundData = data;
+        var avg = backgroundData.values()[0];
+        sdannManager.addNewMeanNNInterval(avg);
 
         var nowMoment = earliestActiveMoment;
         // var nowMoment = new Time.Moment(Time.now().value());
