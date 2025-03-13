@@ -89,6 +89,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         else {
             var id = item.getId() as Number;
             var alarm = StorageManager.getAlarmFromStorage(id);
+            parentMenu.getItem(id - 1).setEnabled(alarm.getActive());
             var editAlarmMenuTitle = alarm.makeAlarmString();
             var editAlarmMenu = new EditAlarmMenu({:title=>editAlarmMenuTitle}, delegate);
             editAlarmMenu.addItem(
