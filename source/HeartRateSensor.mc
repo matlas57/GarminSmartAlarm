@@ -6,7 +6,7 @@ import Toybox.Lang;
 class HeartRateSensor {
 
     var heartBeatIntervals as Lang.Array<Lang.Number>;
-    var currentReadingArray as Lang.Array<Lang.Number>;
+    var currentReadingArray as Lang.Array<Lang.Array<Lang.Number>>;
     //Array to hold NN sum to be used to compute the NN average for a single recording
     var intraRecordingNNSum as Lang.Number;
     var totalIntervalsRecorded = 0;
@@ -40,11 +40,11 @@ class HeartRateSensor {
     function heartBeatIntervalsCallback(sensorData as SensorData) as Void {
         if (sensorData has :heartRateData && sensorData.heartRateData != null) {
             heartBeatIntervals = sensorData.heartRateData.heartBeatIntervals;
-            currentReadingArray.addAll(heartBeatIntervals);
+            currentReadingArray.add(heartBeatIntervals);
             sumNNIntervals(heartBeatIntervals);
         }
         callBackCounter++;
-        if (callBackCounter == 10) {
+        if (callBackCounter == 30) {
             var avg = stop();
             var backgroundData = {
                 "avg" => avg,

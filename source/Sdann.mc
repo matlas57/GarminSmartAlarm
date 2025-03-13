@@ -5,11 +5,13 @@ class Sdann {
 
     //Stores the meanNNInterval returned from each background HR recording
     var meanNNIntervalArray as Lang.Array;
-    var overnightHRV as Lang.Float;
+    var overnightHRV as Lang.Float?;
+    var beforeSDNN as Lang.Float?;
+    var duringSDNN as Lang.Float?;
+    var afterSDNN as Lang.Float?;
 
     function initialize(){
         meanNNIntervalArray = [];
-        overnightHRV = 0.0;
     }
 
     function addNewMeanNNInterval(meanNNInterval) {
@@ -33,6 +35,55 @@ class Sdann {
         return sdann;
     }
 
+    function computeCurrentSDNN(currentReadingArray as Lang.Array<Lang.Array<Lang.Number>>) {
+        var beforeIntervalArray = [];
+        var duringIntervalArray = [];
+        var afterIntervalArray = [];
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 10; j++) {
+                if (i == 0) {
+                    beforeIntervalArray.addAll(currentReadingArray[j]);
+                }
+                else if (i == 1) {
+                    duringIntervalArray.addAll(currentReadingArray[10 + j]);
+                }
+                else if (i == 2) {
+                    afterIntervalArray.addAll(currentReadingArray[20 + j]);
+                }
+            }
+        }
+        
+        var beforeIntervalMean = computeMean(beforeIntervalArray);
+        var duringIntervalMean = computeMean(duringIntervalArray);
+        var afterIntervalMean = computeMean(afterIntervalArray);
+
+        beforeSDNN = sdnnFormula(beforeIntervalArray, beforeIntervalMean);
+        duringSDNN = sdnnFormula(duringIntervalArray, duringIntervalMean);
+        afterSDNN = sdnnFormula(afterIntervalArray, afterIntervalMean);
+    }
+
+    function sdnnFormula(intervals as Lang.Array<Lang.Number>, mean) {
+        var sumSquaredDiff = 0;
+        var n = intervals.size();
+        for (var i = 0; i < n; i++) {
+            sumSquaredDiff += Math.pow(intervals[i] - mean, 2);
+        }
+        return Math.sqrt(sumSquaredDiff / n);
+    }
+
+    function isAwake(){
+        var threshold = 1.5;
+        var tolerance = 0.1;
+        var lowerBound = overnightHRV * (1 - tolerance);
+        var upperBound = overnightHRV * (1 + tolerance);
+        if (duringSDNN > threshold * overnightHRV
+            && (lowerBound <= beforeSDNN && beforeSDNN <= upperBound)
+            && (lowerBound <= afterSDNN && afterSDNN <= upperBound)) {
+            return true;
+        }
+        return false;
+    }
+
     function computeMean(array as Lang.Array) as Lang.Number {
         var n = array.size();
         if (n == 0){
@@ -44,5 +95,4 @@ class Sdann {
         }
         return sum / n;
     }
-
 }

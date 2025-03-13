@@ -26,6 +26,8 @@ var latestActiveHour as Lang.Number?;
 var latestActiveMinute as Lang.Number?;
 var latestActiveMoment as Time.Moment?;
 
+var backgroundData as Lang.Dictionary?;
+
 (:background)
 var hrSensor = null;
 
@@ -94,6 +96,15 @@ class SmartAlarmApp extends Application.AppBase {
         }
         if (appState.equals("alarmAllowed")) {
             sdannManager.computeSDANN();
+            System.println("Current recording:");
+            sdannManager.computeCurrentSDNN(backgroundData.values()[1]);
+            var triggerAlarm = sdannManager.isAwake();
+            if (triggerAlarm) {
+                System.println("Triggering alarm");
+            }
+            else {
+                System.println("Still alseep");
+            }
         }
 
         //register for a new event in 5 minutes

@@ -41,12 +41,7 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
         var latestActiveAlarmMomentValue = Time.today().value() + (latestActiveAlarm.latestHour * 60 * 60) + (latestActiveAlarm.latestMinute * 60);
         $.latestActiveMoment = new Time.Moment(latestActiveAlarmMomentValue);
 
-        // System.println("Current date time is:");
-        // printMoment(Time.now());
-        // System.println("Active alarm interval is:");
-        // printMoment(earliestActiveMoment);
-        // System.println("-");
-        // printMoment(latestActiveMoment);
+        //Register for temporal events
     }
 
     function printMoment(moment) {
