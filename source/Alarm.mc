@@ -49,6 +49,18 @@ class Alarm {
         return false;
     }
 
+    function isActiveToday() {
+        if (repeatArray.size() == 0) {
+            return true;
+        }
+        var today = Time.Gregorian.info(new Time.Moment(Time.today().value()), Time.FORMAT_SHORT);
+        var dayOfWeek = today.day;
+        if (repeatArray[dayOfWeek]) {
+            return true;
+        }
+        return false;
+    }
+
     function getNextEarliestTimeMoment(){
         var curTime = Time.Gregorian.info(Time.now(), Time.FORMAT_SHORT);
         var info;

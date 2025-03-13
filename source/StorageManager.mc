@@ -49,11 +49,11 @@ class StorageManager
         var activeAlarms = [];
         for (var i = 0; i < numAlarms; i++) {
             var curAlarm = getAlarmFromStorage(i + 1);
-            if (curAlarm.getActive()) {
+            if (curAlarm.getActive() && curAlarm.isActiveToday) {
                 activeAlarms.add(curAlarm);
             }
         }
-        // System.println("There are " + activeAlarms.size() + " active alarms");
+        System.println("There are " + activeAlarms.size() + " active alarms");
         return activeAlarms;
     }
 
