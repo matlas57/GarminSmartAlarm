@@ -1,3 +1,11 @@
+/**
+ * @file        LatestAlarmComparator.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description LatestAlarmComparator provides a function used by sorting functions to sort alarm objects by their latest alarm
+ */
+
 (:background)
 class LatestAlarmComparator {
     function compare(a as Alarm, b as Alarm) {

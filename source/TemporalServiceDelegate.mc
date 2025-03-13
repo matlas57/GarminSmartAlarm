@@ -4,6 +4,14 @@ import Toybox.Time;
 import Toybox.UserProfile;
 import Toybox.Timer;
 
+/**
+ * @file        TemporalServiceDelegate.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description TemporalServiceDelegate manages handling background events
+ */
+
 (:background)
 class TemporalServiceDelegate extends System.ServiceDelegate {
 

@@ -1,5 +1,13 @@
 import Toybox.Lang;
 
+/**
+ * @file        Sdann.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description Sdann is responsible for computations on heart rate data for detecting wakefullness and triggering alarms
+ */
+
 (:background)
 class Sdann {
 

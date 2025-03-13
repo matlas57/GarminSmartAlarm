@@ -3,6 +3,14 @@ import Toybox.WatchUi;
 import Toybox.Application;
 import Toybox.System;
 
+/**
+ * @file        SmartAlarmDelegate.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description SmartAlarmDelegate is the input handler for the general application
+ */
+
 class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
     function initialize() {

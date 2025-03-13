@@ -3,6 +3,15 @@ import Toybox.System;
 import Toybox.Application;
 import Toybox.WatchUi;
 
+/**
+ * @file        EditAlarmMenu.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description EditAlarmMenu is a Menu2 object for the options to edit a menu 
+ *              EditAlarmMenuDelegate handles inputs when on an EditAlarmMenu screen
+ */             
+
 class EditAlarmMenu extends WatchUi.Menu2 {
     
     var appDelegate;

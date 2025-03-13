@@ -2,6 +2,14 @@ import Toybox.Sensor;
 import Toybox.Math;
 import Toybox.Lang;
 
+/**
+ * @file        HeartRateSensor.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description HeartRateSensor handles collecting data from the heart rate sensor
+ */  
+
 (:background)
 class HeartRateSensor {
 

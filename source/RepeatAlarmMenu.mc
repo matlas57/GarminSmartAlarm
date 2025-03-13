@@ -1,6 +1,17 @@
 import Toybox.WatchUi;
 import Toybox.System;
 
+/**
+ * @file        RepeatAlarmMenu.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description RepeatAlarmMenu is a Menu2 object for choosing a repeat setting for an alarm
+ *              RepeatAlarmMenuDelegate handles inputs on a RepeatAlarmMenu
+ *              CustomRepeatAlarmMenu is a CheckboxMenu if a user wants a custom repeat setting
+ *              CustomRepeatAlarmMenuDelegate handles inputs on a CustomRepeatAlarmMenu
+ */
+
 class RepeatAlarmMenu extends WatchUi.Menu2 {
 
     function initialize(options) {

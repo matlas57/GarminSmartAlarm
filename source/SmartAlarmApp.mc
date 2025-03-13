@@ -6,6 +6,13 @@ import Toybox.Background;
 import Toybox.UserProfile;
 import Toybox.Time;
 
+/**
+ * @file        SmartAlarmApp.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description SmartAlarmApp is the entrance point of the application, handles high level flow, and contains global variables
+ */
 
 //TODO: Create a separate class to store global data
 var appState = "alarmMenu";

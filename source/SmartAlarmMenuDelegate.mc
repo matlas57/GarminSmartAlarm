@@ -6,6 +6,14 @@ import Toybox.Sensor;
 import Toybox.Background;
 import Toybox.Time;
 
+/**
+ * @file        SmartAlarmMenuDelegate.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description SmartAlarmMenuDelegate is the input handler for the alarm menu
+ */
+
 class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     // var hrSensor;

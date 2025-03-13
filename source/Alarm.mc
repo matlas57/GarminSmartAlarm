@@ -1,6 +1,20 @@
 import Toybox.Lang;
 import Toybox.Time;
 
+/**
+ * @file        Alarm.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description Alarm class represents an interval of time where an alarm is permissible
+ *
+ *  The earliest hour and minute represent the earliest possible time an alarm can be triggered
+ *  The latest hour and minute represent the time an alarm was triggered if the app did not detect wakefulness throughout the entire interval
+ *  The active flag represents if the alarm is on or off
+ *  The repeatArray represents the repeat setting as an array of seven booleans. If the array is empty the setting is set to once
+ *  The delete flag marks an alarm for deletion when StorageManager.reorganizeStorage is called  
+ */
+
 (:background)
 class Alarm {
     var earliestHour as Lang.Number;

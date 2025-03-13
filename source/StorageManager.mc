@@ -3,6 +3,14 @@ import Toybox.Application;
 import Toybox.Lang;
 import Toybox.Time;
 
+/**
+ * @file        StorageManager.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description StorageManager provides functions for fetching data from system storage
+ */
+
 (:background)
 class StorageManager 
 {

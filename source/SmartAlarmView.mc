@@ -3,6 +3,13 @@ import Toybox.WatchUi;
 import Toybox.System;
 import Toybox.Lang;
 
+/**
+ * @file        SmartAlarmView.mc
+ * @author      Matan Atlas
+ * @date        2025-03-13
+ * @version     1.0
+ * @description SmartAlarmView configures the UI for alarm prompts
+ */
 
 class SmartAlarmView extends WatchUi.View {
 
