@@ -68,7 +68,7 @@ class Alarm {
             return true;
         }
         var today = Time.Gregorian.info(new Time.Moment(Time.today().value()), Time.FORMAT_SHORT);
-        var dayOfWeek = today.day;
+        var dayOfWeek = today.day_of_week - 1;
         if (repeatArray[dayOfWeek]) {
             return true;
         }
