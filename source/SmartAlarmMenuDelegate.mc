@@ -37,6 +37,24 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             appState = "earliestAlarmPrompt";
             WatchUi.pushView(new SmartAlarmView(delegate), delegate, WatchUi.SLIDE_UP);
         }
+        else if (item.getId().equals("showTriggeredAlarms")) {
+            var triggeredAlarmTimesMenu = new WatchUi.Menu2({:title=>"Triggered Alarms"});
+            var n = $.triggeredAlarmTimes.size();
+            for (var i = 0; i < n; i++) {
+                triggeredAlarmTimesMenu.addItem(
+                    new MenuItem(
+                        $.triggeredAlarmTimes[i],
+                        "",
+                        "",
+                        {}
+                    )
+                );
+            }
+            WatchUi.pushView(triggeredAlarmTimesMenu, new Menu2InputDelegate(), WatchUi.SLIDE_RIGHT);
+        }
+        else if (item.getId().equals("clearTriggeredAlarms")) {
+            $.triggeredAlarmTimes = [];
+        }
         else if (item.getId().equals("printAppState")) {
             System.println("App state is " + appState);
         }

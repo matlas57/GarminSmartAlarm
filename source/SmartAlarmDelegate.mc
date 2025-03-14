@@ -44,6 +44,22 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             )
         );
         alarmsMenu.addItem(
+            new MenuItem(
+                "Show triggered alarms",
+                "",
+                "showTriggeredAlarms",
+                {}
+            )
+        );
+        alarmsMenu.addItem(
+            new MenuItem(
+                "Clear triggered alarms",
+                "",
+                "clearTriggeredAlarms",
+                {}
+            )
+        );
+        alarmsMenu.addItem(
             new MenuItem (
                 "Print App State",
                 "",

@@ -50,6 +50,15 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
         $.latestActiveMoment = new Time.Moment(latestActiveAlarmMomentValue);
 
         //Register for temporal events
+        //register for a new event in 5 minutes
+        var nowMoment = Time.now();
+        var nextEventMoment = nowMoment.add(new Time.Duration(300));
+        System.println("Registering for next HRV reading event");
+        Background.registerForTemporalEvent(nextEventMoment);
+    }
+
+    function onWakeTime() as Void {
+        Background.deleteTemporalEvent();
     }
 
     function printMoment(moment) {

@@ -38,6 +38,8 @@ var backgroundData as Lang.Dictionary?;
 (:background)
 var hrSensor = null;
 
+var triggeredAlarmTimes as Lang.Array<Lang.String>?;
+
 (:background)
 class SmartAlarmApp extends Application.AppBase {
 
@@ -48,6 +50,9 @@ class SmartAlarmApp extends Application.AppBase {
         System.println("SmartAlarmApp Init");
         AppBase.initialize();
         initializeHrSensor();
+        $.triggeredAlarmTimes = [];
+        $.triggeredAlarmTimes.add("5:15 (test)");
+        $.triggeredAlarmTimes.add("5:30 (test)");
     }
 
     (:background)
@@ -108,6 +113,14 @@ class SmartAlarmApp extends Application.AppBase {
             var triggerAlarm = sdannManager.isAwake();
             if (triggerAlarm) {
                 System.println("Triggering alarm");
+                var info = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+                $.triggeredAlarmTimes.add(Lang.format(
+                    "$1$:$2$",
+                    [
+                        info.hour,
+                        info.min,
+                    ])
+                );
             }
             else {
                 System.println("Still alseep");
@@ -144,6 +157,9 @@ class SmartAlarmApp extends Application.AppBase {
         );
     }
 
+    function clearTriggeredAlarmTimes() {
+        triggeredAlarmTimes = [];
+    }
 }
 
 function getApp() as SmartAlarmApp {
