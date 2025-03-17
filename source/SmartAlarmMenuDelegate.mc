@@ -153,6 +153,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onBack() {
         StorageManager.reorganizeStorage();
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
     }
 
