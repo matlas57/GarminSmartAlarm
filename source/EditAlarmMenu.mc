@@ -128,7 +128,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                 parentMenuItemId,
                 grandParentMenu
             ),
-            WatchUi.SLIDE_RIGHT);
+            WatchUi.SLIDE_LEFT);
     }
 
     function deleteAlarmConfirmation() {

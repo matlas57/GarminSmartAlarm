@@ -50,7 +50,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                     )
                 );
             }
-            WatchUi.pushView(triggeredAlarmTimesMenu, new Menu2InputDelegate(), WatchUi.SLIDE_RIGHT);
+            WatchUi.pushView(triggeredAlarmTimesMenu, new Menu2InputDelegate(), WatchUi.SLIDE_LEFT);
         }
         else if (item.getId().equals("clearTriggeredAlarms")) {
             $.triggeredAlarmTimes = [];
@@ -147,7 +147,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                     deleteButtonId,
                     {}
             ));
-            WatchUi.pushView(editAlarmMenu, new EditAlarmMenuDelegate(editAlarmMenu, parentMenu, id), WatchUi.SLIDE_RIGHT);
+            WatchUi.pushView(editAlarmMenu, new EditAlarmMenuDelegate(editAlarmMenu, parentMenu, id), WatchUi.SLIDE_LEFT);
         }
     }
 

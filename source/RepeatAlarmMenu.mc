@@ -101,14 +101,14 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             alarmMenuItem.setSubLabel(repeatLabel);
             alarmMenu.updateItem(alarmMenuItem, editAlarmMenuItemId - 1);
 
-            WatchUi.popView(WatchUi.SLIDE_LEFT);
+            WatchUi.popView(WatchUi.SLIDE_RIGHT);
         }
         else {
             var customRepeatAlarmMenu = new CustomRepeatAlarmMenu({:title=>"Custom"}, alarm.repeatArray);
             WatchUi.pushView(
                 customRepeatAlarmMenu,
                 new CustomRepeatAlarmMenuDelegate(alarm, customRepeatAlarmMenu, editAlarmMenu, editAlarmMenuItemId, alarmMenu),
-                WatchUi.SLIDE_RIGHT);
+                WatchUi.SLIDE_LEFT);
         }
     }
 }
@@ -237,6 +237,6 @@ class CustomRepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         alarmMenuItem.setSubLabel(repeatLabel);
         alarmMenu.updateItem(alarmMenuItem, editAlarmMenuItemId - 1);
 
-        WatchUi.popView(WatchUi.SLIDE_LEFT);
+        WatchUi.popView(WatchUi.SLIDE_RIGHT);
     }
 }

@@ -154,7 +154,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                     step++;
                 }
                 else if (keyEvent.getKey() == 5) {
-                    WatchUi.popView(WatchUi.SLIDE_LEFT);
+                    WatchUi.popView(WatchUi.SLIDE_UP);
                 }
             }
             else if (step == 1) {
@@ -235,7 +235,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                     } 
                     else if (editAlarmId > 0) {
                         StorageManager.editAlarmInStorage(editAlarmId, alarm);
-                        WatchUi.popView(WatchUi.SLIDE_LEFT);
+                        WatchUi.popView(WatchUi.SLIDE_UP);
                     }
 
                     appState = "trackSleep";
