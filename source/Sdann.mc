@@ -32,6 +32,10 @@ class Sdann {
         var sumSquaredDiff = 0;
         var meanNNIntervals = computeMean(meanNNIntervalArray);
         var n = meanNNIntervalArray.size();
+        if (n == 0) {
+            overnightHRV = 0.0;
+            return 0.0;
+        }
         for (var i = 0; i < n; i++) {
             sumSquaredDiff += Math.pow(meanNNIntervalArray[i] - meanNNIntervals, 2);
         }
@@ -73,6 +77,9 @@ class Sdann {
     function sdnnFormula(intervals as Lang.Array<Lang.Number>, mean) {
         var sumSquaredDiff = 0;
         var n = intervals.size();
+        if (n == 0) {
+            return 0;
+        }
         for (var i = 0; i < n; i++) {
             sumSquaredDiff += Math.pow(intervals[i] - mean, 2);
         }
