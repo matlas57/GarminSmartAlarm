@@ -60,29 +60,37 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             )
         );
         alarmsMenu.addItem(
-            new MenuItem (
-                "Print App State",
+            new MenuItem(
+                "Show overnights avgs",
                 "",
-                "printAppState",
+                "showOvernightsAvgs",
                 {}
             )
         );
-        alarmsMenu.addItem(
-            new MenuItem (
-                "Get Active Alarms",
-                "",
-                "getActiveAlarms",
-                {}
-            )
-        );
-        alarmsMenu.addItem(
-            new MenuItem (
-                "Print Active Interval",
-                "",
-                "printActiveInterval",
-                {}
-            )
-        );
+        // alarmsMenu.addItem(
+        //     new MenuItem (
+        //         "Print App State",
+        //         "",
+        //         "printAppState",
+        //         {}
+        //     )
+        // );
+        // alarmsMenu.addItem(
+        //     new MenuItem (
+        //         "Get Active Alarms",
+        //         "",
+        //         "getActiveAlarms",
+        //         {}
+        //     )
+        // );
+        // alarmsMenu.addItem(
+        //     new MenuItem (
+        //         "Print Active Interval",
+        //         "",
+        //         "printActiveInterval",
+        //         {}
+        //     )
+        // );
         alarmsMenu.addItem(
             new MenuItem (
                 "Test Vibration",
@@ -107,22 +115,22 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 {}
             )
         );
-        alarmsMenu.addItem(
-            new MenuItem (
-                "Get Heart Rate",
-                "",
-                "getHR",
-                {}
-            )
-        );
-        alarmsMenu.addItem(
-            new MenuItem (
-                "Stop Recording",
-                "",
-                "stopHR",
-                {}
-            )
-        );
+        // alarmsMenu.addItem(
+        //     new MenuItem (
+        //         "Get Heart Rate",
+        //         "",
+        //         "getHR",
+        //         {}
+        //     )
+        // );
+        // alarmsMenu.addItem(
+        //     new MenuItem (
+        //         "Stop Recording",
+        //         "",
+        //         "stopHR",
+        //         {}
+        //     )
+        // );
 
         WatchUi.pushView(alarmsMenu, new SmartAlarmMenuDelegate(alarmsMenu), WatchUi.SLIDE_UP);
         return true;

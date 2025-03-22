@@ -55,6 +55,21 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         else if (item.getId().equals("clearTriggeredAlarms")) {
             $.triggeredAlarmTimes = [];
         }
+        else if (item.getId().equals("showOvernightsAvgs")) {
+            var overnightAveragesMenu = new WatchUi.Menu2({:title=>"Overnight Averages"});
+            var n = $.overnightAverages.size();
+            for (var i = 0; i < n; i++) {
+                overnightAveragesMenu.addItem(
+                    new MenuItem(
+                        $.overnightAverages[i].toString(),
+                        "",
+                        "",
+                        {}
+                    )
+                );
+            }
+            WatchUi.pushView(overnightAveragesMenu, new Menu2InputDelegate(), WatchUi.SLIDE_LEFT);
+        }
         else if (item.getId().equals("printAppState")) {
             System.println("App state is " + appState);
         }

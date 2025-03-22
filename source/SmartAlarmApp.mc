@@ -34,6 +34,7 @@ var latestActiveMinute as Lang.Number?;
 var latestActiveMoment as Time.Moment?;
 
 var backgroundData as Lang.Dictionary?;
+var overnightAverages as Lang.Array<Lang.Float>?;
 
 (:background)
 var hrSensor = null;
@@ -53,6 +54,7 @@ class SmartAlarmApp extends Application.AppBase {
         $.triggeredAlarmTimes = [];
         $.triggeredAlarmTimes.add("5:15 (test)");
         $.triggeredAlarmTimes.add("5:30 (test)");
+        $.overnightAverages = [];
     }
 
     (:background)
@@ -91,6 +93,7 @@ class SmartAlarmApp extends Application.AppBase {
         backgroundData = data;
         var avg = backgroundData.values()[0];
         sdannManager.addNewMeanNNInterval(avg);
+        $.overnightAverages.add(avg);
 
         var nowMoment = earliestActiveMoment;
         // var nowMoment = new Time.Moment(Time.now().value());
