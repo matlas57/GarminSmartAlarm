@@ -67,6 +67,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 {}
             )
         );
+        alarmsMenu.addItem(
+            new MenuItem(
+                "Clear overnights avgs",
+                "",
+                "clearOvernightsAvgs",
+                {}
+            )
+        );
         // alarmsMenu.addItem(
         //     new MenuItem (
         //         "Print App State",

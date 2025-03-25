@@ -70,6 +70,9 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             }
             WatchUi.pushView(overnightAveragesMenu, new Menu2InputDelegate(), WatchUi.SLIDE_LEFT);
         }
+        else if (item.getId().equals("clearOvernightsAvgs")){
+            $.overnightAverages = [];
+        }
         else if (item.getId().equals("printAppState")) {
             System.println("App state is " + appState);
         }
