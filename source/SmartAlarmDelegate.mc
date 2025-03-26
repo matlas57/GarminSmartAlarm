@@ -109,7 +109,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         );
         alarmsMenu.addItem(
             new MenuItem (
-                "Print next event",
+                "Show next event",
                 "",
                 "getNextTemporalEvent",
                 {}

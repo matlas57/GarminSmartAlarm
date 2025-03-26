@@ -91,26 +91,45 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         else if (item.getId().equals("getNextTemporalEvent")) {
             System.println("Getting next event time");
             var eventTime = Background.getTemporalEventRegisteredTime();
+            var time = "";
             if (eventTime == null) {
-                System.println("No registered event");
+                // System.println("No registered event");
+                time = "No Registered event";
             }
             else {
                 if (eventTime instanceof Time.Moment) {
                     var nextEventInfo = Gregorian.info(eventTime, Time.FORMAT_SHORT);
-                    System.println(
-                        Lang.format(
+                    // System.println(
+                    //     Lang.format(
+                    //     "Temporal event at: $1$:$2$:$3$", 
+                    //     [
+                    //         nextEventInfo.hour,
+                    //         nextEventInfo.min,
+                    //         nextEventInfo.sec,
+                    //     ]
+                    // ));
+                    time = Lang.format(
                         "Temporal event at: $1$:$2$:$3$", 
                         [
                             nextEventInfo.hour,
                             nextEventInfo.min,
                             nextEventInfo.sec,
                         ]
-                    ));
+                    );
                 }
                 else {
-                    System.println("Temporal event in " + eventTime.value() + " seconds");
+                    // System.println("Temporal event in " + eventTime.value() + " seconds");
+                    time = "In " + eventTime.value() + " seconds";
                 }
             }
+            var nextEventTimeMenu = new WatchUi.Menu2({:title=>"Next event"});
+            nextEventTimeMenu.addItem(new MenuItem(
+                time,
+                "",
+                "",
+                {}
+            ));
+            WatchUi.pushView(nextEventTimeMenu, new Menu2InputDelegate(), WatchUi.SLIDE_LEFT);
         }
         else if (item.getId().equals("deleteNextTemporalEvent")) {
             System.println("Deleting temporal events");
