@@ -247,6 +247,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
 
                     if (editAlarmId == 0) {
                         StorageManager.addNewAlarmToStorage(alarm);
+                        WatchUi.popView(WatchUi.SLIDE_UP);
                         onMenu();
                     } 
                     else if (editAlarmId > 0) {

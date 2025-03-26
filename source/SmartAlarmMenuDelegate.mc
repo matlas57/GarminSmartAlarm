@@ -35,7 +35,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         var delegate = new SmartAlarmDelegate();
         if (item.getId().equals("addAlarmButton")) {
             appState = "earliestAlarmPrompt";
-            WatchUi.pushView(new SmartAlarmView(delegate), delegate, WatchUi.SLIDE_UP);
+            WatchUi.switchToView(new SmartAlarmView(delegate), delegate, WatchUi.SLIDE_UP);
         }
         else if (item.getId().equals("showTriggeredAlarms")) {
             var triggeredAlarmTimesMenu = new WatchUi.Menu2({:title=>"Triggered Alarms"});
