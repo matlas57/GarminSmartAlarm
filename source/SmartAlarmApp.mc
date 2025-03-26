@@ -34,7 +34,7 @@ var latestActiveMinute as Lang.Number?;
 var latestActiveMoment as Time.Moment?;
 
 var backgroundData as Lang.Dictionary?;
-var overnightAverages as Lang.Array<Lang.Float>?;
+var overnightAverages as Lang.Array<Lang.String>?;
 
 (:background)
 var hrSensor = null;
@@ -93,7 +93,16 @@ class SmartAlarmApp extends Application.AppBase {
         backgroundData = data;
         var avg = backgroundData.values()[0];
         sdannManager.addNewMeanNNInterval(avg);
-        $.overnightAverages.add(avg);
+        var overnightAvginfo = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+        $.overnightAverages.add(Lang.format(
+            "$1$:$2$ | $3$",
+            [
+                overnightAvginfo.hour,
+                overnightAvginfo.min,
+                avg.toString()
+            ])
+        );
+        // $.overnightAverages.add(avg);
 
         var nowMoment = earliestActiveMoment;
         // var nowMoment = new Time.Moment(Time.now().value());
