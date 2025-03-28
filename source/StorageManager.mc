@@ -187,4 +187,30 @@ class StorageManager
         }
         return;
     }
+
+    static function addOvernightAverage(avg) {
+        var overnightAveragesArray = Storage.getValue("overnightAverages");
+        if (overnightAveragesArray == null) {
+            overnightAveragesArray = [];  
+        }
+        overnightAveragesArray.add(avg);
+        Storage.setValue("overnightAverages", overnightAveragesArray);
+    }
+
+    static function getOvernightAverages() {
+        return Storage.getValue("overnightAverages");
+    }
+
+    static function addTriggeredAlarmTime(time) {
+        var triggeredAlarmTimesArray = Storage.getValue("triggeredAlarms");
+        if (triggeredAlarmTimesArray == null) {
+            triggeredAlarmTimesArray = [];  
+        }
+        triggeredAlarmTimesArray.add(time);
+        Storage.setValue("triggeredAlarms", triggeredAlarmTimesArray);
+    }
+
+    static function getTriggeredAlarmTimes() {
+        return Storage.getValue("triggeredAlarms");
+    }
 }

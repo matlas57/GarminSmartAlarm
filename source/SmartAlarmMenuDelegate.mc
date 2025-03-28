@@ -5,6 +5,7 @@ import Toybox.Attention;
 import Toybox.Sensor;
 import Toybox.Background;
 import Toybox.Time;
+import Toybox.Application;
 
 /**
  * @file        SmartAlarmMenuDelegate.mc
@@ -39,7 +40,11 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         }
         else if (item.getId().equals("showTriggeredAlarms")) {
             var triggeredAlarmTimesMenu = new WatchUi.Menu2({:title=>"Triggered Alarms"});
-            var n = $.triggeredAlarmTimes.size();
+            $.triggeredAlarmTimes = StorageManager.getTriggeredAlarmTimes();
+            var n = 0;
+            if (triggeredAlarmTimes != null){
+                n = $.triggeredAlarmTimes.size();
+            }
             for (var i = 0; i < n; i++) {
                 triggeredAlarmTimesMenu.addItem(
                     new MenuItem(
@@ -54,10 +59,15 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         }
         else if (item.getId().equals("clearTriggeredAlarms")) {
             $.triggeredAlarmTimes = [];
+            Storage.deleteValue("triggeredAlarms");
         }
         else if (item.getId().equals("showOvernightsAvgs")) {
             var overnightAveragesMenu = new WatchUi.Menu2({:title=>"Overnight Averages"});
-            var n = $.overnightAverages.size();
+            overnightAverages = StorageManager.getOvernightAverages();
+            var n = 0;
+            if (overnightAverages != null){
+                n = $.overnightAverages.size();
+            }
             for (var i = 0; i < n; i++) {
                 overnightAveragesMenu.addItem(
                     new MenuItem(
@@ -72,6 +82,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         }
         else if (item.getId().equals("clearOvernightsAvgs")){
             $.overnightAverages = [];
+            Storage.deleteValue("overnightAverages");
         }
         else if (item.getId().equals("printAppState")) {
             System.println("App state is " + appState);

@@ -51,10 +51,8 @@ class SmartAlarmApp extends Application.AppBase {
         System.println("SmartAlarmApp Init");
         AppBase.initialize();
         initializeHrSensor();
-        $.triggeredAlarmTimes = [];
-        $.triggeredAlarmTimes.add("5:15 (test)");
-        $.triggeredAlarmTimes.add("5:30 (test)");
-        $.overnightAverages = [];
+        $.triggeredAlarmTimes = StorageManager.getTriggeredAlarmTimes();
+        $.overnightAverages = StorageManager.getOvernightAverages();
     }
 
     (:background)
@@ -93,15 +91,16 @@ class SmartAlarmApp extends Application.AppBase {
         backgroundData = data;
         var avg = backgroundData.values()[0];
         sdannManager.addNewMeanNNInterval(avg);
-        var overnightAvginfo = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        $.overnightAverages.add(Lang.format(
-            "$1$:$2$ | $3$",
-            [
-                overnightAvginfo.hour,
-                overnightAvginfo.min,
-                avg.toString()
-            ])
-        );
+        // var overnightAvginfo = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+        StorageManager.addOvernightAverage(avg);
+        // $.overnightAverages.add(Lang.format(
+        //     "$1$:$2$ | $3$",
+        //     [
+        //         overnightAvginfo.hour,
+        //         overnightAvginfo.min,
+        //         avg.toString()
+        //     ])
+        // );
         // $.overnightAverages.add(avg);
 
         var nowMoment = earliestActiveMoment;
@@ -126,7 +125,7 @@ class SmartAlarmApp extends Application.AppBase {
             if (triggerAlarm) {
                 System.println("Triggering alarm");
                 var info = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-                $.triggeredAlarmTimes.add(Lang.format(
+                StorageManager.addTriggeredAlarmTime(Lang.format(
                     "$1$:$2$",
                     [
                         info.hour,
