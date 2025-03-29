@@ -103,8 +103,8 @@ class SmartAlarmApp extends Application.AppBase {
         // );
         // $.overnightAverages.add(avg);
 
-        var nowMoment = earliestActiveMoment;
-        // var nowMoment = new Time.Moment(Time.now().value());
+        // var nowMoment = earliestActiveMoment;
+        var nowMoment = new Time.Moment(Time.now().value());
         
         if (!appState.equals("alarmAllowed")) {
             if ($.earliestActiveMoment == null || $.latestActiveMoment == null){
@@ -132,6 +132,20 @@ class SmartAlarmApp extends Application.AppBase {
                         info.min,
                     ])
                 );
+
+                //Check for 'Once' alarms. If one is triggered set it to be off
+                var activeAlarms = StorageManager.getActiveAlarms();
+                var n = activeAlarms.size();
+                for (var i = 0; i < n; i++) {
+                    if (activeAlarms[i].getRepeatLabel().equals("Once")) {
+                        var earliestMoment = timeToMomentHelper(activeAlarms[i].earliestHour, activeAlarms[i].earliestMinute, false);
+                        var latestMoment = timeToMomentHelper(activeAlarms[i].latestHour, activeAlarms[i].latestMinute, false);
+                        if (nowMoment.compare(earliestMoment) >= 0 && nowMoment.compare(latestMoment) <= 0) {
+                            activeAlarms[i].toggleActive();
+                            break;
+                        }
+                    }
+                }
             }
             else {
                 System.println("Still alseep");
@@ -145,12 +159,18 @@ class SmartAlarmApp extends Application.AppBase {
         Background.registerForTemporalEvent(nextEventMoment);
     }
 
-    function timeToDurationHelper(hour, min, pm) as Time.Duration {
+    static function timeToDurationHelper(hour, min, pm) as Time.Duration {
         if (pm) {
             hour += 12;
         }
         var seconds = ((hour * 60 + min) * 60);
         return new Time.Duration(seconds);
+    }
+
+    function timeToMomentHelper(hour, min, pm) as Time.Moment {
+        var today = Time.today();
+        var duration = timeToDurationHelper(hour, min, pm);
+        return today.add(duration);
     }
 
     function printMoment(moment) {
