@@ -71,7 +71,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             for (var i = 0; i < n; i++) {
                 overnightAveragesMenu.addItem(
                     new MenuItem(
-                        $.overnightAverages[i].toString(),
+                        overnightAverages[i].toString(),
                         "",
                         "",
                         {}
