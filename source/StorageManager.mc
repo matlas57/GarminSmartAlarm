@@ -213,4 +213,60 @@ class StorageManager
     static function getTriggeredAlarmTimes() {
         return Storage.getValue("triggeredAlarms");
     }
+
+    static function getNumAlarmChecks() {
+        var numAlarmChecks = Storage.getValue("numAlarmChecks");
+        if (numAlarmChecks == null) {
+            return 0;
+        }
+        else {
+            return numAlarmChecks;
+        }
+    }
+
+    static function addAlarmCheckToStorage(alarmCheck) {
+        var numAlarmChecks = getNumAlarmChecks();
+        var curAlarmCheck = numAlarmChecks + 1;
+        
+        var alarmCheckArray = [
+            alarmCheck.timeString,
+            alarmCheck.sdann,
+            alarmCheck.sdnn,
+            alarmCheck.result
+        ];
+        try {
+            var id = "alarmCheck" + curAlarmCheck.toString();
+            Storage.setValue(id, alarmCheckArray);
+            Storage.setValue("numAlarmChecks", curAlarmCheck);
+        } catch (e instanceof Lang.Exception) {
+            System.println(e.getErrorMessage());
+        }
+    }
+
+    static function getAlarmCheckFromStorage(alarmCheckNum) {
+        if (!(alarmCheckNum instanceof Number)) {
+            System.println("Invalid parameter alarmCheckNum");
+            return null;
+        }
+        else if (alarmCheckNum > getNumAlarmChecks()) {
+            System.println("Attempting to retrieve non-existing alarm");
+            return null;
+        }
+        var id = "alarmCheck" + alarmCheckNum.toString();
+        var alarmCheckArray = Storage.getValue(id);
+        System.println("Retrieved alarmCheck " + alarmCheckArray);
+
+        if (alarmCheckArray != null) {
+            return new AlarmCheck(alarmCheckArray[0], alarmCheckArray[1], alarmCheckArray[2], alarmCheckArray[3]);
+        }
+        return null;
+    }
+
+    static function clearAlarmChecks() {
+        for (var i = 1; i <= getNumAlarmChecks(); i++) {
+            var id = "alarmCheck" + i.toString();
+            Storage.deleteValue(id);
+        }
+        Storage.deleteValue("numAlarmChecks");
+    }
 }

@@ -118,10 +118,17 @@ class SmartAlarmApp extends Application.AppBase {
             }
         }
         if (appState.equals("alarmAllowed")) {
-            sdannManager.computeSDANN();
+            var sdannn = sdannManager.computeSDANN();
             System.println("Current recording:");
-            sdannManager.computeCurrentSDNN(backgroundData.values()[1]);
+            var sdnn = sdannManager.computeCurrentSDNN(backgroundData.values()[1]);
             var triggerAlarm = sdannManager.isAwake();
+            var resultString;
+            if (triggerAlarm) {
+                resultString = "Awake";
+            }
+            else {
+                resultString = "Asleep";
+            }
             if (triggerAlarm) {
                 System.println("Triggering alarm");
                 var info = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
@@ -150,7 +157,21 @@ class SmartAlarmApp extends Application.AppBase {
             else {
                 System.println("Still alseep");
             }
+
+            var timeInfo = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+            var timeString = Lang.format(
+                "$1$:$2$",
+                [
+                    timeInfo.hour,
+                    timeInfo.min,
+                ]
+            );
+
+            var alarmCheck = new AlarmCheck(timeString, sdannn, sdnn, resultString);
+            StorageManager.addAlarmCheckToStorage(alarmCheck);
         }
+
+       
 
         //register for a new event in 5 minutes
         nowMoment = Time.now();

@@ -93,6 +93,27 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             $.overnightAverages = [];
             Storage.deleteValue("overnightAverages");
         }
+        else if (item.getId().equals("alarmChecks")){
+            var alarmChecksMenu = new WatchUi.Menu2({:title=>"Alarm checks"});
+            var n = StorageManager.getNumAlarmChecks();
+            if (n > 0) {
+                for (var i = 1; i <= n; i++) {
+                    var alarkCheck = StorageManager.getAlarmCheckFromStorage(i);
+                    alarmChecksMenu.addItem(
+                        new MenuItem(
+                            alarkCheck.timeString,
+                            "",
+                            i,
+                            {}
+                        )
+                    );
+                }
+            }
+            WatchUi.pushView(alarmChecksMenu, new Menu2InputDelegate(), WatchUi.SLIDE_LEFT);
+        }
+        else if (item.getId().equals("alarmChecks")){
+            StorageManager.clearAlarmChecks();
+        }
         else if (item.getId().equals("printAppState")) {
             System.println("App state is " + appState);
         }
