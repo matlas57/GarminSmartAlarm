@@ -87,7 +87,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             new MenuItem(
                 "Clear alarm checks",
                 "",
-                "alarmChecks",
+                "clearAlarmChecks",
                 {}
             )
         );

@@ -109,9 +109,9 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                     );
                 }
             }
-            WatchUi.pushView(alarmChecksMenu, new Menu2InputDelegate(), WatchUi.SLIDE_LEFT);
+            WatchUi.pushView(alarmChecksMenu, new AlarmCheckMenuDelegate(), WatchUi.SLIDE_LEFT);
         }
-        else if (item.getId().equals("alarmChecks")){
+        else if (item.getId().equals("clearAlarmChecks")){
             StorageManager.clearAlarmChecks();
         }
         else if (item.getId().equals("printAppState")) {
