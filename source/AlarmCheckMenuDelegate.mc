@@ -7,7 +7,7 @@ class AlarmCheckMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     function onSelect(item as MenuItem) as Void {
         var alarmCheckSelectionMenu = new WatchUi.Menu2({:title=>"Alarm Check"});
-        var alarmCheck = StorageManager.getAlarmCheckFromStorage("alarmCheck" + item.getId().toString());
+        var alarmCheck = StorageManager.getAlarmCheckFromStorage(item.getId());
         if (alarmCheck != null) {
             alarmCheckSelectionMenu.addItem(
                 new MenuItem(
@@ -27,7 +27,23 @@ class AlarmCheckMenuDelegate extends WatchUi.Menu2InputDelegate {
             );
             alarmCheckSelectionMenu.addItem(
                 new MenuItem(
-                    "SDNN: " + alarmCheck.sdnn,
+                    "Before SDNN: " + alarmCheck.beforeSDNN,
+                    "",
+                    "",
+                    {}
+                )
+            );
+            alarmCheckSelectionMenu.addItem(
+                new MenuItem(
+                    "During SDNN: " + alarmCheck.duringSDNN,
+                    "",
+                    "",
+                    {}
+                )
+            );
+            alarmCheckSelectionMenu.addItem(
+                new MenuItem(
+                    "After SDNN: " + alarmCheck.afterSDNN,
                     "",
                     "",
                     {}

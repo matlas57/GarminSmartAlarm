@@ -217,9 +217,11 @@ class StorageManager
     static function getNumAlarmChecks() {
         var numAlarmChecks = Storage.getValue("numAlarmChecks");
         if (numAlarmChecks == null) {
+            System.println("0 Alarm checks in storage");
             return 0;
         }
         else {
+            System.println(numAlarmChecks + " Alarm checks in storage");
             return numAlarmChecks;
         }
     }
@@ -231,13 +233,16 @@ class StorageManager
         var alarmCheckArray = [
             alarmCheck.timeString,
             alarmCheck.sdann,
-            alarmCheck.sdnn,
+            alarmCheck.beforeSDNN,
+            alarmCheck.duringSDNN,
+            alarmCheck.afterSDNN,
             alarmCheck.result
         ];
         try {
             var id = "alarmCheck" + curAlarmCheck.toString();
             Storage.setValue(id, alarmCheckArray);
             Storage.setValue("numAlarmChecks", curAlarmCheck);
+            System.println("Added alarm check " + id + " to storage");
         } catch (e instanceof Lang.Exception) {
             System.println(e.getErrorMessage());
         }
@@ -257,16 +262,19 @@ class StorageManager
         System.println("Retrieved alarmCheck " + alarmCheckArray);
 
         if (alarmCheckArray != null) {
-            return new AlarmCheck(alarmCheckArray[0], alarmCheckArray[1], alarmCheckArray[2], alarmCheckArray[3]);
+            return new AlarmCheck(alarmCheckArray[0], alarmCheckArray[1], alarmCheckArray[2], alarmCheckArray[3], alarmCheckArray[4], alarmCheckArray[5]);
         }
         return null;
     }
 
     static function clearAlarmChecks() {
-        for (var i = 1; i <= getNumAlarmChecks(); i++) {
+        var n = getNumAlarmChecks();
+        for (var i = 1; i <= n; i++) {
             var id = "alarmCheck" + i.toString();
             Storage.deleteValue(id);
         }
         Storage.deleteValue("numAlarmChecks");
+        n = getNumAlarmChecks();
+        System.println("There are now " + n + " alarm checks in storage");
     }
 }

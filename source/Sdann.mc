@@ -72,6 +72,8 @@ class Sdann {
         beforeSDNN = sdnnFormula(beforeIntervalArray, beforeIntervalMean);
         duringSDNN = sdnnFormula(duringIntervalArray, duringIntervalMean);
         afterSDNN = sdnnFormula(afterIntervalArray, afterIntervalMean);
+
+        return [beforeSDNN, duringSDNN, afterSDNN];
     }
 
     function sdnnFormula(intervals as Lang.Array<Lang.Number>, mean) {

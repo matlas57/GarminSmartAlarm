@@ -167,7 +167,7 @@ class SmartAlarmApp extends Application.AppBase {
                 ]
             );
 
-            var alarmCheck = new AlarmCheck(timeString, sdannn, sdnn, resultString);
+            var alarmCheck = new AlarmCheck(timeString, sdannn, sdnn[0], sdnn[1], sdnn[2], resultString);
             StorageManager.addAlarmCheckToStorage(alarmCheck);
         }
 
