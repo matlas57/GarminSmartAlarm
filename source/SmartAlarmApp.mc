@@ -103,8 +103,8 @@ class SmartAlarmApp extends Application.AppBase {
         // );
         // $.overnightAverages.add(avg);
 
-        // var nowMoment = earliestActiveMoment;
-        var nowMoment = new Time.Moment(Time.now().value());
+        var nowMoment = earliestActiveMoment;
+        // var nowMoment = new Time.Moment(Time.now().value());
         
         if (!appState.equals("alarmAllowed")) {
             if ($.earliestActiveMoment == null || $.latestActiveMoment == null){

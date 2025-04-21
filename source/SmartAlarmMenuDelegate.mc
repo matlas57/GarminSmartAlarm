@@ -44,11 +44,21 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             var n = 0;
             if (triggeredAlarmTimes != null){
                 n = $.triggeredAlarmTimes.size();
+                for (var i = 0; i < n; i++) {
+                    triggeredAlarmTimesMenu.addItem(
+                        new MenuItem(
+                            $.triggeredAlarmTimes[i],
+                            "",
+                            "",
+                            {}
+                        )
+                    );
+                }
             }
-            for (var i = 0; i < n; i++) {
+            else {
                 triggeredAlarmTimesMenu.addItem(
                     new MenuItem(
-                        $.triggeredAlarmTimes[i],
+                        "No triggered alarms",
                         "",
                         "",
                         {}
@@ -67,20 +77,22 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             var n = 0;
             if (overnightAverages != null){
                 n = $.overnightAverages.size();
+                for (var i = 0; i < n; i++) {
+                    overnightAveragesMenu.addItem(
+                        new MenuItem(
+                            overnightAverages[i].toString(),
+                            "",
+                            "",
+                            {}
+                        )
+                    );
+                }
             }
-            var timeInfo = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-            for (var i = 0; i < n; i++) {
-                var timeAvgString = Lang.format(
-                    "$1$:$2$ | $3$",
-                    [
-                        timeInfo.hour,
-                        timeInfo.min,
-                        overnightAverages[i].toString()
-                    ]
-                );
+            else {
                 overnightAveragesMenu.addItem(
                     new MenuItem(
-                        timeAvgString,
+                        "No recordings"
+                        ,
                         "",
                         "",
                         {}
@@ -108,6 +120,16 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                         )
                     );
                 }
+            }
+            else {
+                alarmChecksMenu.addItem(
+                    new MenuItem(
+                        "No alarm checks",
+                        "",
+                        "",
+                        {}
+                    )
+                );
             }
             WatchUi.pushView(alarmChecksMenu, new AlarmCheckMenuDelegate(), WatchUi.SLIDE_LEFT);
         }
