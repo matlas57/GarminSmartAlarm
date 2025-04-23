@@ -22,6 +22,7 @@ var earliestHour = 6;
 var earliestMinute = 0;
 var latestHour = 7;
 var latestMinute = 0;
+var am = true;
 var validLatestTime = true;
 var editAlarmId = 0;
 
@@ -103,8 +104,8 @@ class SmartAlarmApp extends Application.AppBase {
         // );
         // $.overnightAverages.add(avg);
 
-        var nowMoment = earliestActiveMoment;
-        // var nowMoment = new Time.Moment(Time.now().value());
+        // var nowMoment = earliestActiveMoment;
+        var nowMoment = new Time.Moment(Time.now().value());
         
         if (!appState.equals("alarmAllowed")) {
             if ($.earliestActiveMoment == null || $.latestActiveMoment == null){

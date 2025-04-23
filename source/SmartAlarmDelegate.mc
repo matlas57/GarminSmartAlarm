@@ -206,7 +206,18 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                     step++;
                 }
             }
-            else if (step == 2 && keyEvent.getKey() == 4) {
+            else if (step == 2) {
+                if (keyEvent.getKey() == 13 && !am) {
+                    am = true;    
+                }
+                else if (keyEvent.getKey() == 8 && am) {
+                    am = false;
+                }
+                else if (keyEvent.getKey() == 4) {
+                    step++;
+                }
+            }
+            else if (step == 3 && keyEvent.getKey() == 4) {
                 appState = "latestAlarmPrompt";
                 step = 0;
             }
@@ -258,6 +269,17 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 }
             }
             else if (step == 2) {
+                if (keyEvent.getKey() == 13 && !am) {
+                    am = true;    
+                }
+                else if (keyEvent.getKey() == 8 && am) {
+                    am = false;
+                }
+                else if (keyEvent.getKey() == 4) {
+                    step++;
+                }
+            }
+            else if (step == 3) {
                 if (keyEvent.getKey() == 4) {
                     var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute, true, false, []);
 
