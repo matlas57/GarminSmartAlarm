@@ -68,19 +68,31 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             if (overnightAverages != null){
                 n = $.overnightAverages.size();
             }
-            var timeInfo = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-            for (var i = 0; i < n; i++) {
-                var timeAvgString = Lang.format(
-                    "$1$:$2$ | $3$",
-                    [
-                        timeInfo.hour,
-                        timeInfo.min,
-                        overnightAverages[i].toString()
-                    ]
-                );
+            if (n > 0) {
+                var timeInfo = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+                for (var i = 0; i < n; i++) {
+                    var timeAvgString = Lang.format(
+                        "$1$:$2$ | $3$",
+                        [
+                            timeInfo.hour,
+                            timeInfo.min,
+                            overnightAverages[i].toString()
+                        ]
+                    );
+                    overnightAveragesMenu.addItem(
+                        new MenuItem(
+                            timeAvgString,
+                            "",
+                            "",
+                            {}
+                        )
+                    );
+                }
+            }
+            else {
                 overnightAveragesMenu.addItem(
                     new MenuItem(
-                        timeAvgString,
+                        "No averages stored",
                         "",
                         "",
                         {}
