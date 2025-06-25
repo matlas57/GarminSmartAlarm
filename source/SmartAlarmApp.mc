@@ -22,6 +22,7 @@ var earliestHour = 6;
 var earliestMinute = 0;
 var latestHour = 7;
 var latestMinute = 0;
+var am = true;
 var validLatestTime = true;
 var editAlarmId = 0;
 
