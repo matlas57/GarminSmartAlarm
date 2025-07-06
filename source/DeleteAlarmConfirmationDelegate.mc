@@ -6,7 +6,7 @@ using Toybox.System;
  * @author      Matan Atlas
  * @date        2025-03-13
  * @version     1.0
- * @description DeleteAlarmConfirmationDelegate manages inputs on the delete confirmation appears
+ * @description DeleteAlarmConfirmationDelegate manages inputs as the delete confirmation appears
  */
 
 class DeleteAlarmConfirmationDelegate extends WatchUi.ConfirmationDelegate {

@@ -102,8 +102,13 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             WatchUi.pushView(overnightAveragesMenu, new Menu2InputDelegate(), WatchUi.SLIDE_LEFT);
         }
         else if (item.getId().equals("clearOvernightsAvgs")){
-            $.overnightAverages = [];
-            Storage.deleteValue("overnightAverages");
+            var confirmationMessage = "Delete Alarm?";
+            var confirmationView = new WatchUi.Confirmation(confirmationMessage);
+            WatchUi.pushView(
+                confirmationView,
+                new ClearDataConfirmationDelegate("overnightAverages"),
+                WatchUi.SLIDE_IMMEDIATE
+            );
         }
         else if (item.getId().equals("alarmChecks")){
             var alarmChecksMenu = new WatchUi.Menu2({:title=>"Alarm checks"});
