@@ -110,6 +110,37 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                 WatchUi.SLIDE_IMMEDIATE
             );
         }
+        else if (item.getId().equals("editThreshold")){
+            var thresholdMenu = new WatchUi.Menu2({:title=>"Edit threshold"});
+            thresholdMenu.addItem(
+                new MenuItem(
+                    "Increase threshold",
+                    "",
+                    "increase",
+                    {}
+                )
+            );
+            var title = "Threshold: " + $.threshold;
+            var thresholdItem = new MenuItem(
+                title,
+                "",
+                $.threshold,
+                {}
+            );
+            thresholdMenu.addItem(
+                thresholdItem 
+            );
+            thresholdMenu.addItem(
+                new MenuItem(
+                    "Decrease threshold",
+                    "",
+                    "decrease",
+                    {}
+                )
+            );
+
+            WatchUi.pushView(thresholdMenu, new EditThresholdMenuDelegate(thresholdItem), WatchUi.SLIDE_LEFT);
+        }
         else if (item.getId().equals("alarmChecks")){
             var alarmChecksMenu = new WatchUi.Menu2({:title=>"Alarm checks"});
             var n = StorageManager.getNumAlarmChecks();

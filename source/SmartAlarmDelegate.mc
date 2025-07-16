@@ -77,6 +77,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         );
         alarmsMenu.addItem(
             new MenuItem(
+                "Edit Threshold",
+                "",
+                "editThreshold",
+                {}
+            )
+        );
+        alarmsMenu.addItem(
+            new MenuItem(
                 "Alarm checks",
                 "",
                 "alarmChecks",

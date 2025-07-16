@@ -89,11 +89,11 @@ class Sdann {
     }
 
     function isAwake(){
-        var threshold = 1.5;
+        // var threshold = 1.5;
         var tolerance = 0.1;
         var lowerBound = overnightHRV * (1 - tolerance);
         var upperBound = overnightHRV * (1 + tolerance);
-        if (duringSDNN > threshold * overnightHRV
+        if (duringSDNN > $.threshold * overnightHRV
             && (lowerBound <= beforeSDNN && beforeSDNN <= upperBound)
             && (lowerBound <= afterSDNN && afterSDNN <= upperBound)) {
             return true;

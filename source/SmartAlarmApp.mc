@@ -25,6 +25,7 @@ var latestMinute = 0;
 var am = true;
 var validLatestTime = true;
 var editAlarmId = 0;
+var threshold = 1.5;
 
 //Below store the earliestActive alarm time across all stored alarms in the application
 var earliestActiveHour as Lang.Number?;
@@ -36,6 +37,7 @@ var latestActiveMoment as Time.Moment?;
 
 var backgroundData as Lang.Dictionary?;
 var overnightAverages as Lang.Array<Lang.String>?;
+
 
 (:background)
 var hrSensor = null;
