@@ -16,7 +16,7 @@ class StorageManager
 {
 
     static function TestStatic() {
-        System.println("Reached module");
+        SmartAlarmApp.debugLog("Reached module");
     }
 
     static function getNumAlarms() {
@@ -31,16 +31,16 @@ class StorageManager
 
     static function getAlarmFromStorage(alarmNum) {
         if (!(alarmNum instanceof Number)){
-            System.println("Invalid parameter alarmNum");
+            SmartAlarmApp.debugLog("Invalid parameter alarmNum");
             return null;
         }
         else if (alarmNum > getNumAlarms()) {
             // TODO: Throw exception here
-            System.println("Attempting to retrieve non-existing alarm");
+            SmartAlarmApp.debugLog("Attempting to retrieve non-existing alarm");
             return null;
         }
         var alarmArray = Storage.getValue(alarmNum);
-        System.println("Retrieved alarm " + alarmArray);
+        SmartAlarmApp.debugLog("Retrieved alarm " + alarmArray);
 
         if (alarmArray != null) {
             return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4], alarmArray[5], alarmArray[6]);
@@ -61,7 +61,7 @@ class StorageManager
                 activeAlarms.add(curAlarm);
             }
         }
-        System.println("There are " + activeAlarms.size() + " active alarms");
+        SmartAlarmApp.debugLog("There are " + activeAlarms.size() + " active alarms");
         return activeAlarms;
     }
 
@@ -72,12 +72,12 @@ class StorageManager
             return [];
         }
         else if (n == 1) {
-            System.println("Earliest alarm: " + activeAlarms[0].earliestHour + ":" + activeAlarms[0].earliestMinute);
+            SmartAlarmApp.debugLog("Earliest alarm: " + activeAlarms[0].earliestHour + ":" + activeAlarms[0].earliestMinute);
             return activeAlarms[0];
         }
         else {
             activeAlarms.sort(new EarliestAlarmComparator() as Lang.Comparator);
-            System.println("Earliest active time is " + activeAlarms[0].earliestHour + ":" + activeAlarms[0].earliestMinute);
+            SmartAlarmApp.debugLog("Earliest active time is " + activeAlarms[0].earliestHour + ":" + activeAlarms[0].earliestMinute);
             return activeAlarms[0];
         }
     }
@@ -93,7 +93,7 @@ class StorageManager
         }
         else {
             activeAlarms.sort(new LatestAlarmComparator() as Lang.Comparator);
-            System.println("Latest active time is " + activeAlarms[activeAlarms.size() - 1].latestHour + ":" + activeAlarms[activeAlarms.size() - 1].latestMinute);
+            SmartAlarmApp.debugLog("Latest active time is " + activeAlarms[activeAlarms.size() - 1].latestHour + ":" + activeAlarms[activeAlarms.size() - 1].latestMinute);
             return activeAlarms[activeAlarms.size() - 1];
         }
     }
@@ -128,13 +128,13 @@ class StorageManager
             alarm.delete
         ];
         alarmArray.add(alarm.repeatArray);
-        System.println("Adding new alarmArray to storage :" + alarmArray.toString());
+        SmartAlarmApp.debugLog("Adding new alarmArray to storage :" + alarmArray.toString());
         try {
             Storage.setValue(curAlarm, alarmArray);
             Storage.setValue("numAlarms", curAlarm);
             setActiveAlarmInterval();
         } catch (e instanceof Lang.Exception) {
-            System.println(e.getErrorMessage());
+            SmartAlarmApp.debugLog(e.getErrorMessage());
             // TODO: Add window here to indicate that alarms need to be deleted before more can be added
         }
     }
@@ -143,7 +143,7 @@ class StorageManager
         var numAlarms = getNumAlarms();
         if (alarmId > numAlarms) {
             // TODO: Throw exception here
-            System.println("Invalid id");
+            SmartAlarmApp.debugLog("Invalid id");
             return;
         }
         var alarmArray = [
@@ -171,7 +171,7 @@ class StorageManager
             for (var i = 1; i <= numAlarms; i++) {
                 var alarm = getAlarmFromStorage(i);
                 if (alarm.delete) {
-                    System.println("Deleting alarm " + i.toString());
+                    SmartAlarmApp.debugLog("Deleting alarm " + i.toString());
                     Storage.deleteValue(i);
                     alarmsDeleted++;
                 } 
@@ -217,11 +217,11 @@ class StorageManager
     static function getNumAlarmChecks() {
         var numAlarmChecks = Storage.getValue("numAlarmChecks");
         if (numAlarmChecks == null) {
-            System.println("0 Alarm checks in storage");
+            SmartAlarmApp.debugLog("0 Alarm checks in storage");
             return 0;
         }
         else {
-            System.println(numAlarmChecks + " Alarm checks in storage");
+            SmartAlarmApp.debugLog(numAlarmChecks + " Alarm checks in storage");
             return numAlarmChecks;
         }
     }
@@ -242,24 +242,24 @@ class StorageManager
             var id = "alarmCheck" + curAlarmCheck.toString();
             Storage.setValue(id, alarmCheckArray);
             Storage.setValue("numAlarmChecks", curAlarmCheck);
-            System.println("Added alarm check " + id + " to storage");
+            SmartAlarmApp.debugLog("Added alarm check " + id + " to storage");
         } catch (e instanceof Lang.Exception) {
-            System.println(e.getErrorMessage());
+            SmartAlarmApp.debugLog(e.getErrorMessage());
         }
     }
 
     static function getAlarmCheckFromStorage(alarmCheckNum) {
         if (!(alarmCheckNum instanceof Number)) {
-            System.println("Invalid parameter alarmCheckNum");
+            SmartAlarmApp.debugLog("Invalid parameter alarmCheckNum");
             return null;
         }
         else if (alarmCheckNum > getNumAlarmChecks()) {
-            System.println("Attempting to retrieve non-existing alarm");
+            SmartAlarmApp.debugLog("Attempting to retrieve non-existing alarm");
             return null;
         }
         var id = "alarmCheck" + alarmCheckNum.toString();
         var alarmCheckArray = Storage.getValue(id);
-        System.println("Retrieved alarmCheck " + alarmCheckArray);
+        SmartAlarmApp.debugLog("Retrieved alarmCheck " + alarmCheckArray);
 
         if (alarmCheckArray != null) {
             return new AlarmCheck(alarmCheckArray[0], alarmCheckArray[1], alarmCheckArray[2], alarmCheckArray[3], alarmCheckArray[4], alarmCheckArray[5]);
@@ -275,6 +275,6 @@ class StorageManager
         }
         Storage.deleteValue("numAlarmChecks");
         n = getNumAlarmChecks();
-        System.println("There are now " + n + " alarm checks in storage");
+        SmartAlarmApp.debugLog("There are now " + n + " alarm checks in storage");
     }
 }

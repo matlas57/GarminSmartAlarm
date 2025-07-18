@@ -60,7 +60,7 @@ class AlarmCheckMenuDelegate extends WatchUi.Menu2InputDelegate {
             WatchUi.pushView(alarmCheckSelectionMenu, new Menu2InputDelegate(), WatchUi.SLIDE_LEFT);
         }
         else {
-            System.println("Alarm check null");
+            SmartAlarmApp.debugLog("Alarm check null");
         }
     }
 }

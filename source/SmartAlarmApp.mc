@@ -38,6 +38,9 @@ var latestActiveMoment as Time.Moment?;
 var backgroundData as Lang.Dictionary?;
 var overnightAverages as Lang.Array<Lang.String>?;
 
+// debugging variable determines if print statements meant for console print, if off then only log file prints execute
+var debugging = false; 
+
 
 (:background)
 var hrSensor = null;
@@ -51,7 +54,7 @@ class SmartAlarmApp extends Application.AppBase {
     var appDelegate;
 
     function initialize() {
-        System.println("SmartAlarmApp Init");
+        debugLog("SmartAlarmApp Init");
         AppBase.initialize();
         initializeHrSensor();
         $.triggeredAlarmTimes = StorageManager.getTriggeredAlarmTimes();
@@ -60,7 +63,7 @@ class SmartAlarmApp extends Application.AppBase {
 
     (:background)
     function initializeHrSensor() {
-        System.println("initializeHrSensor");
+        debugLog("initializeHrSensor");
         $.hrSensor = new HeartRateSensor();
         sdannManager = new Sdann();
     }
@@ -111,18 +114,18 @@ class SmartAlarmApp extends Application.AppBase {
         
         if (!appState.equals("alarmAllowed")) {
             if ($.earliestActiveMoment == null || $.latestActiveMoment == null){
-                System.println("Moments have not been set");
+                debugLog("Moments have not been set");
             }
             else {
                 if (nowMoment.compare($.earliestActiveMoment) >= 0 && nowMoment.compare($.latestActiveMoment) <= 0) {
-                    System.println("Checking for alarm");
+                    debugLog("Checking for alarm");
                     $.appState = "alarmAllowed";
                 }
             }
         }
         if (appState.equals("alarmAllowed")) {
             var sdannn = sdannManager.computeSDANN();
-            System.println("Current recording:");
+            debugLog("Current recording:");
             var sdnn = sdannManager.computeCurrentSDNN(backgroundData.values()[1]);
             var triggerAlarm = sdannManager.isAwake();
             var resultString;
@@ -133,7 +136,7 @@ class SmartAlarmApp extends Application.AppBase {
                 resultString = "Asleep";
             }
             if (triggerAlarm) {
-                System.println("Triggering alarm");
+                debugLog("Triggering alarm");
                 var info = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
                 StorageManager.addTriggeredAlarmTime(Lang.format(
                     "$1$:$2$",
@@ -158,7 +161,7 @@ class SmartAlarmApp extends Application.AppBase {
                 }
             }
             else {
-                System.println("Still alseep");
+                debugLog("Still alseep");
             }
 
             var timeInfo = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
@@ -174,12 +177,10 @@ class SmartAlarmApp extends Application.AppBase {
             StorageManager.addAlarmCheckToStorage(alarmCheck);
         }
 
-       
-
         //register for a new event in 5 minutes
         nowMoment = Time.now();
         var nextEventMoment = nowMoment.add(new Time.Duration(300));
-        System.println("Registering for next HRV reading event");
+        debugLog("Registering for next HRV reading event");
         Background.registerForTemporalEvent(nextEventMoment);
     }
 
@@ -199,7 +200,7 @@ class SmartAlarmApp extends Application.AppBase {
 
     function printMoment(moment) {
         var info = Gregorian.info(moment, Time.FORMAT_SHORT);
-        System.println(Lang.format(
+        debugLog(Lang.format(
             "Moment: $1$:$2$:$3$ $4$/$5$/$6$",
             [
                 info.hour,
@@ -214,6 +215,12 @@ class SmartAlarmApp extends Application.AppBase {
 
     function clearTriggeredAlarmTimes() {
         triggeredAlarmTimes = [];
+    }
+
+    static function debugLog(string as Lang.String) {
+        if (debugging) {
+            debugLog(string);
+        }
     }
 }
 

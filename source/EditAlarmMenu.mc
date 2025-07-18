@@ -28,7 +28,7 @@ class EditAlarmMenu extends WatchUi.Menu2 {
             var alarm = StorageManager.getAlarmFromStorage(editAlarmId);
             timeMenuItem.setSubLabel(alarm.makeAlarmString());
         }
-        System.println(timeMenuItem.getSubLabel());
+        SmartAlarmApp.debugLog(timeMenuItem.getSubLabel());
     }
 }
 
@@ -71,7 +71,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     function toggleStatus() {
         var alarm = StorageManager.getAlarmFromStorage(parentMenuItemId);
         alarm.toggleActive();
-        System.println("alarm active is " + alarm.active);
+        SmartAlarmApp.debugLog("alarm active is " + alarm.active);
         StorageManager.editAlarmInStorage(parentMenuItemId, alarm);
         //Get the menu item for the status button in this menu and request it be updated
         var parentItem = parentMenu.getItem(0);        
@@ -97,7 +97,7 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         WatchUi.pushView(new SmartAlarmView(appDelegate), appDelegate, WatchUi.SLIDE_BLINK);
 
         parentMenu.setFocus(1);
-        System.println("Editing alarm " + editAlarmId.toString());
+        SmartAlarmApp.debugLog("Editing alarm " + editAlarmId.toString());
     }
 
     function openRepeatAlarmMenu() {

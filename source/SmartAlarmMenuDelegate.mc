@@ -32,7 +32,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function onSelect(item) {
-        System.println(item.getId());
+        SmartAlarmApp.debugLog(item.getId().toString());
         var delegate = new SmartAlarmDelegate();
         if (item.getId().equals("addAlarmButton")) {
             appState = "earliestAlarmPrompt";
@@ -173,7 +173,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             StorageManager.clearAlarmChecks();
         }
         else if (item.getId().equals("printAppState")) {
-            System.println("App state is " + appState);
+            SmartAlarmApp.debugLog("App state is " + appState);
         }
         else if (item.getId().equals("testVibration")) {
             WatchUi.pushView(new WakeUpView(), new WakeUpViewDelegate(), WatchUi.SLIDE_IMMEDIATE);
@@ -184,21 +184,21 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         else if (item.getId().equals("printActiveInterval")) {
             StorageManager.getEarliestActiveAlarm();
             StorageManager.getLatestActiveAlarm();
-            System.println("Global var earliest time: " + earliestActiveHour + ":" + earliestActiveMinute);
-            System.println("Global var latest time: " + latestActiveHour + ":" + latestActiveMinute);
+            SmartAlarmApp.debugLog("Global var earliest time: " + earliestActiveHour + ":" + earliestActiveMinute);
+            SmartAlarmApp.debugLog("Global var latest time: " + latestActiveHour + ":" + latestActiveMinute);
         }
         else if (item.getId().equals("getNextTemporalEvent")) {
-            System.println("Getting next event time");
+            SmartAlarmApp.debugLog("Getting next event time");
             var eventTime = Background.getTemporalEventRegisteredTime();
             var time = "";
             if (eventTime == null) {
-                // System.println("No registered event");
+                // SmartAlarmApp.debugLog("No registered event");
                 time = "No Registered event";
             }
             else {
                 if (eventTime instanceof Time.Moment) {
                     var nextEventInfo = Gregorian.info(eventTime, Time.FORMAT_SHORT);
-                    // System.println(
+                    // SmartAlarmApp.debugLog(
                     //     Lang.format(
                     //     "Temporal event at: $1$:$2$:$3$", 
                     //     [
@@ -217,7 +217,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                     );
                 }
                 else {
-                    // System.println("Temporal event in " + eventTime.value() + " seconds");
+                    // SmartAlarmApp.debugLog("Temporal event in " + eventTime.value() + " seconds");
                     time = "In " + eventTime.value() + " seconds";
                 }
             }
@@ -231,14 +231,14 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
             WatchUi.pushView(nextEventTimeMenu, new Menu2InputDelegate(), WatchUi.SLIDE_LEFT);
         }
         else if (item.getId().equals("deleteNextTemporalEvent")) {
-            System.println("Deleting temporal events");
+            SmartAlarmApp.debugLog("Deleting temporal events");
             Background.deleteTemporalEvent();
             var eventTime = Background.getTemporalEventRegisteredTime();
             if (eventTime == null) {
-                System.println("Event deleted");
+                SmartAlarmApp.debugLog("Event deleted");
             }
             else {
-                System.println("Event deletion failed");
+                SmartAlarmApp.debugLog("Event deletion failed");
             }
         }
         else if (item.getId().equals("getHR")) {

@@ -41,7 +41,7 @@ class HeartRateSensor {
             Sensor.registerSensorDataListener(method(:heartBeatIntervalsCallback), options);
         }
         catch(e) {
-            System.println(e.getErrorMessage());
+            SmartAlarmApp.debugLog(e.getErrorMessage());
         }
     }
 
@@ -63,7 +63,7 @@ class HeartRateSensor {
     }
 
     function sumNNIntervals(rrIntervals as Lang.Array<Lang.Number>) {
-        System.println(rrIntervals.toString());
+        SmartAlarmApp.debugLog(rrIntervals.toString());
         var n = rrIntervals.size();
         if (n <= 0) {
             return;
@@ -77,11 +77,11 @@ class HeartRateSensor {
     function stop() {
         Sensor.unregisterSensorDataListener();
         if (totalIntervalsRecorded == 0) {
-            System.println("No intervals recorded");
+            SmartAlarmApp.debugLog("No intervals recorded");
             return null;
         }
         var meanNNInterval = intraRecordingNNSum / totalIntervalsRecorded;
-        System.println("Recorded " + totalIntervalsRecorded + " intervals with average " + meanNNInterval);
+        SmartAlarmApp.debugLog("Recorded " + totalIntervalsRecorded + " intervals with average " + meanNNInterval);
         return meanNNInterval;
     }
 }

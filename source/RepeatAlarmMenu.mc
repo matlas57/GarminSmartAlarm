@@ -78,9 +78,9 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         self.editAlarmMenuItemId = editAlarmMenuItemId;
         self.alarmMenu = alarmMenu;
 
-        System.println("RepeatAlarmMenuDelegate()");
-        System.println(curRepeatSetting);
-        System.println(editAlarmMenuItemId);
+        SmartAlarmApp.debugLog("RepeatAlarmMenuDelegate()");
+        SmartAlarmApp.debugLog(curRepeatSetting);
+        SmartAlarmApp.debugLog(editAlarmMenuItemId);
     }
 
     function onSelect(item) {
@@ -88,7 +88,7 @@ class RepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         if (!item.getId().equals("custom")) {
             alarm.setRepeatByLabel(item.getId());
             StorageManager.editAlarmInStorage(editAlarmMenuItemId, alarm);
-            System.println(alarm.getRepeatLabel());
+            SmartAlarmApp.debugLog(alarm.getRepeatLabel());
 
             var repeatLabel = alarm.getRepeatLabel();
 
@@ -124,7 +124,7 @@ class CustomRepeatAlarmMenu extends WatchUi.CheckboxMenu {
     }
 
     function buildMenu() {
-        System.println("Building menu");
+        SmartAlarmApp.debugLog("Building menu");
         self.addItem(
             new CheckboxMenuItem(
                 "Sunday",
@@ -208,8 +208,8 @@ class CustomRepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         self.editAlarmMenuItemId = editAlarmMenuItemId;
         self.alarmMenu = alarmMenu;
 
-        System.println("CustomRepeatAlarmMenuDelegate()");
-        System.println(editAlarmMenuItemId);
+        SmartAlarmApp.debugLog("CustomRepeatAlarmMenuDelegate()");
+        SmartAlarmApp.debugLog(editAlarmMenuItemId);
 
     }
 
@@ -221,8 +221,8 @@ class CustomRepeatAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                 customRepeatAlarmMenu.getItem(i).isChecked()
             );
         }
-        System.println("Custom repeat selection");
-        System.println(repeatArray.toString());
+        SmartAlarmApp.debugLog("Custom repeat selection");
+        SmartAlarmApp.debugLog(repeatArray.toString());
 
         alarm.setRepeatByArray(repeatArray);
         StorageManager.editAlarmInStorage(editAlarmMenuItemId, alarm);

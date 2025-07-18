@@ -44,7 +44,7 @@ class Alarm {
 
     function toggleActive() {
         active = !active;
-        System.println("active set to " + active);
+        SmartAlarmApp.debugLog("active set to " + active);
     }
 
     function setDelete(d) {
@@ -136,7 +136,7 @@ class Alarm {
     }
     
     function printGregorianInfo(info){
-        System.println(Lang.format(
+        SmartAlarmApp.debugLog(Lang.format(
             "$1$:$2$:$3$ $4$ $5$ $6$ $7$",
             [
                 info.hour,
@@ -152,7 +152,7 @@ class Alarm {
 
     //TODO: Find a better way for array comparison
     function getRepeatLabel() {
-        System.println(repeatArray.toString());
+        SmartAlarmApp.debugLog(repeatArray.toString());
         if (repeatArray.size() == 0) {
             return "Once";
         }
@@ -166,7 +166,7 @@ class Alarm {
             return "Weekend";
         } 
         else {
-            System.println("Making custom repeat string");
+            SmartAlarmApp.debugLog("Making custom repeat string");
             var indexToDayPrefixDict = {
                 0 => "Sun",
                 1 => "Mon",
@@ -190,7 +190,7 @@ class Alarm {
     }
 
     function setRepeatByLabel(label) {
-        System.println("Setting repeat label");
+        SmartAlarmApp.debugLog("Setting repeat label");
         if (label.equals("once")) {
             repeatArray = [];
         }

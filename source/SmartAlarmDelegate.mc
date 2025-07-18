@@ -23,7 +23,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         for (var i = 1; i <= numAlarms; i++ ) {
             var alarm = StorageManager.getAlarmFromStorage(i);
             var alarmString = alarm.makeAlarmString();
-            System.println(alarmString);
+            SmartAlarmApp.debugLog(alarmString);
             // alarm.getNextEarliestTimeMoment();
             alarmsMenu.addItem(
                 new ToggleMenuItem(
@@ -322,7 +322,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
     (:debug)
     function onHold(clickEvent) {
         Storage.clearValues();
-        System.println("Cleared storage");
+        SmartAlarmApp.debugLog("Cleared storage");
 
         WatchUi.requestUpdate();
 
@@ -330,12 +330,12 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onTap(clickEvent) {
-        System.println(clickEvent.getType() + appState);      // e.g. CLICK_TYPE_TAP = 0
+        SmartAlarmApp.debugLog(clickEvent.getType() + appState);      // e.g. CLICK_TYPE_TAP = 0
         return true;
     }
 
     function onSwipe(swipeEvent) {
-        System.println(swipeEvent.getDirection()); // e.g. SWIPE_DOWN = 2
+        SmartAlarmApp.debugLog(swipeEvent.getDirection().toString()); // e.g. SWIPE_DOWN = 2
         return true;
     }
 

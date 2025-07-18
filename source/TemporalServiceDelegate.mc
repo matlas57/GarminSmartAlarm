@@ -17,7 +17,7 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
 
 
     function initialize () {
-        System.println("Temporal Service delegate");
+        SmartAlarmApp.debugLog("Temporal Service delegate");
         System.ServiceDelegate.initialize();
     }
 
@@ -31,12 +31,12 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
                 today.sec,
             ]
         );
-        System.println("Temporal event triggered at " + dateString);
+        SmartAlarmApp.debugLog("Temporal event triggered at " + dateString);
         $.hrSensor.start();
     }
 
     function onSleepTime() {
-        System.println("Sleep event triggered: setting active interval");
+        SmartAlarmApp.debugLog("Sleep event triggered: setting active interval");
 
         //if current time is after the earliest alarm time then check if an alarm should be triggered
         var earliestActiveAlarm = StorageManager.getEarliestActiveAlarm();
@@ -53,7 +53,7 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
         //register for a new event in 5 minutes
         var nowMoment = Time.now();
         var nextEventMoment = nowMoment.add(new Time.Duration(300));
-        System.println("Registering for next HRV reading event");
+        SmartAlarmApp.debugLog("Registering for next HRV reading event");
         Background.registerForTemporalEvent(nextEventMoment);
     }
 
@@ -63,7 +63,7 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
 
     function printMoment(moment) {
         var info = Gregorian.info(moment, Time.FORMAT_SHORT);
-        System.println(Lang.format(
+        SmartAlarmApp.debugLog(Lang.format(
             "Moment: $1$:$2$:$3$ $4$/$5$/$6$",
             [
                 info.hour,

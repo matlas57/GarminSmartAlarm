@@ -23,7 +23,7 @@ class Sdann {
     }
 
     function addNewMeanNNInterval(meanNNInterval) {
-        System.println("Adding new interval to array: " + meanNNInterval);
+        SmartAlarmApp.debugLog("Adding new interval to array: " + meanNNInterval);
         meanNNIntervalArray.add(meanNNInterval);
     }
 
@@ -42,7 +42,7 @@ class Sdann {
 
         // Compute SDANN (standard deviation)
         var sdann = Math.sqrt(sumSquaredDiff / n);
-        System.println("HRV Reading: " + sdann);
+        SmartAlarmApp.debugLog("HRV Reading: " + sdann);
         overnightHRV = sdann;
         return sdann;
     }
