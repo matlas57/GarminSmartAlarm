@@ -236,7 +236,8 @@ class StorageManager
             alarmCheck.beforeSDNN,
             alarmCheck.duringSDNN,
             alarmCheck.afterSDNN,
-            alarmCheck.result
+            alarmCheck.predictedResult,
+            alarmCheck.actualResult
         ];
         try {
             var id = "alarmCheck" + curAlarmCheck.toString();
@@ -262,9 +263,29 @@ class StorageManager
         SmartAlarmApp.debugLog("Retrieved alarmCheck " + alarmCheckArray);
 
         if (alarmCheckArray != null) {
-            return new AlarmCheck(alarmCheckArray[0], alarmCheckArray[1], alarmCheckArray[2], alarmCheckArray[3], alarmCheckArray[4], alarmCheckArray[5]);
+            return new AlarmCheck(alarmCheckArray[0], alarmCheckArray[1], alarmCheckArray[2], alarmCheckArray[3], alarmCheckArray[4], alarmCheckArray[5], alarmCheckArray[6]);
         }
         return null;
+    }
+
+    static function addActualResultToAlarmCheck(alarmCheckNum, actualResult) {
+        if (!(alarmCheckNum instanceof Number)) {
+            SmartAlarmApp.debugLog("Invalid parameter alarmCheckNum");
+            return;
+        }
+        else if (alarmCheckNum > getNumAlarmChecks()) {
+            SmartAlarmApp.debugLog("Attempting to retrieve non-existing alarm");
+            return;
+        }
+
+        var id = "alarmCheck" + alarmCheckNum.toString();
+        var alarmCheckArray = Storage.getValue(id);
+        SmartAlarmApp.debugLog("Retrieved alarmCheck " + alarmCheckArray);
+
+        if (alarmCheckArray != null) {
+            alarmCheckArray[6] = actualResult;
+            Storage.setValue(id, alarmCheckArray);
+        }
     }
 
     static function clearAlarmChecks() {

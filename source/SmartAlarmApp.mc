@@ -26,6 +26,7 @@ var am = true;
 var validLatestTime = true;
 var editAlarmId = 0;
 var threshold = 1.5;
+var tolerance = 0.1;
 
 //Below store the earliestActive alarm time across all stored alarms in the application
 var earliestActiveHour as Lang.Number?;
@@ -109,8 +110,8 @@ class SmartAlarmApp extends Application.AppBase {
         // );
         // $.overnightAverages.add(avg);
 
-        // var nowMoment = earliestActiveMoment;
-        var nowMoment = new Time.Moment(Time.now().value());
+        var nowMoment = earliestActiveMoment;
+        // var nowMoment = new Time.Moment(Time.now().value());
         
         if (!appState.equals("alarmAllowed")) {
             if ($.earliestActiveMoment == null || $.latestActiveMoment == null){
@@ -128,12 +129,12 @@ class SmartAlarmApp extends Application.AppBase {
             debugLog("Current recording:");
             var sdnn = sdannManager.computeCurrentSDNN(backgroundData.values()[1]);
             var triggerAlarm = sdannManager.isAwake();
-            var resultString;
+            var pResultString;
             if (triggerAlarm) {
-                resultString = "Awake";
+                pResultString = "Awake";
             }
             else {
-                resultString = "Asleep";
+                pResultString = "Asleep";
             }
             if (triggerAlarm) {
                 debugLog("Triggering alarm");
@@ -169,11 +170,11 @@ class SmartAlarmApp extends Application.AppBase {
                 "$1$:$2$",
                 [
                     timeInfo.hour,
-                    timeInfo.min,
+                    Alarm.padMinuteString(timeInfo.min),
                 ]
             );
 
-            var alarmCheck = new AlarmCheck(timeString, sdannn, sdnn[0], sdnn[1], sdnn[2], resultString);
+            var alarmCheck = new AlarmCheck(timeString, sdannn, sdnn[0], sdnn[1], sdnn[2], pResultString, "");
             StorageManager.addAlarmCheckToStorage(alarmCheck);
         }
 
@@ -221,6 +222,41 @@ class SmartAlarmApp extends Application.AppBase {
         if (debugging) {
             debugLog(string);
         }
+    }
+
+    static function writeAlarmCheckToLogFile(alarmCheckId) {
+        var alarmCheck = StorageManager.getAlarmCheckFromStorage(alarmCheckId);
+        if (alarmCheck) {
+            var date = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+            var dateString = Lang.format(
+                "$1$/$2$/$3$",
+                [
+                    date.month,
+                    date.day,
+                    date.year
+                ]
+            );
+            var items = [
+                dateString,
+                alarmCheck.timeString,
+                $.tolerance,
+                $.threshold,
+                alarmCheck.sdann,
+                alarmCheck.beforeSDNN,
+                alarmCheck.duringSDNN,
+                alarmCheck.afterSDNN,
+                alarmCheck.predictedResult,
+                alarmCheck.actualResult
+            ];
+            writeLine(items);
+        }
+    }
+    
+    private static function writeLine(items as Lang.Array<Lang.String>) {
+        for (var i = 0; i < items.size() - 1; i++){
+            System.print(items[i] + ", ");
+        }
+        System.println(items[items.size() - 1]);
     }
 }
 

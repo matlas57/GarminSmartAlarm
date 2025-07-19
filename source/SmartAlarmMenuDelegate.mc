@@ -144,6 +144,7 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         else if (item.getId().equals("alarmChecks")){
             var alarmChecksMenu = new WatchUi.Menu2({:title=>"Alarm checks"});
             var n = StorageManager.getNumAlarmChecks();
+            SmartAlarmApp.debugLog("There are " + n + " alarm checks");
             if (n > 0) {
                 for (var i = 1; i <= n; i++) {
                     var alarkCheck = StorageManager.getAlarmCheckFromStorage(i);

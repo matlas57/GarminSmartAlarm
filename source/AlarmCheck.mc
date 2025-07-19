@@ -6,14 +6,16 @@ class AlarmCheck {
     var beforeSDNN as Lang.Float;
     var duringSDNN as Lang.Float;
     var afterSDNN as Lang.Float;
-    var result as Lang.string;
+    var predictedResult as Lang.string;
+    var actualResult as Lang.String;
 
-    function initialize (time, sdann, bsdnn, dsdnn, asdnn, res) {
+    function initialize (time, sdann, bsdnn, dsdnn, asdnn, pRes, aRes) {
         self.timeString = time;
         self.sdann = sdann;
         self.beforeSDNN = bsdnn;
         self.duringSDNN = dsdnn;
         self.afterSDNN = asdnn;
-        self.result = res;
+        self.predictedResult = pRes;
+        self.actualResult = aRes;
     }
 }
