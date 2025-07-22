@@ -85,6 +85,14 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
         );
         alarmsMenu.addItem(
             new MenuItem(
+                "Edit Tolerance",
+                "",
+                "editTolerance",
+                {}
+            )
+        );
+        alarmsMenu.addItem(
+            new MenuItem(
                 "Alarm checks",
                 "",
                 "alarmChecks",

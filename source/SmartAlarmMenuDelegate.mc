@@ -142,6 +142,38 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
 
             WatchUi.pushView(thresholdMenu, new EditThresholdMenuDelegate(thresholdItem), WatchUi.SLIDE_LEFT);
         }
+        else if (item.getId().equals("editTolerance")){
+            var toleranceMenu = new WatchUi.Menu2({:title=>"Edit tolerance"});
+            toleranceMenu.addItem(
+                new MenuItem(
+                    "Increase tolerance",
+                    "",
+                    "increase",
+                    {}
+                )
+            );
+            var tolerance = StorageManager.getTolerance();
+            var title = "Tolerance: " + tolerance;
+            var toleranceItem = new MenuItem(
+                title,
+                "",
+                tolerance,
+                {}
+            );
+            toleranceMenu.addItem(
+                toleranceItem 
+            );
+            toleranceMenu.addItem(
+                new MenuItem(
+                    "Decrease tolerance",
+                    "",
+                    "decrease",
+                    {}
+                )
+            );
+
+            WatchUi.pushView(toleranceMenu, new EditToleranceMenuDelegate(toleranceItem), WatchUi.SLIDE_LEFT);
+        }
         else if (item.getId().equals("alarmChecks")){
             var alarmChecksMenu = new WatchUi.Menu2({:title=>"Alarm checks"});
             var n = StorageManager.getNumAlarmChecks();

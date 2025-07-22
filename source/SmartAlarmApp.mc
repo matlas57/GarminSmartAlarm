@@ -64,6 +64,10 @@ class SmartAlarmApp extends Application.AppBase {
         if (threshold == null) {
             StorageManager.setThreshold(1.5f);
         }
+        var tolerance = StorageManager.getTolerance();
+        if (tolerance == null) {
+            StorageManager.setTolerance(0.1f);
+        }
     }
 
     (:background)
@@ -245,11 +249,13 @@ class SmartAlarmApp extends Application.AppBase {
                     date.year
                 ]
             );
+            var threshold = StorageManager.getThreshold();
+            var tolerance = StorageManager.getTolerance();
             var items = [
                 dateString,
                 alarmCheck.timeString,
-                $.tolerance,
-                $.threshold,
+                tolerance,
+                threshold,
                 alarmCheck.sdann,
                 alarmCheck.beforeSDNN,
                 alarmCheck.duringSDNN,

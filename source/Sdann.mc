@@ -89,9 +89,9 @@ class Sdann {
     }
 
     function isAwake(){
-        // var tolerance = 0.1;
-        var lowerBound = overnightHRV * (1 - $.tolerance);
-        var upperBound = overnightHRV * (1 + $.tolerance);
+        var tolerance = StorageManager.getTolerance();
+        var lowerBound = overnightHRV * (1 - tolerance);
+        var upperBound = overnightHRV * (1 + tolerance);
         var threshold = StorageManager.getThreshold();
         if (duringSDNN > threshold * overnightHRV
             && (lowerBound <= beforeSDNN && beforeSDNN <= upperBound)

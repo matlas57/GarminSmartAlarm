@@ -306,4 +306,12 @@ class StorageManager
     static function setThreshold(threshold) {
         Storage.setValue("threshold", threshold);
     }
+
+    static function getTolerance() {
+        return Storage.getValue("tolerance");
+    }
+
+    static function setTolerance(tolerance) {
+        Storage.setValue("tolerance", tolerance);
+    }
 }
