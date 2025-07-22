@@ -298,4 +298,12 @@ class StorageManager
         n = getNumAlarmChecks();
         SmartAlarmApp.debugLog("There are now " + n + " alarm checks in storage");
     }
+
+    static function getThreshold() {
+        return Storage.getValue("threshold");
+    }
+
+    static function setThreshold(threshold) {
+        Storage.setValue("threshold", threshold);
+    }
 }

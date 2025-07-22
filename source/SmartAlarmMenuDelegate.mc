@@ -120,11 +120,12 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
                     {}
                 )
             );
-            var title = "Threshold: " + $.threshold;
+            var threshold = StorageManager.getThreshold();
+            var title = "Threshold: " + threshold;
             var thresholdItem = new MenuItem(
                 title,
                 "",
-                $.threshold,
+                threshold,
                 {}
             );
             thresholdMenu.addItem(

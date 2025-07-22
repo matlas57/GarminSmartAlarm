@@ -11,12 +11,14 @@ class EditThresholdMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function onSelect(item as MenuItem) as Void {
+        var threshold = StorageManager.getThreshold();
         if (item.getId().equals("increase")) {
-            $.threshold += 0.1;
+            StorageManager.setThreshold(threshold + 0.1f);
+            thresholdItem.setLabel("Threshold: " + (threshold + 0.1));
         }
         else if (item.getId().equals("decrease")) {
-            $.threshold -= 0.1;
+            StorageManager.setThreshold(threshold - 0.1f);
+            thresholdItem.setLabel("Threshold: " + (threshold - 0.1));
         }
-        thresholdItem.setLabel("Threshold: " + $.threshold);
     }
 }

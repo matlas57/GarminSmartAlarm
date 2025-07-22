@@ -60,6 +60,10 @@ class SmartAlarmApp extends Application.AppBase {
         initializeHrSensor();
         $.triggeredAlarmTimes = StorageManager.getTriggeredAlarmTimes();
         $.overnightAverages = StorageManager.getOvernightAverages();
+        var threshold = StorageManager.getThreshold();
+        if (threshold == null) {
+            StorageManager.setThreshold(1.5f);
+        }
     }
 
     (:background)
@@ -110,8 +114,13 @@ class SmartAlarmApp extends Application.AppBase {
         // );
         // $.overnightAverages.add(avg);
 
-        var nowMoment = earliestActiveMoment;
-        // var nowMoment = new Time.Moment(Time.now().value());
+        var nowMoment;
+        if ($.debugging) {
+            nowMoment = earliestActiveMoment;
+        }
+        else {
+            nowMoment = new Time.Moment(Time.now().value());
+        }
         
         if (!appState.equals("alarmAllowed")) {
             if ($.earliestActiveMoment == null || $.latestActiveMoment == null){
