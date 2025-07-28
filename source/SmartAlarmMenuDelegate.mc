@@ -73,14 +73,14 @@ class SmartAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
         }
         else if (item.getId().equals("showOvernightsAvgs")) {
             var overnightAveragesMenu = new WatchUi.Menu2({:title=>"Overnight Averages"});
-            overnightAverages = StorageManager.getOvernightAverages();
+            $.overnightAverages = StorageManager.getOvernightAverages();
             var n = 0;
             if (overnightAverages != null){
                 n = $.overnightAverages.size();
                 for (var i = 0; i < n; i++) {
                     overnightAveragesMenu.addItem(
                         new MenuItem(
-                            overnightAverages[i].toString(),
+                            $.overnightAverages[i].toString(),
                             "",
                             "",
                             {}
