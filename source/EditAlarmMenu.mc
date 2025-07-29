@@ -86,13 +86,15 @@ class EditAlarmMenuDelegate extends WatchUi.Menu2InputDelegate {
     function editAlarm() {
         editAlarmId = grandParentMenuItemId;
 
-        appState = "earliestAlarmPrompt";
+        $.appState = "earliestAlarmPrompt";
 
         var alarm = StorageManager.getAlarmFromStorage(parentMenuItemId);
-        earliestHour = alarm.earliestHour;
-        earliestMinute = alarm.earliestMinute;
-        latestHour = alarm.latestHour;
-        latestMinute = alarm.latestMinute;
+        $.earliestHour = alarm.earliestHour;
+        $.earliestMinute = alarm.earliestMinute;
+        $.earliestAm = alarm.earliestAm;
+        $.latestHour = alarm.latestHour;
+        $.latestMinute = alarm.latestMinute;
+        $.latestAm = alarm.latestAm;
 
         WatchUi.pushView(new SmartAlarmView(appDelegate), appDelegate, WatchUi.SLIDE_BLINK);
 

@@ -203,10 +203,12 @@ class SmartAlarmView extends WatchUi.View {
             
             minute.setText(padMinuteString(earliestMinute));
 
+            amPm.setText($.earliestAm ? "AM" : "PM");
+
             prompt.setText("Earliest Alarm");
             warning.setText("");
 
-            confirm.setText(earliestHour.toString() + ":" + padMinuteString(earliestMinute) + " " + (amPm ? "AM" : "PM"));
+            confirm.setText(earliestHour.toString() + ":" + padMinuteString(earliestMinute) + " " + ($.earliestAm ? "AM" : "PM"));
         } 
         else if (appState.equals("latestAlarmPrompt")) {
             //Compute the value of the next and prev hour 
@@ -248,6 +250,7 @@ class SmartAlarmView extends WatchUi.View {
 
             hour.setText(latestHour.toString());
             minute.setText(padMinuteString(latestMinute));
+            amPm.setText($.latestAm ? "AM" : "PM");
 
             var warningText = appDelegate.getLatestAlarmWarning();
             if (!warningText.equals("No warning")) {
@@ -260,7 +263,7 @@ class SmartAlarmView extends WatchUi.View {
 
             prompt.setText("Latest Alarm");
 
-            confirm.setText(latestHour.toString() + ":" + padMinuteString(latestMinute) + " " + (amPm ? "AM" : "PM"));
+            confirm.setText(latestHour.toString() + ":" + padMinuteString(latestMinute) + " " + ($.latestAm ? "AM" : "PM"));
         }
 
         //Set nextHour UI element position
@@ -305,7 +308,7 @@ class SmartAlarmView extends WatchUi.View {
             nextMinute.setVisible(false);
             prevMinute.setVisible(false);
 
-            if (am) {
+            if ((appState.equals("earliestAlarmPrompt") && $.earliestAm) || (appState.equals("latestAlarmPrompt") && $.latestAm)) {
                 amPm.setText("AM");
                 nextAmPm.setVisible(false);
                 prevAmPm.setVisible(true);

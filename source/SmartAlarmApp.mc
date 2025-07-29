@@ -20,9 +20,10 @@ var step = 0;
 //earliest/latest hour/min here are holders for current selections when adding/editing an alarm
 var earliestHour = 6;
 var earliestMinute = 0;
+var earliestAm = true;
 var latestHour = 7;
 var latestMinute = 0;
-var am = true;
+var latestAm = true;
 var validLatestTime = true;
 var editAlarmId = 0;
 var threshold = 1.5;
@@ -212,9 +213,9 @@ class SmartAlarmApp extends Application.AppBase {
         return today.add(duration);
     }
 
-    function printMoment(moment) {
+    static function printMoment(moment) {
         var info = Gregorian.info(moment, Time.FORMAT_SHORT);
-        debugLog(Lang.format(
+        System.println(Lang.format(
             "Moment: $1$:$2$:$3$ $4$/$5$/$6$",
             [
                 info.hour,

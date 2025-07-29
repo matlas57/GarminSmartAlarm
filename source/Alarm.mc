@@ -19,8 +19,10 @@ import Toybox.Time;
 class Alarm {
     var earliestHour as Lang.Number;
     var earliestMinute as Lang.Number;
+    var earliestAm as Lang.Boolean;
     var latestHour as Lang.Number;
     var latestMinute as Lang.Number;
+    var latestAm as Lang.Boolean;
 
     var active as Lang.Boolean;
 
@@ -28,11 +30,13 @@ class Alarm {
 
     var delete as Lang.Boolean;
 
-    function initialize(eh, em, lh, lm, a, d, ra) {
+    function initialize(eh, em, eam, lh, lm, lam, a, d, ra) {
         earliestHour = eh;
         earliestMinute = em;
+        earliestAm = eam;
         latestHour = lh;
         latestMinute = lm;
+        latestAm = lam;
         active = a;
         delete = d;
         repeatArray = ra;

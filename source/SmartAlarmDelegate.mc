@@ -223,11 +223,11 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 }
             }
             else if (step == 2) {
-                if (keyEvent.getKey() == 13 && !am) {
-                    am = true;    
+                if (keyEvent.getKey() == 13 && !$.earliestAm) {
+                    $.earliestAm = true;    
                 }
-                else if (keyEvent.getKey() == 8 && am) {
-                    am = false;
+                else if (keyEvent.getKey() == 8 && $.earliestAm) {
+                    $.earliestAm = false;
                 }
                 else if (keyEvent.getKey() == 4) {
                     step++;
@@ -285,11 +285,11 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
                 }
             }
             else if (step == 2) {
-                if (keyEvent.getKey() == 13 && !am) {
-                    am = true;    
+                if (keyEvent.getKey() == 13 && !$.latestAm) {
+                    $.latestAm = true;    
                 }
-                else if (keyEvent.getKey() == 8 && am) {
-                    am = false;
+                else if (keyEvent.getKey() == 8 && $.latestAm) {
+                    $.latestAm = false;
                 }
                 else if (keyEvent.getKey() == 4) {
                     step++;
@@ -297,7 +297,7 @@ class SmartAlarmDelegate extends WatchUi.BehaviorDelegate {
             }
             else if (step == 3) {
                 if (keyEvent.getKey() == 4) {
-                    var alarm = new Alarm(earliestHour, earliestMinute, latestHour, latestMinute, true, false, []);
+                    var alarm = new Alarm(earliestHour, earliestMinute, earliestAm, latestHour, latestMinute, latestAm, true, false, []);
 
                     if (editAlarmId == 0) {
                         StorageManager.addNewAlarmToStorage(alarm);

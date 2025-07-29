@@ -43,7 +43,7 @@ class StorageManager
         SmartAlarmApp.debugLog("Retrieved alarm " + alarmArray);
 
         if (alarmArray != null) {
-            return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4], alarmArray[5], alarmArray[6]);
+            return new Alarm(alarmArray[0], alarmArray[1], alarmArray[2], alarmArray[3], alarmArray[4], alarmArray[5], alarmArray[6], alarmArray[7], alarmArray[8]);
         }
         // TODO: Throw exception here
         return null;
@@ -122,8 +122,10 @@ class StorageManager
         var alarmArray = [
             alarm.earliestHour,
             alarm.earliestMinute,
+            alarm.earliestAm,
             alarm.latestHour,
             alarm.latestMinute,
+            alarm.latestAm,
             alarm.active,
             alarm.delete
         ];
@@ -149,8 +151,10 @@ class StorageManager
         var alarmArray = [
             alarm.earliestHour,
             alarm.earliestMinute,
+            alarm.earliestAm,
             alarm.latestHour,
             alarm.latestMinute,
+            alarm.latestAm,
             alarm.active,
             alarm.delete
         ];
