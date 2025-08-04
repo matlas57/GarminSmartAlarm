@@ -22,6 +22,7 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
     }
 
     function onTemporalEvent() {
+        System.println("Temporal event triggered");
         var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
         var dateString = Lang.format(
             "$1$:$2$:$3$",
@@ -32,7 +33,14 @@ class TemporalServiceDelegate extends System.ServiceDelegate {
             ]
         );
         SmartAlarmApp.debugLog("Temporal event triggered at " + dateString);
-        $.hrSensor.start();
+        if ($.appState.equals("TriggerAlarm")) {
+            System.println("Triggering alarm");
+            WatchUi.pushView(new WakeUpView(), new WakeUpViewDelegate(), WatchUi.SLIDE_IMMEDIATE);
+            $.appState = "trackSleep";
+        }
+        else {
+            $.hrSensor.start();
+        }
     }
 
     function onSleepTime() {

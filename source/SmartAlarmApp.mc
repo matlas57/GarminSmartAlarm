@@ -166,8 +166,8 @@ class SmartAlarmApp extends Application.AppBase {
                 var n = activeAlarms.size();
                 for (var i = 0; i < n; i++) {
                     if (activeAlarms[i].getRepeatLabel().equals("Once")) {
-                        var earliestMoment = timeToMomentHelper(activeAlarms[i].earliestHour, activeAlarms[i].earliestMinute, false);
-                        var latestMoment = timeToMomentHelper(activeAlarms[i].latestHour, activeAlarms[i].latestMinute, false);
+                        var earliestMoment = timeToMomentHelper(activeAlarms[i].earliestHour, activeAlarms[i].earliestMinute, activeAlarms[i].earliestAm);
+                        var latestMoment = timeToMomentHelper(activeAlarms[i].latestHour, activeAlarms[i].latestMinute, activeAlarms[i].latestAm);
                         if (nowMoment.compare(earliestMoment) >= 0 && nowMoment.compare(latestMoment) <= 0) {
                             activeAlarms[i].toggleActive();
                             break;
@@ -195,21 +195,40 @@ class SmartAlarmApp extends Application.AppBase {
         //register for a new event in 5 minutes
         nowMoment = Time.now();
         var nextEventMoment = nowMoment.add(new Time.Duration(300));
+        //if next event moment is less than 5 minutes from the end of the active alarm, dont register and set an event for the final alarm time
+        var latestActiveAlarm = StorageManager.getLatestActiveAlarm();
+        //TODO: Remove hardcoded pm
+        var latestActiveMoment = timeToMomentHelper(latestActiveAlarm.latestHour, latestActiveAlarm.latestMinute, latestActiveAlarm.latestAm);
+        var latestActiveMomentMinus5 = latestActiveMoment.subtract(new Time.Duration(300));
+
+        System.println("appState = " + $.appState);
+
+        if (nextEventMoment.greaterThan(latestActiveMomentMinus5)) {
+            System.println("Registering event for latestActiveMoment");
+            $.appState = "TriggerAlarm";
+            printMoment(latestActiveMoment);
+            Background.registerForTemporalEvent(latestActiveMoment);
+        }
+        else {
+            System.println("Registering event for 5 minutes from now");
+            printMoment(nextEventMoment);
+            Background.registerForTemporalEvent(nextEventMoment);
+        }
         debugLog("Registering for next HRV reading event");
-        Background.registerForTemporalEvent(nextEventMoment);
     }
 
-    static function timeToDurationHelper(hour, min, pm) as Time.Duration {
-        if (pm) {
+    static function timeToDurationHelper(hour, min, am) as Time.Duration {
+        if (!am) {
             hour += 12;
         }
         var seconds = ((hour * 60 + min) * 60);
         return new Time.Duration(seconds);
     }
 
-    function timeToMomentHelper(hour, min, pm) as Time.Moment {
+    function timeToMomentHelper(hour, min, am) as Time.Moment {
+        System.println("timeToMomentHelper: " + hour + ", " + min + ", " + am );
         var today = Time.today();
-        var duration = timeToDurationHelper(hour, min, pm);
+        var duration = timeToDurationHelper(hour, min, am);
         return today.add(duration);
     }
 

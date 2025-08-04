@@ -130,7 +130,9 @@ class StorageManager
             alarm.delete
         ];
         alarmArray.add(alarm.repeatArray);
-        SmartAlarmApp.debugLog("Adding new alarmArray to storage :" + alarmArray.toString());
+        // SmartAlarmApp.debugLog("Adding new alarmArray to storage :" + alarmArray.toString());
+        System.println("Adding new alarmArray to storage :" + alarmArray.toString());
+
         try {
             Storage.setValue(curAlarm, alarmArray);
             Storage.setValue("numAlarms", curAlarm);

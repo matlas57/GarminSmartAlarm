@@ -88,13 +88,23 @@ class Alarm {
                 (new Time.Moment(Time.today().value()).add(new Time.Duration(Gregorian.SECONDS_PER_DAY))),
                 Time.FORMAT_SHORT
             );
-            tomorrow.hour = earliestHour;
+            if (!earliestAm && earliestHour != 12) {
+                tomorrow.hour = earliestHour + 12;
+            }
+            else {
+                tomorrow.hour = earliestHour;
+            }
             tomorrow.min = earliestMinute;
             info = tomorrow;
         }
         else {
             var today = Time.Gregorian.info(new Time.Moment(Time.today().value()), Time.FORMAT_SHORT);
-            today.hour = earliestHour;
+            if (!earliestAm && earliestHour != 12) {
+                today.hour = earliestHour + 12;
+            }
+            else {
+                today.hour = earliestHour;
+            }
             today.min = earliestMinute;
             info = today;
         }
@@ -118,13 +128,23 @@ class Alarm {
                 (new Time.Moment(Time.today().value()).add(new Time.Duration(Gregorian.SECONDS_PER_DAY))),
                 Time.FORMAT_SHORT
             );
-            tomorrow.hour = latestHour;
+            if (!latestAm && latestHour != 12) {
+                tomorrow.hour = latestHour + 12;
+            }
+            else {
+                tomorrow.hour = latestHour;
+            }
             tomorrow.min = latestMinute;
             info = tomorrow;
         }
         else {
             var today = Time.Gregorian.info(new Time.Moment(Time.today().value()), Time.FORMAT_SHORT);
-            today.hour = latestHour;
+            if (!latestAm && latestHour != 12) {
+                today.hour = latestHour + 12;
+            }
+            else {
+                today.hour = latestHour;
+            }
             today.hour = latestMinute;
             info = today;
         }
